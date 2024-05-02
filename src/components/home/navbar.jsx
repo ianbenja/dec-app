@@ -1,4 +1,5 @@
 import React from "react";
+import { Link as LinkRouter } from "react-router-dom";
 import {
   Navbar,
   NavbarBrand,
@@ -15,18 +16,7 @@ import { AcmeLogo } from "./AcmeLogo.jsx";
 const NavBarHome = () => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
 
-  const menuItems = [
-    "Profile",
-    "Dashboard",
-    "Activity",
-    "Analytics",
-    "System",
-    "Deployments",
-    "My Settings",
-    "Team Settings",
-    "Help & Feedback",
-    "Log Out",
-  ];
+  const menuItems = ["Home", "Moora", "Topsis", "Documentación", "Contacto"];
 
   return (
     <Navbar onMenuOpenChange={setIsMenuOpen}>
@@ -43,41 +33,26 @@ const NavBarHome = () => {
 
       <NavbarContent className="hidden sm:flex gap-4" justify="center">
         <NavbarItem>
-          <Link color="foreground" href="/">
+          <LinkRouter color="foreground" to="/">
             Home
-          </Link>
+          </LinkRouter>
         </NavbarItem>
         <NavbarItem isActive>
-          <Link href="/moora" aria-current="page">
+          <LinkRouter to="/moora" aria-current="page">
             Moora
-          </Link>
+          </LinkRouter>
         </NavbarItem>
         <NavbarItem>
-          <Link color="foreground" href="/topsis">
+          <LinkRouter color="foreground" to="/topsis">
             Topsis
-          </Link>
+          </LinkRouter>
         </NavbarItem>
       </NavbarContent>
-      <NavbarContent justify="end">
-        <NavbarItem className="hidden lg:flex">
-          <Link href="#">Login</Link>
-        </NavbarItem>
-      </NavbarContent>
+
       <NavbarMenu>
         {menuItems.map((item, index) => (
           <NavbarMenuItem key={`${item}-${index}`}>
-            <Link
-              color={
-                index === 2
-                  ? "primary"
-                  : index === menuItems.length - 1
-                  ? "danger"
-                  : "foreground"
-              }
-              className="w-full"
-              href="#"
-              size="lg"
-            >
+            <Link color={"foreground"} className="w-full" href="#" size="lg">
               {item}
             </Link>
           </NavbarMenuItem>
