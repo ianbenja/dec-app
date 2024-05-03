@@ -8,7 +8,19 @@ import { NextUIProvider } from "@nextui-org/react";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <NextUIProvider>
-      <main className="dark text-foreground bg-background">
+      <style>
+        {`
+          html, body {
+            height: 100%;
+          }
+          body {
+            background-color: #000;
+            color: #fff;
+            margin: 0; /* Elimina los márgenes predeterminados */
+          }
+        `}
+      </style>
+      <main className="dark text-foreground bg-background ">
         <Rutas />
       </main>
     </NextUIProvider>
