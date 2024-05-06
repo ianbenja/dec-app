@@ -1,6 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App.jsx";
 import Rutas from "./routes/routes.jsx";
 import "./index.css";
 import { NextUIProvider } from "@nextui-org/react";
@@ -10,12 +9,10 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <NextUIProvider>
       <style>
         {`
-          html, body {
-            height: 100%;
+          main {
+            min-height: 100vh;
           }
           body {
-            background-color: #000;
-            color: #fff;
             margin: 0; /* Elimina los márgenes predeterminados */
           }
         `}
