@@ -2,87 +2,51 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import TablaCelda from "./celda.jsx";
 import { Input } from "postcss";
+import { Button } from "@nextui-org/react";
 
 const tipo_criterio = {
-  Max: "MAX",
-  Min: "MIN",
+  Max: {
+    value: "MAX",
+    text: "Max",
+    color: "primary",
+  },
+  Min: {
+    value: "MIN",
+    text: "Min",
+    color: "danger",
+  },
 };
 
 const Tabla = ({ alternativas, criterios }) => {
-  //al hacer click en el boton cambiar el texto, si es max o min, color de fondo y el valor del boton
+  const cantidad_alternativas = Number(alternativas);
+  const cantidad_criterios = Number(criterios);
 
-  const cantidad_alternativas = Number(alternativas) + 1;
-  const cantidad_criterios = Number(criterios) + 1;
+  const [botones, setBotones] = useState(Array(Number(criterios)).fill(tipo_criterio.Max));
 
-  console.log("cantidad_alternativas", cantidad_alternativas, typeof cantidad_alternativas);
-  console.log("cantidad_criterios", cantidad_criterios, typeof cantidad_criterios);
-
-  const cambiarTipoCriterio = (e, i) => {
-    console.log("cambiarTipoCriterior", e, i);
-    if (e.target.value === "MAX") {
-      e.target.value = "MIN";
-      e.target.textContent = "Min";
-      e.target.className = "absolute -top-10 left-0 bg-blue-500 p-1";
-    } else {
-      e.target.value = "MAX";
-      e.target.textContent = "Max";
-      e.target.className = "absolute -top-10 left-0 bg-red-500 p-1";
-    }
+  const cambiarTipoCriterio = (i) => {
+    setBotones(botones.map((boton, index) => {
+      if (index === i) {
+        if (boton.value === "MAX") {
+          return tipo_criterio.Min;
+        } else {
+          return tipo_criterio.Max;
+        }
+      } else {
+        return boton;
+      }
+    }));
   };
+
 
   const generarCeldas = () => {
     const celdas = [];
-    // for (let i = 0; i < cantidad_alternativas; i++) {
-    //   const fila = [];
-    //   for (let j = 0; j < cantidad_criterios; j++) {
-    //     if (i === 0 && j === 0) {
-    //       fila.push(
-    //         <TablaCelda
-    //           key={`${i}-${j}`}
-    //           tipo="header-input"
-    //         />
-    //       );
-    //     } else if (i === 0) {
-    //       fila.push(
-    //         <th
-    //           key={`${i}-${j}`}
-    //           className="relative criterio"
-    //         >
-    //           C{j}
-    //           <button
-    //             onClick={() => cambiarBoton(j)}
-    //             className="absolute top-0 right-0"
-    //           >
-    //             {botones[j]}
-    //           </button>
-    //         </th>
-    //       );
-    //     } else if (j === 0) {
-    //       fila.push(
-    //         <TablaCelda
-    //           key={`${i}-${j}`}
-    //           tipo="header-input"
-    //           valor={`A${i}`}
-    //         />
-    //       );
-    //     } else {
-    //       fila.push(
-    //         <TablaCelda
-    //           key={`${i}-${j}`}
-    //           tipo="input"
-    //         />
-    //       );
-    //     }
-    //   }
-    //   celdas.push(<tr key={i}>{fila}</tr>);
-    // }
-    // return celdas;
 
     return (
       <>
         <tr>
           <th></th>
           {[...Array(cantidad_criterios).keys()].map((i) => (
+            i = i + 1,  //para que empiece en C1
             <th
               key={i}
               className="relative criterio"
@@ -92,23 +56,26 @@ const Tabla = ({ alternativas, criterios }) => {
                 label={`C${i}`}
                 defaultValue={`C${i}`}
               />
-              <button
-                onClick={(e) => cambiarTipoCriterio(e)}
-                className="absolute -top-10 left-0 bg-red-500 p-1"
-                value={"MAX"}
+              <Button color={botones[i].color} radius="none"
+                className="absolute -top-10 left-0"
+                value={botones[i].value}
+                onClick={() => cambiarTipoCriterio(i)}
               >
-                Max
-              </button>
+                {botones[i].text}
+              </Button>
             </th>
           ))}
         </tr>
         {[...Array(cantidad_alternativas).keys()].map((i) => (
+          i = i + 1,  //para que empiece en C1
           <tr key={i}>
-            <input
-              type="text"
-              label={`A${i}`}
-              defaultValue={`A${i}`}
-            />
+            <th>
+              <input
+                type="text"
+                label={`A${i}`}
+                defaultValue={`A${i}`}
+              />
+            </th>
             {[...Array(cantidad_criterios).keys()].map((j) => (
               <td key={j}>
                 <input type="text" />
