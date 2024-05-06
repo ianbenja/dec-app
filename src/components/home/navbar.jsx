@@ -11,7 +11,7 @@ import {
   Link,
   Button,
 } from "@nextui-org/react";
-import { AcmeLogo } from "./AcmeLogo.jsx";
+import Logo from "./Logo";
 
 const NavBarHome = () => {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
@@ -26,8 +26,8 @@ const NavBarHome = () => {
           className="sm:hidden"
         />
         <NavbarBrand>
-          <AcmeLogo />
-          <p className="font-bold text-inherit">DEC</p>
+          <Logo />
+          <p className="font-bold text-inherit"></p>
         </NavbarBrand>
       </NavbarContent>
 
