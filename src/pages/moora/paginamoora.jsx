@@ -2,7 +2,7 @@ import NavBarHome from "../home/navbar";
 import Confirmar from "./confirmar";
 import React, { useState } from "react"; // Import the 'useState' hook
 import EntradaMoora from "./entradamoora";
-import Tabla from "../../components/tabla.jsx";
+import TablaInicial from "../../components/tabla.jsx";
 
 const PaginaMoora = () => {
   // Define el estado para alternativas y criterios
@@ -24,19 +24,21 @@ const PaginaMoora = () => {
           MOORA
         </div>
       </div>
+
       <div className="mt-4 flex justify-center">
         <EntradaMoora
           onAlternativasChange={setAlternativas}
           onCriteriosChange={setCriterios}
         />
       </div>
+
       <div className="flex justify-center mt-4">
         <Confirmar onClick={handleConfirmarClick} />
       </div>
 
       {generarTabla && (
-        <div className="mt-4">
-          <Tabla
+        <div className="mt-4 flex justify-center">
+          <TablaInicial
             alternativas={alternativas}
             criterios={criterios}
           />
