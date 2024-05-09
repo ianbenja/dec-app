@@ -22,6 +22,7 @@ const EntradaMoora = ({ onAlternativasChange, onCriteriosChange }) => {
               placeholder="Seleccione cantidad de Alternativas"
               // defaultSelectedKeys={[opciones["2"]]}
               className="max-w-xs "
+              isRequired
               onChange={(e) => onAlternativasChange(e.target.value)}
             >
               {Object.keys(opciones).map((opcion) => (
@@ -45,6 +46,7 @@ const EntradaMoora = ({ onAlternativasChange, onCriteriosChange }) => {
               placeholder="Seleccione cantidad de Criterios"
               // defaultSelectedKeys={[opciones["2"]]}
               className="max-w-xs"
+              isRequired
               onChange={(e) => onCriteriosChange(e.target.value)}
             >
               {Object.keys(opciones).map((opcion) => (

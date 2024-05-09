@@ -1,104 +1,111 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import TablaCelda from "./celda.jsx";
 import { Button, Input } from "@nextui-org/react";
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@nextui-org/react";
+import { MaxIcon } from "./iconos/MaxIcon.jsx";
+import { MinIcon } from "./iconos/MinIcon.jsx";
+
 
 const TablaInicial = ({ alternativas, criterios }) => {
-  const cantidad_alternativas = Number(alternativas);
-  const cantidad_criterios = Number(criterios);
 
   const tipo_criterio = {
     Max: {
       value: "MAX",
       text: "Max",
-      color: "primary",
+      color: "danger",
+      icon: <MaxIcon />
     },
     Min: {
       value: "MIN",
       text: "Min",
-      color: "danger",
+      color: "primary",
+      icon: <MinIcon />
     },
   };
 
-  const [botones, setBotones] = useState(Array(cantidad_criterios).fill(tipo_criterio.Max));
+  const [tipoCriterios, setTipoCriterio] = useState(Array(criterios).fill(tipo_criterio.Max));
 
   const cambiarTipoCriterio = (i) => {
-    setBotones(
-      botones.map((boton, index) => {
-        if (index === i) {
-          if (boton.value === "MAX") {
-            return tipo_criterio.Min;
-          } else {
-            return tipo_criterio.Max;
-          }
-        } else {
-          return boton;
-        }
-      })
-    );
+    const nuevoTipoCriterios = [...tipoCriterios];
+    nuevoTipoCriterios[i] = nuevoTipoCriterios[i].value === tipo_criterio.Max.value ? tipo_criterio.Min : tipo_criterio.Max;
+    setTipoCriterio(nuevoTipoCriterios);
   };
+
+
+  useEffect(() => {
+    setTipoCriterio(Array(criterios).fill(tipo_criterio.Max));
+  }, [criterios]);
 
   const generarHeader = () => {
     return (
-      <TableHeader>
-        <TableColumn>Alternativas</TableColumn>
-        {[...Array(cantidad_criterios).keys()].map((i) => (
-          <TableColumn
-            key={i}
-            className="relative criterio"
-          >
-            <Input
-              type="text"
-              // label={`C${i}`}
-              defaultValue={`C${i}`}
-            />
-            <Button
-              color={botones[i].color}
-              radius="none"
-              className="absolute -top-10 left-0"
-              value={botones[i].value}
-              onClick={() => cambiarTipoCriterio(i)}
+      <thead>
+        <tr>
+          <th
+          //estilo para el header
+
+          >Alternativas</th>
+          {[...Array(criterios).keys()].map((i) => (
+            <th
+              key={i}
+              className="relative criterio"
             >
-              {botones[i].text}
-            </Button>
-          </TableColumn>
-        ))}
-      </TableHeader>
+              <input
+                type="text"
+                // label={`C${i}`}
+                defaultValue={`C${1 + i}`}
+                className="p-2 w-full"
+              />
+              <Button
+                color={tipoCriterios[i].color}
+                radius="none"
+                className="absolute -top-11 left-10"
+                value={tipoCriterios[i].value}
+                onClick={() => cambiarTipoCriterio(i)}
+                endContent={tipoCriterios[i].icon}
+              >
+                {tipoCriterios[i].text}
+              </Button>
+            </th>
+          ))}
+        </tr>
+      </thead>
     );
   };
 
   const generarCuerpo = () => {
     return (
-      <TableBody>
+      <tbody>
         {/* Aca se generan las filas de la tabla */}
-        {[...Array(cantidad_alternativas).keys()].map((i) => (
-          <TableRow key={i}>
+        {[...Array(alternativas).keys()].map((i) => (
+          <tr key={i}>
             {/* Aca se genera la primer celda que corresponde a la alternativa */}
-            <TableCell>
-              <Input
+            <th>
+              <input
                 type="text"
                 // label={`A${i}`}
-                defaultValue={`A${i}`}
+                defaultValue={`A${1 + i}`}
+                className="p-2 w-full"
               />
-            </TableCell>
+            </th>
             {/* Aca se generan las celdas de la fila */}
-            {[...Array(cantidad_criterios).keys()].map((j) => (
-              <TableCell key={j}>
-                <Input type="text" />
-              </TableCell>
+            {[...Array(criterios).keys()].map((j) => (
+              <td key={j}
+              >
+                <input type="number" className="p-2 w-full remove-arrow" />
+              </td>
             ))}
-          </TableRow>
+          </tr>
         ))}
-      </TableBody>
+      </tbody>
     );
   };
 
   return (
-    <Table className="w-full lg:w-3/4">
+    <table className="w-full lg:w-3/4 mt-10">
       {generarHeader()}
       {generarCuerpo()}
-    </Table>
+    </table>
   );
 };
 

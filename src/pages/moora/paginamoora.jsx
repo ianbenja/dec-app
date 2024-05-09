@@ -3,18 +3,24 @@ import Confirmar from "./confirmar";
 import React, { useState } from "react"; // Import the 'useState' hook
 import EntradaMoora from "./entradamoora";
 import TablaInicial from "../../components/tabla.jsx";
+import { Button } from "@nextui-org/react";
+import { Select, SelectItem } from "@nextui-org/react";
 
 const PaginaMoora = () => {
   // Define el estado para alternativas y criterios
+  const [alternativasInput, setAlternativasInput] = useState(0);
+  const [criteriosInput, setCriteriosInput] = useState(0);
   const [alternativas, setAlternativas] = useState(0);
   const [criterios, setCriterios] = useState(0);
   const [generarTabla, setGenerarTabla] = useState(false);
 
-  const handleConfirmarClick = () => {
-    console.log("Alternativas: ", alternativas);
-    console.log("Criterios: ", criterios);
+  const handleConfirmar = (e) => {
+    e.preventDefault()
+    setAlternativas(parseInt(alternativasInput));
+    setCriterios(parseInt(criteriosInput));
     setGenerarTabla(true);
   };
+
 
   return (
     <>
@@ -25,16 +31,37 @@ const PaginaMoora = () => {
         </div>
       </div>
 
-      <div className="mt-4 flex justify-center">
+      {/* <div className="mt-4 flex justify-center">
         <EntradaMoora
-          onAlternativasChange={setAlternativas}
-          onCriteriosChange={setCriterios}
+          onAlternativasChange={setAlternativasInput}
+          onCriteriosChange={setCriteriosInput}
         />
       </div>
 
       <div className="flex justify-center mt-4">
-        <Confirmar onClick={handleConfirmarClick} />
-      </div>
+        <Confirmar onClick={handleConfirmar} />
+      </div> */}
+
+
+      {/* un formulario que tendra el componente entrada morra que nos dara los valores y el boton para generar la tabla que se llama confirmar */}
+      <form onSubmit={(e) => { handleConfirmar(e) }}
+
+        className="flex flex-col items-center"
+      >
+        <EntradaMoora
+          onAlternativasChange={setAlternativasInput}
+          onCriteriosChange={setCriteriosInput}
+        />
+        <Button
+          type="submit"
+          radius="full"
+          className="w-1 bg-gradient-to-tr from-pink-500 to-yellow-500 text-white shadow-lg"
+        >
+          Confirmar
+        </Button>
+      </form>
+
+
 
       {generarTabla && (
         <div className="mt-4 flex justify-center">
