@@ -1,4 +1,3 @@
-import React from "react";
 import { Select, SelectItem } from "@nextui-org/react";
 import PropTypes from "prop-types";
 
@@ -12,7 +11,7 @@ const opciones = {
 const EntradaMoora = ({ onAlternativasChange, onCriteriosChange }) => {
   return (
     <>
-      <div className="w-full flex flex-center flex-wrap md:flex-nowrap gap-10 max-w-screen-xl">
+      <div className="w-full flex flex-center flex-wrap md:flex-nowrap gap-5 max-w-screen-xl">
         <div className="w-full lg:w-1/2 flex flex-col justify-between">
           <p className="text-center ">Ingrese la cantidad de Alternativas de Decisión (X)</p>
           <div className="flex w-full flex-wrap justify-center p-1">

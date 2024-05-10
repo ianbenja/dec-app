@@ -17,7 +17,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           }
         `}
       </style>
-      <main className="dark text-foreground bg-background ">
+      <main className="dark text-foreground bg-background px-5">
         <Rutas />
       </main>
     </NextUIProvider>
