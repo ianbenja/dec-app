@@ -10,12 +10,10 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <NextUIProvider>
       <style>
         {`
-          html, body {
-            height: 100%;
+          main {
+            min-height: 100vh;
           }
           body {
-            background-color: #000;
-            color: #fff;
             margin: 0; /* Elimina los márgenes predeterminados */
           }
         `}

@@ -37,6 +37,7 @@ export const DATATABLAPRUEBA1 = {
     [10, 11, 12, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
   ],
   cabezafilas: ["X1", "X2", "X3", "X4", "X5", "X6"],
+  sumaTabla: [10, 20, 30, 40, 50, 60],
 };
 
 export const DATATABLAPRUEBA2 = {
