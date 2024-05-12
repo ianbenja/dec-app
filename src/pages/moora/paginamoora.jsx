@@ -1,5 +1,5 @@
 import NavBarHome from "../home/navbar";
-import { useState } from "react"; // Import the 'useState' hook
+import { useEffect, useState } from "react"; // Import the 'useState' hook
 import EntradaMoora from "./entradamoora";
 import TablaInicial from "../../components/tabla.jsx";
 import { Button } from "@nextui-org/react";
@@ -19,14 +19,12 @@ const PaginaMoora = () => {
   const [matrizValores, setMatrizValores] = useState([]);
   const [pesos, setPesos] = useState([]);
 
-  const handleConfirmarTabla = (e) => {
-    e.preventDefault();
-    setCantidadAlternativas(parseInt(alternativasInput) || 2);
-    setCantidadCriterios(parseInt(criteriosInput) || 2);
-
+  // Definir un efecto para manejar la actualización de los vectores y la matriz
+  useEffect(() => {
     // Crear arreglos según las entradas
-    setAlternativas(Array(cantidadAlternativas).fill(""));
-    setCriterios(Array(cantidadCriterios).fill(""));
+    setAlternativas(Array.from({ length: cantidadAlternativas }, (_, index) => `A${index + 1}`));
+    setCriterios(Array.from({ length: cantidadCriterios }, (_, index) => `C${index + 1}`));
+
     setPesos(Array(cantidadCriterios).fill(0));
     setTiposDeCriterio(Array(cantidadCriterios).fill("MAX")); // Tipo por defecto
     setMatrizValores(
@@ -34,7 +32,12 @@ const PaginaMoora = () => {
         .fill([])
         .map(() => Array(cantidadCriterios).fill(0))
     );
+  }, [cantidadAlternativas, cantidadCriterios]); // Se ejecuta cuando cambian estas dependencias
 
+  const handleConfirmarTabla = (e) => {
+    e.preventDefault();
+    setCantidadAlternativas(parseInt(alternativasInput) || 2);
+    setCantidadCriterios(parseInt(criteriosInput) || 2);
     setGenerarTabla(true);
     setTablaKey(tablaKey + 1);
   };
@@ -111,15 +114,14 @@ const PaginaMoora = () => {
               cantidadAlternativas={cantidadAlternativas}
               cantidadCriterios={cantidadCriterios}
               alternativas={alternativas}
-              criterios={criterios}
-              tiposDeCriterio={tiposDeCriterio}
-              matrizValores={matrizValores}
-              pesos={pesos}
-
               setAlternativas={setAlternativas}
+              criterios={criterios}
               setCriterios={setCriterios}
+              tiposDeCriterio={tiposDeCriterio}
               setTiposDeCriterio={setTiposDeCriterio}
+              matrizValores={matrizValores}
               setMatrizValores={setMatrizValores}
+              pesos={pesos}
               setPesos={setPesos}
             />
           </div>
