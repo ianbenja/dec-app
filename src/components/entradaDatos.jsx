@@ -8,7 +8,7 @@ const opciones = {
   5: 5,
 };
 
-const EntradaMoora = ({ onAlternativasChange, onCriteriosChange }) => {
+const EntradaDatos = ({ onAlternativasChange, onCriteriosChange }) => {
   return (
     <>
       <div className="w-full flex flex-center flex-wrap md:flex-nowrap gap-5 max-w-screen-xl">
@@ -64,9 +64,9 @@ const EntradaMoora = ({ onAlternativasChange, onCriteriosChange }) => {
   );
 };
 
-EntradaMoora.propTypes = {
+EntradaDatos.propTypes = {
   onAlternativasChange: PropTypes.func.isRequired,
   onCriteriosChange: PropTypes.func.isRequired,
 };
 
-export default EntradaMoora;
+export default EntradaDatos;

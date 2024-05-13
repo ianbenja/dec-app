@@ -1,6 +1,5 @@
-import NavBarHome from "../home/navbar";
 import { useEffect, useState } from "react"; // Import the 'useState' hook
-import EntradaMoora from "./entradamoora";
+import EntradaDatos from "../../components/entradaDatos.jsx";
 import TablaInicial from "../../components/tabla.jsx";
 import { Button } from "@nextui-org/react";
 
@@ -76,31 +75,38 @@ const PaginaMoora = () => {
 
   return (
     <>
-      <NavBarHome />
-      <div>
-        <h1 className="text-center mt-16 mb-5 text-4xl lg:mt-16 bg-gradient-to-r from-pink-300 via-slate-300 to-purple-500 bg-clip-text tracking-tight text-transparent">
-          MOORA
-        </h1>
-      </div>
-
-      <form
-        onSubmit={(e) => {
-          handleConfirmarTabla(e);
-        }}
+      {/* Sección inicial */}
+      <section
+        id="seccion-inicial"
         className="flex flex-col items-center gap-5"
       >
-        <EntradaMoora
-          onAlternativasChange={setAlternativasInput}
-          onCriteriosChange={setCriteriosInput}
-        />
-        <Button
-          type="submit"
-          radius="full"
-          className="w-1 bg-gradient-to-tr from-pink-500 to-yellow-500 text-white shadow-lg"
+        <div>
+          <h1 className="text-center mt-16 mb-5 text-4xl lg:mt-16 bg-gradient-to-r from-pink-300 via-slate-300 to-purple-500 bg-clip-text tracking-tight text-transparent">
+            MOORA
+          </h1>
+        </div>
+
+        <form
+          onSubmit={(e) => {
+            handleConfirmarTabla(e);
+          }}
+          className="flex flex-col items-center gap-5"
         >
-          Confirmar
-        </Button>
-      </form>
+          <EntradaDatos
+            onAlternativasChange={setAlternativasInput}
+            onCriteriosChange={setCriteriosInput}
+          />
+          <Button
+            type="submit"
+            radius="md"
+            className="w-1 bg-gradient-to-tr from-pink-500 to-yellow-500 text-white shadow-lg"
+          >
+            Confirmar
+          </Button>
+        </form>
+      </section>
+
+      {/* Sección de la tabla de datos */}
       {generarTabla && (
         <form
           className="flex flex-col items-center gap-5"
@@ -127,13 +133,26 @@ const PaginaMoora = () => {
           </div>
           <Button
             type="submit"
-            radius="full"
+            radius="md"
             className="w-1 bg-gradient-to-tr from-pink-500 to-yellow-500 text-white shadow-lg"
           >
             Calcular
           </Button>
         </form>
       )}
+
+      {/* Sección de resultados que tendra 4 tablas, la primera sera la tabla con los datos normalizados, la segunda tabla con los datos ponderizados y la tercera con los resultados finales ordenados  */}
+      <section
+        id="seccion-resultados"
+        className="flex flex-col items-center gap-5"
+      >
+        <h2 className="text-2xl">Resultados</h2>
+        <TablaResultados
+          datosNormalizados={datosNormalizados}
+          datosPonderizados={datosPonderizados}
+          resultadosFinales={resultadosFinales}
+        />
+      </section>
     </>
   );
 };

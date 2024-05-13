@@ -25,6 +25,7 @@ export const TablaCuerpo = ({
             <td key={j}>
               <input
                 type="number"
+                inputMode="decimal"
                 required
                 name={`A${i}C${j}`}
                 className="p-2 w-full text-center remove-arrow bg-zinc-900"

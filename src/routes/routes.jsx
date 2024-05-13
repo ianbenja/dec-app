@@ -1,8 +1,8 @@
-import React from "react";
 import { RouterProvider, createHashRouter } from "react-router-dom";
 import PaginaMoora from "../pages/moora/paginamoora.jsx";
 import PaginaTopsis from "../pages/topsis/paginatopsis.jsx";
 import Home from "../pages/home/home.jsx";
+import Error404 from "../pages/error/Error404.jsx";
 
 const router = createHashRouter([
   {
@@ -16,6 +16,10 @@ const router = createHashRouter([
   {
     path: "/topsis",
     element: <PaginaTopsis />,
+  },
+  {
+    path: "*",
+    element: <Error404 />,
   },
 ]);
 
