@@ -1,24 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App.jsx";
 import Rutas from "./routes/routes.jsx";
 import "./index.css";
 import { NextUIProvider } from "@nextui-org/react";
+import NavBarHome from "./components/navbar.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <NextUIProvider>
-      <style>
-        {`
-          main {
-            min-height: 100vh;
-          }
-          body {
-            margin: 0; /* Elimina los márgenes predeterminados */
-          }
-        `}
-      </style>
-      <main className="dark text-foreground bg-background ">
+      <main className="dark text-foreground bg-background px-5 flex flex-col items-center">
+        <NavBarHome />
         <Rutas />
       </main>
     </NextUIProvider>
