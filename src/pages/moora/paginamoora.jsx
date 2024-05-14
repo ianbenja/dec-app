@@ -147,11 +147,19 @@ const PaginaMoora = () => {
         className="flex flex-col items-center gap-5"
       >
         <h2 className="text-2xl">Resultados</h2>
-        <TablaResultados
-          datosNormalizados={datosNormalizados}
-          datosPonderizados={datosPonderizados}
-          resultadosFinales={resultadosFinales}
-        />
+        <div className="flex flex-col items-center gap-5">
+          <h3 className="text-xl"></h3>
+          {/* <TablaResultados datosNormalizados={datosNormalizados} /> */}
+        </div>
+        <div className="flex flex-col items-center gap-5">
+          <h3 className="text-xl"></h3>
+          {/* <TablaResultados datosPonderizados={datosPonderizados} /> */}
+        </div>
+
+        <div className="flex flex-col items-center gap-5">
+          <h3 className="text-xl"></h3>
+          {/* <TablaResultados resultadosFinales={resultadosFinales} /> */}
+        </div>
       </section>
     </>
   );
