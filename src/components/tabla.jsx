@@ -1,10 +1,10 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
-import { MaxIcon } from "./iconos/maxIcon.jsx";
-import { MinIcon } from "./iconos/minIcon.jsx";
-import { TablaPesos } from "./tablaPesos.jsx";
-import { TablaCuerpo } from "./tablaCuerpo.jsx";
-import { TablaCabecera } from "./tablaCabecera.jsx";
+import { MaxIcon } from "./iconos/MaxIcon.jsx";
+import { MinIcon } from "./iconos/MinIcon.jsx";
+import { TablaPesos } from "./TablaPesos.jsx";
+import { TablaCuerpo } from "./TablaCuerpo.jsx";
+import { TablaCabecera } from "./TablaCabecera.jsx";
 
 const TIPO_CRITERIO = {
   Max: {
