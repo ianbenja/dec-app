@@ -16,9 +16,10 @@ const EntradaDatos = ({ onAlternativasChange, onCriteriosChange }) => {
           <p className="text-center ">Ingrese la cantidad de Alternativas de Decisión (X)</p>
           <div className="flex w-full flex-wrap justify-center p-1">
             <Select
-              color="primary"
+              color="secondary"
+              variant="underlined"
               label="Alternativas"
-              placeholder="Seleccione cantidad de Alternativas"
+              // placeholder="Seleccione cantidad de Alternativas"
               // defaultSelectedKeys={[opciones["2"]]}
               className="max-w-xs "
               isRequired
@@ -40,9 +41,10 @@ const EntradaDatos = ({ onAlternativasChange, onCriteriosChange }) => {
           <p className="text-center ">Ingrese la cantidad de Criterios (Y)</p>
           <div className="w-full flex flex-wrap justify-center p-1">
             <Select
-              color="primary"
+              color="secondary"
+              variant="underlined"
               label="Criterios"
-              placeholder="Seleccione cantidad de Criterios"
+              // placeholder="Seleccione cantidad de Criterios"
               // defaultSelectedKeys={[opciones["2"]]}
               className="max-w-xs"
               isRequired

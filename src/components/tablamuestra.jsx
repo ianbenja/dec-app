@@ -1,12 +1,5 @@
 import React from "react";
-import {
-  Table,
-  TableHeader,
-  TableColumn,
-  TableBody,
-  TableRow,
-  TableCell,
-} from "@nextui-org/react";
+import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@nextui-org/react";
 
 const TablaMuestra = ({ data }) => {
   const { header, rows, pesos, cabezafilas, sumaTabla } = data;
@@ -27,9 +20,7 @@ const TablaMuestra = ({ data }) => {
           </TableColumn>
         ))}
         {mostrarSuma ? (
-          <TableColumn className="text-xl font-bold text-indigo-500">
-            Suma
-          </TableColumn>
+          <TableColumn className="text-xl font-bold text-indigo-500">Suma</TableColumn>
         ) : (
           <TableColumn
             hidden={true}
@@ -62,9 +53,7 @@ const TablaMuestra = ({ data }) => {
 
         {mostrarPesos && (
           <TableRow>
-            <TableCell className="text-xl font-bold text-indigo-500">
-              Pesos
-            </TableCell>
+            <TableCell className="text-xl font-bold text-indigo-500">Pesos</TableCell>
             {pesos.map((cell, cellIndex) => (
               <TableCell key={cellIndex}>{cell}</TableCell>
             ))}

@@ -1,25 +1,10 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
-import { MaxIcon } from "./iconos/MaxIcon.jsx";
-import { MinIcon } from "./iconos/MinIcon.jsx";
 import { TablaPesos } from "./TablaPesos.jsx";
 import { TablaCuerpo } from "./TablaCuerpo.jsx";
 import { TablaCabecera } from "./TablaCabecera.jsx";
-
-const TIPO_CRITERIO = {
-  Max: {
-    value: "MAX",
-    text: "Max",
-    color: "danger",
-    icon: <MaxIcon />,
-  },
-  Min: {
-    value: "MIN",
-    text: "Min",
-    color: "primary",
-    icon: <MinIcon />,
-  },
-};
+import { Select, SelectItem } from "@nextui-org/react";
+import { METODOS_NORMALIZACION, TIPO_CRITERIO } from "../constants/index.js";
 
 const TablaInicial = ({
   cantidadAlternativas,
@@ -34,6 +19,7 @@ const TablaInicial = ({
   setMatrizValores,
   pesos,
   setPesos,
+  setMetodoNormalizacion,
 }) => {
   const [botonesTipoCriterios, setTipoCriterio] = useState(
     Array(cantidadCriterios).fill(TIPO_CRITERIO.Max)
@@ -52,8 +38,15 @@ const TablaInicial = ({
 
   const handleCambioValor = (array, index, value, setFunction) => {
     const newArray = [...array];
-    newArray[index] = value;
+    const newValue = parseFloat(value);
+    newArray[index] = newValue ? newValue : value;
     setFunction(newArray);
+  };
+
+  const handleCambioValorMatriz = (matrizValores, i, j, value, setMatrizValores) => {
+    const nuevaMatrizValores = [...matrizValores];
+    nuevaMatrizValores[i][j] = parseFloat(value);
+    setMatrizValores(nuevaMatrizValores);
   };
 
   const handleMostrarPesosChange = (e) => {
@@ -76,9 +69,7 @@ const TablaInicial = ({
             handleCambioValor(alternativas, i, value, setAlternativas)
           }
           cambiarMatrizValores={(i, j, value) => {
-            const nuevaMatrizValores = [...matrizValores];
-            nuevaMatrizValores[i][j] = value;
-            setMatrizValores(nuevaMatrizValores);
+            handleCambioValorMatriz(matrizValores, i, j, value, setMatrizValores);
           }}
           cambiarPesos={(i, value) => handleCambioValor(pesos, i, value, setPesos)}
         />
@@ -89,6 +80,29 @@ const TablaInicial = ({
         handleMostrarPesosChange={handleMostrarPesosChange}
         cambiarPesos={(i, value) => handleCambioValor(pesos, i, value, setPesos)}
       />
+
+      <div className="flex justify-center items-center mt-5">
+        <Select
+          color="secondary"
+          variant="underlined"
+          label="Método de Normalización"
+          labelPlacement="outside"
+          placeholder="Método"
+          // defaultSelectedKeys={[opciones["2"]]}
+          className="max-w-xs "
+          isRequired
+          onChange={(e) => setMetodoNormalizacion(e.target.value)}
+        >
+          {Object.keys(METODOS_NORMALIZACION).map((opcion) => (
+            <SelectItem
+              key={opcion}
+              value={opcion}
+            >
+              {opcion}
+            </SelectItem>
+          ))}
+        </Select>
+      </div>
     </div>
   );
 };
@@ -106,6 +120,7 @@ TablaInicial.propTypes = {
   setMatrizValores: PropTypes.func.isRequired,
   pesos: PropTypes.array.isRequired,
   setPesos: PropTypes.func.isRequired,
+  setMetodoNormalizacion: PropTypes.func.isRequired,
 };
 
 export default TablaInicial;

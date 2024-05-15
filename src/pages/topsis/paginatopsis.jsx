@@ -1,8 +1,7 @@
-import NavBarHome from "../../components/navbar.jsx";
+import { useEffect, useState } from "react"; // Import the 'useState' hook
 import EntradaDatos from "../../components/entradaDatos.jsx";
-import { Button } from "@nextui-org/react";
 import TablaInicial from "../../components/tabla.jsx";
-import { useEffect, useState } from "react";
+import { Button } from "@nextui-org/react";
 
 const PaginaTopsis = () => {
   // Define el estado para alternativas y criterios
@@ -12,6 +11,7 @@ const PaginaTopsis = () => {
   const [cantidadCriterios, setCantidadCriterios] = useState(0);
   const [generarTabla, setGenerarTabla] = useState(false);
   const [tablaKey, setTablaKey] = useState(0);
+  const [mostrarResultados, setMostrarResultados] = useState(false);
 
   const [alternativas, setAlternativas] = useState([]);
   const [criterios, setCriterios] = useState([]);
@@ -25,7 +25,7 @@ const PaginaTopsis = () => {
     setAlternativas(Array.from({ length: cantidadAlternativas }, (_, index) => `A${index + 1}`));
     setCriterios(Array.from({ length: cantidadCriterios }, (_, index) => `C${index + 1}`));
 
-    setPesos(Array(cantidadCriterios).fill(1));
+    setPesos(Array(cantidadCriterios).fill(0));
     setTiposDeCriterio(Array(cantidadCriterios).fill("MAX")); // Tipo por defecto
     setMatrizValores(
       Array(cantidadAlternativas)
@@ -49,9 +49,10 @@ const PaginaTopsis = () => {
     const data = {
       alternativas,
       criterios,
-      pesos,
       tiposDeCriterio,
       matrizValores,
+      pesos,
+      metodoNormalizacion,
     };
     console.log(data);
 
@@ -76,30 +77,38 @@ const PaginaTopsis = () => {
 
   return (
     <>
-      <div>
-        <h1 className="text-center mt-16 mb-5 text-4xl lg:mt-16 bg-gradient-to-r from-pink-300 via-slate-300 to-purple-500 bg-clip-text tracking-tight text-transparent">
-          TOPSIS
-        </h1>
-      </div>
-
-      <form
-        onSubmit={(e) => {
-          handleConfirmarTabla(e);
-        }}
+      {/* Sección inicial */}
+      <section
+        id="seccion-inicial"
         className="flex flex-col items-center gap-5"
       >
-        <EntradaDatos
-          onAlternativasChange={setAlternativasInput}
-          onCriteriosChange={setCriteriosInput}
-        />
-        <Button
-          type="submit"
-          radius="md"
-          className="w-1 bg-gradient-to-tr from-pink-500 to-yellow-500 text-white shadow-lg"
+        <div>
+          <h1 className="text-center mt-16 mb-5 text-4xl lg:mt-16 bg-gradient-to-r from-pink-300 via-slate-300 to-purple-500 bg-clip-text tracking-tight text-transparent">
+            TOPSIS
+          </h1>
+        </div>
+
+        <form
+          onSubmit={(e) => {
+            handleConfirmarTabla(e);
+          }}
+          className="flex flex-col items-center gap-5"
         >
-          Confirmar
-        </Button>
-      </form>
+          <EntradaDatos
+            onAlternativasChange={setAlternativasInput}
+            onCriteriosChange={setCriteriosInput}
+          />
+          <Button
+            type="submit"
+            radius="md"
+            className="w-1 bg-gradient-to-tr from-pink-500 to-yellow-500 text-white shadow-lg"
+          >
+            Confirmar
+          </Button>
+        </form>
+      </section>
+
+      {/* Sección de la tabla de datos */}
       {generarTabla && (
         <form
           className="flex flex-col items-center gap-5"
@@ -132,6 +141,29 @@ const PaginaTopsis = () => {
             Calcular
           </Button>
         </form>
+      )}
+
+      {/* Sección de resultados que tendra 4 tablas, la primera sera la tabla con los datos normalizados, la segunda tabla con los datos ponderizados y la tercera con los resultados finales ordenados  */}
+      {mostrarResultados && (
+        <section
+          id="seccion-resultados"
+          className="flex flex-col items-center gap-5"
+        >
+          <h2 className="text-2xl">Resultados</h2>
+          <div className="flex flex-col items-center gap-5">
+            <h3 className="text-xl"></h3>
+            {/* <TablaResultados datosNormalizados={datosNormalizados} /> */}
+          </div>
+          <div className="flex flex-col items-center gap-5">
+            <h3 className="text-xl"></h3>
+            {/* <TablaResultados datosPonderizados={datosPonderizados} /> */}
+          </div>
+
+          <div className="flex flex-col items-center gap-5">
+            <h3 className="text-xl"></h3>
+            {/* <TablaResultados resultadosFinales={resultadosFinales} /> */}
+          </div>
+        </section>
       )}
     </>
   );

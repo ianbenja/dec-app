@@ -2,6 +2,8 @@ import { useEffect, useState } from "react"; // Import the 'useState' hook
 import EntradaDatos from "../../components/entradaDatos.jsx";
 import TablaInicial from "../../components/tabla.jsx";
 import { Button } from "@nextui-org/react";
+import { METODOS_NORMALIZACION } from "../../constants/index.js";
+import TablaMuestra from "../../components/tablamuestrav2.jsx";
 
 const PaginaMoora = () => {
   // Define el estado para alternativas y criterios
@@ -9,13 +11,18 @@ const PaginaMoora = () => {
   const [criteriosInput, setCriteriosInput] = useState(0);
   const [cantidadAlternativas, setCantidadAlternativas] = useState(0);
   const [cantidadCriterios, setCantidadCriterios] = useState(0);
+  const [metodoNormalizacion, setMetodoNormalizacion] = useState(METODOS_NORMALIZACION.EULER);
   const [generarTabla, setGenerarTabla] = useState(false);
   const [tablaKey, setTablaKey] = useState(0);
+  const [mostrarResultados, setMostrarResultados] = useState(false);
+  const [datosNormalizados, setDatosNormalizados] = useState();
+  const [datosPonderizados, setDatosPonderizados] = useState();
+  const [datosFinales, setFinales] = useState();
 
   const [alternativas, setAlternativas] = useState([]);
   const [criterios, setCriterios] = useState([]);
-  const [tiposDeCriterio, setTiposDeCriterio] = useState([]);
-  const [matrizValores, setMatrizValores] = useState([]);
+  const [tipos_criterios, setTiposDeCriterio] = useState([]);
+  const [valores, setValores] = useState([]);
   const [pesos, setPesos] = useState([]);
 
   // Definir un efecto para manejar la actualización de los vectores y la matriz
@@ -26,7 +33,7 @@ const PaginaMoora = () => {
 
     setPesos(Array(cantidadCriterios).fill(0));
     setTiposDeCriterio(Array(cantidadCriterios).fill("MAX")); // Tipo por defecto
-    setMatrizValores(
+    setValores(
       Array(cantidadAlternativas)
         .fill([])
         .map(() => Array(cantidadCriterios).fill(0))
@@ -39,6 +46,7 @@ const PaginaMoora = () => {
     setCantidadCriterios(parseInt(criteriosInput) || 2);
     setGenerarTabla(true);
     setTablaKey(tablaKey + 1);
+    setMostrarResultados(false);
   };
 
   //funcion que al hacer submit del formulario tranforma todos los datos de la tabla en un json y lo envia al backend
@@ -48,29 +56,40 @@ const PaginaMoora = () => {
     const data = {
       alternativas,
       criterios,
+      tipos_criterios,
+      valores,
       pesos,
-      tiposDeCriterio,
-      matrizValores,
+      metodoNormalizacion,
     };
     console.log(data);
 
-    // try {
-    //   const response = await fetch('/api/endpoint', {
-    //     method: 'POST',
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //     },
-    //     body: JSON.stringify(data),
-    //   });
+    try {
+      const response = await fetch("https://jtzzynaju6.execute-api.us-east-1.amazonaws.com/moora", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
 
-    //   if (response.ok) {
-    //     console.log('Datos enviados exitosamente');
-    //   } else {
-    //     console.error('Error al enviar los datos');
-    //   }
-    // } catch (error) {
-    //   console.error('Error en la solicitud:', error);
-    // }
+      if (response.ok) {
+        console.log("Datos enviados exitosamente");
+        console.log("Respuesta:", response);
+        const json = await response.json();
+        console.log("Respuesta:", json);
+
+        const { normalizado, ponderado, solucion } = json;
+        setDatosNormalizados(normalizado);
+        setDatosPonderizados(ponderado);
+        setFinales(solucion);
+
+        setMostrarResultados(true);
+      } else {
+        console.error("Error al enviar los datos");
+      }
+    } catch (error) {
+      console.error("Error en la solicitud:", error);
+    }
   };
 
   return (
@@ -123,12 +142,13 @@ const PaginaMoora = () => {
               setAlternativas={setAlternativas}
               criterios={criterios}
               setCriterios={setCriterios}
-              tiposDeCriterio={tiposDeCriterio}
+              tiposDeCriterio={tipos_criterios}
               setTiposDeCriterio={setTiposDeCriterio}
-              matrizValores={matrizValores}
-              setMatrizValores={setMatrizValores}
+              matrizValores={valores}
+              setMatrizValores={setValores}
               pesos={pesos}
               setPesos={setPesos}
+              setMetodoNormalizacion={setMetodoNormalizacion}
             />
           </div>
           <Button
@@ -142,25 +162,27 @@ const PaginaMoora = () => {
       )}
 
       {/* Sección de resultados que tendra 4 tablas, la primera sera la tabla con los datos normalizados, la segunda tabla con los datos ponderizados y la tercera con los resultados finales ordenados  */}
-      <section
-        id="seccion-resultados"
-        className="flex flex-col items-center gap-5"
-      >
-        <h2 className="text-2xl">Resultados</h2>
-        <div className="flex flex-col items-center gap-5">
-          <h3 className="text-xl"></h3>
-          {/* <TablaResultados datosNormalizados={datosNormalizados} /> */}
-        </div>
-        <div className="flex flex-col items-center gap-5">
-          <h3 className="text-xl"></h3>
-          {/* <TablaResultados datosPonderizados={datosPonderizados} /> */}
-        </div>
+      {mostrarResultados && (
+        <section
+          id="seccion-resultados"
+          className="flex flex-col w-full items-center gap-5"
+        >
+          <h2 className="text-2xl">Resultados</h2>
+          <div className="w-full flex flex-col items-center gap-5">
+            <h3 className="w-full  text-xl">Tabla Normalizada</h3>
+            <TablaMuestra data={datosNormalizados} />
+          </div>
+          <div className="w-full flex flex-col items-center gap-5">
+            <h3 className="w-full text-xl">Tabla Ponderada</h3>
+            <TablaMuestra data={datosPonderizados} />
+          </div>
 
-        <div className="flex flex-col items-center gap-5">
-          <h3 className="text-xl"></h3>
-          {/* <TablaResultados resultadosFinales={resultadosFinales} /> */}
-        </div>
-      </section>
+          <div className="w-full flex flex-col items-center gap-5">
+            <h3 className="w-full  text-xl">Tabla Suma</h3>
+            <TablaMuestra data={datosFinales} />
+          </div>
+        </section>
+      )}
     </>
   );
 };

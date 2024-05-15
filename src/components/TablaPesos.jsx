@@ -32,6 +32,8 @@ export const TablaPesos = ({
                   <th key={i}>
                     <input
                       type="number"
+                      inputMode="decimal"
+                      step="any"
                       required
                       name={`WC${i}`}
                       className=" p-2 w-full text-center remove-arrow"

@@ -1,7 +1,31 @@
+import { MaxIcon } from "../components/iconos/MaxIcon.jsx";
+import { MinIcon } from "../components/iconos/MinIcon.jsx";
+
 export const PRESENTACION = {
   title: "Herramienta de Apoyo a la Toma de Decisiones",
   description:
     "Esta pagina tiene como fin asistir a la resolución de problemas de toma de decisiones complejas, a través de la implementación de los métodos de Moora y Topsis.",
+};
+
+export const TIPO_CRITERIO = {
+  Max: {
+    value: "MAX",
+    text: "Max",
+    color: "danger",
+    icon: MaxIcon,
+  },
+  Min: {
+    value: "MIN",
+    text: "Min",
+    color: "primary",
+    icon: MinIcon,
+  },
+};
+
+export const METODOS_NORMALIZACION = {
+  MAX: "MAX",
+  SUMA: "SUMA",
+  EULER: "EULER",
 };
 
 export const DATATABLAPRUEBA1 = {
@@ -73,8 +97,8 @@ export const DATATABLAPRUEBA2 = {
     [10, 11, 12, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
   ],
   pesos: [
-    0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 0.1, 0.11, 0.12, 0.13, 0.14,
-    0.15, 0.16, 0.17, 0.18, 0.19, 0.2,
+    0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 0.1, 0.11, 0.12, 0.13, 0.14, 0.15, 0.16, 0.17,
+    0.18, 0.19, 0.2,
   ],
   cabezafilas: ["X1", "X2", "X3", "X4", "X5", "X6"],
 };
