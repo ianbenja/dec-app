@@ -1,6 +1,4 @@
-import axios from "axios";
-
-const url_api = "https://jtzzynaju6.execute-api.us-east-1.amazonaws.com/";
+const url_api = "https://jtzzynaju6.execute-api.us-east-1.amazonaws.com";
 
 export const metodoMoora = async (data) => {
   try {
@@ -19,7 +17,7 @@ export const metodoMoora = async (data) => {
 
 export const metodoPonLin = async (data) => {
   try {
-    const response = await fetch(`${url_api}/ponderacinolineal`, {
+    const response = await fetch(`${url_api}/ponderacionlineal`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

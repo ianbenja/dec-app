@@ -2,14 +2,12 @@ import { useEffect, useState } from "react"; // Import the 'useState' hook
 import EntradaDatos from "../../components/entradaDatos.jsx";
 import TablaInicial from "../../components/tabla.jsx";
 import { Button } from "@nextui-org/react";
-import { metodoTopsis } from "../../services/metodo.js";
+import { PONDERACION_LINEAL as PONDERACIONLINEAL } from "../../constants/index.js";
 import TablaMuestra from "../../components/tablamuestra.jsx";
-import TablaCoficientes from "../../components/tablaCofTop.jsx";
 import TablaOrden from "../../components/tablaOrden.jsx";
-import { TOPSIS } from "../../constants/index.js";
+import { metodoPonLin } from "../../services/metodo";
 
-const PaginaTopsis = () => {
-  // Define el estado para alternativas y criterios
+const PaginaPonderacion = () => {
   const [alternativasInput, setAlternativasInput] = useState(0);
   const [criteriosInput, setCriteriosInput] = useState(0);
   const [cantidadAlternativas, setCantidadAlternativas] = useState(0);
@@ -18,12 +16,10 @@ const PaginaTopsis = () => {
   const [tablaKey, setTablaKey] = useState(0);
   const [mostrarResultados, setMostrarResultados] = useState(false);
   const [datosOriginales, setDatosOriginale] = useState();
+  const [datosCriterizados, setDatosCriterizados] = useState();
   const [datosNormalizados, setDatosNormalizados] = useState();
   const [datosPonderizados, setDatosPonderizados] = useState();
-  const [datosIdeales, setDatosIdeales] = useState();
-  const [datosIdeal, setDatosIdeal] = useState();
-  const [datosAntiIdeal, setDatosAntiIdeal] = useState();
-  const [datosCoficientes, setDatosCoficientes] = useState();
+  const [datosSolucion, setDatosSolucion] = useState();
   const [datosOrden, setDatosOrden] = useState();
 
   const [alternativas, setAlternativas] = useState([]);
@@ -74,11 +70,12 @@ const PaginaTopsis = () => {
       valores,
       pesos,
       normalizacion,
+      criterio_general: "MAX",
     };
     console.log(data);
 
     try {
-      const response = await metodoTopsis(data);
+      const response = await metodoPonLin(data);
 
       if (response.ok) {
         console.log("Datos enviados exitosamente");
@@ -90,19 +87,15 @@ const PaginaTopsis = () => {
           normalizado,
           ponderado,
           original,
-          ideales,
-          ideal,
-          anti_ideal,
+          criterizado,
           solucion,
           ordenFinal,
         } = json;
         setDatosOriginale(original);
         setDatosNormalizados(normalizado);
         setDatosPonderizados(ponderado);
-        setDatosIdeales(ideales);
-        setDatosAntiIdeal(anti_ideal);
-        setDatosIdeal(ideal);
-        setDatosCoficientes(solucion);
+        setDatosCriterizados(criterizado);
+        setDatosSolucion(solucion);
         setDatosOrden(ordenFinal);
 
         setMostrarResultados(true);
@@ -123,7 +116,7 @@ const PaginaTopsis = () => {
       >
         <div>
           <h1 className="text-center mt-16 mb-5 text-4xl lg:mt-16 bg-gradient-to-r from-pink-300 via-slate-300 to-purple-500 bg-clip-text tracking-tight text-transparent">
-            TOPSIS
+            PONDERACIÓN LINEAL
           </h1>
         </div>
 
@@ -198,14 +191,22 @@ const PaginaTopsis = () => {
           </div>
 
           <div className="w-full flex flex-col items-center gap-5">
+            <h3 className="w-full text-center mt-16 mb-5 text-4xl lg:mt-16 bg-gradient-to-r from-pink-300 via-slate-300 to-purple-500 bg-clip-text tracking-tight text-transparent">
+              Tabla Criterizada
+            </h3>
+            <p>{PONDERACIONLINEAL.criterizar1}</p>
+            <p>{PONDERACIONLINEAL.criterizar2}</p>
+            <TablaMuestra data={datosCriterizados} />
+          </div>
+
+          <div className="w-full flex flex-col items-center gap-5">
             <h3 className="w-full  text-center mt-16 mb-5 text-4xl lg:mt-16 bg-gradient-to-r from-pink-300 via-slate-300 to-purple-500 bg-clip-text tracking-tight text-transparent">
               Tabla Normalizada
             </h3>
-            <p>{TOPSIS.normalizar1}</p>
-            <p>{TOPSIS.normalizar2}</p>
-            <p>{TOPSIS.normalizar3}</p>
-            <p>{TOPSIS.normalizar4}</p>
-
+            <p>{PONDERACIONLINEAL.normalizar1}</p>
+            <p>{PONDERACIONLINEAL.normalizar2}</p>
+            <p>{PONDERACIONLINEAL.normalizar3}</p>
+            <p>{PONDERACIONLINEAL.normalizar4}</p>
             <TablaMuestra data={datosNormalizados} />
           </div>
 
@@ -213,57 +214,27 @@ const PaginaTopsis = () => {
             <h3 className="w-full text-center mt-16 mb-5 text-4xl lg:mt-16 bg-gradient-to-r from-pink-300 via-slate-300 to-purple-500 bg-clip-text tracking-tight text-transparent">
               Tabla Ponderada
             </h3>
-            <p>{TOPSIS.ponderizar1}</p>
-            <p>{TOPSIS.ponderizar2}</p>
-            <p>{TOPSIS.ponderizar3}</p>
+            <p>{PONDERACIONLINEAL.ponderizar1}</p>
+            <p>{PONDERACIONLINEAL.ponderizar2}</p>
+            <p>{PONDERACIONLINEAL.ponderizar3}</p>
 
             <TablaMuestra data={datosPonderizados} />
           </div>
 
           <div className="w-full flex flex-col items-center gap-5">
             <h3 className="w-full text-center mt-16 mb-5 text-4xl lg:mt-16 bg-gradient-to-r from-pink-300 via-slate-300 to-purple-500 bg-clip-text tracking-tight text-transparent">
-              Tabla Ideal y Anti-Ideal
+              Tabla Solucion
             </h3>
-            <p>{TOPSIS.ideales1}</p>
-            <p>{TOPSIS.ideales2}</p>
-            <p>{TOPSIS.ideales3}</p>
-            <TablaMuestra data={datosIdeales} />
-          </div>
-
-          <div className="w-full flex flex-col items-center gap-5">
-            <h3 className="w-full text-center mt-16 mb-5 text-4xl lg:mt-16 bg-gradient-to-r from-pink-300 via-slate-300 to-purple-500 bg-clip-text tracking-tight text-transparent">
-              Tabla distancia Ideal
-            </h3>
-            <p>{TOPSIS.ideal1}</p>
-            <p>{TOPSIS.ideal2}</p>
-            <p>{TOPSIS.ideal3}</p>
-            <TablaMuestra data={datosIdeal} />
-          </div>
-
-          <div className="w-full flex flex-col items-center gap-5">
-            <h3 className="w-full text-center mt-16 mb-5 text-4xl lg:mt-16 bg-gradient-to-r from-pink-300 via-slate-300 to-purple-500 bg-clip-text tracking-tight text-transparent">
-              Tabla distancia Anti-Ideal
-            </h3>
-            <p>{TOPSIS.anti_ideal1}</p>
-            <p>{TOPSIS.anti_ideal2}</p>
-            <p>{TOPSIS.anti_ideal3}</p>
-            <TablaMuestra data={datosAntiIdeal} />
-          </div>
-
-          <div className="w-full flex flex-col items-center gap-5">
-            <h3 className="w-full text-center mt-16 mb-5 text-4xl lg:mt-16 bg-gradient-to-r from-pink-300 via-slate-300 to-purple-500 bg-clip-text tracking-tight text-transparent">
-              Tabla de Coficientes
-            </h3>
-            <p>{TOPSIS.coeficientes1}</p>
-            <p>{TOPSIS.coeficientes2}</p>
-            <TablaCoficientes data={datosCoficientes} />
+            <p>{PONDERACIONLINEAL.solucion1}</p>
+            <p>{PONDERACIONLINEAL.solucion2}</p>
+            <TablaMuestra data={datosSolucion} />
           </div>
 
           <div className="w-full flex flex-col items-center gap-5">
             <h3 className="w-full text-center mt-16 mb-5 text-4xl lg:mt-16 bg-gradient-to-r from-pink-300 via-slate-300 to-purple-500 bg-clip-text tracking-tight text-transparent">
               Tabla de Resultados
             </h3>
-            <p>{TOPSIS.orden1}</p>
+            <p>{PONDERACIONLINEAL.orden1}</p>
             <TablaOrden data={datosOrden} />
           </div>
         </section>
@@ -272,4 +243,4 @@ const PaginaTopsis = () => {
   );
 };
 
-export default PaginaTopsis;
+export default PaginaPonderacion;

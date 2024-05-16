@@ -16,6 +16,7 @@ const NavBarHome = () => {
 
   const menuItems = {
     Home: "#",
+    Ponderación: "#ponderacion",
     Moora: "#moora",
     Topsis: "#topsis",
     Documentación: "#documentacion",
@@ -36,10 +37,7 @@ const NavBarHome = () => {
         </NavbarBrand>
       </NavbarContent>
 
-      <NavbarContent
-        className="hidden sm:flex"
-        justify="center"
-      >
+      <NavbarContent className="hidden sm:flex" justify="center">
         {/* generamos los items del menu */}
         {Object.entries(menuItems).map(([label, path]) => (
           <NavbarItem

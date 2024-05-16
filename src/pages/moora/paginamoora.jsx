@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"; // Import the 'useState' hook
 import EntradaDatos from "../../components/entradaDatos.jsx";
 import TablaInicial from "../../components/tabla.jsx";
 import { Button } from "@nextui-org/react";
-import { METODOS_NORMALIZACION } from "../../constants/index.js";
+import { METODOS_NORMALIZACION, MOORA } from "../../constants/index.js";
 import TablaMuestra from "../../components/tablamuestra.jsx";
 import TablaOrden from "../../components/tablaOrden.jsx";
 import { metodoMoora } from "../../services/metodo";
@@ -178,27 +178,46 @@ const PaginaMoora = () => {
         >
           <h2 className="text-2xl">Resultados</h2>
           <div className="w-full flex flex-col items-center gap-5">
-            <h3 className="w-full  text-xl">Tabla Original</h3>
+            <h3 className="w-full text-center mt-16 mb-5 text-4xl lg:mt-16 bg-gradient-to-r from-pink-300 via-slate-300 to-purple-500 bg-clip-text tracking-tight text-transparent">
+              Tabla Original
+            </h3>
             <TablaMuestra data={datosOriginales} />
           </div>
           <div className="w-full flex flex-col items-center gap-5">
-            <h3 className="w-full  text-xl">Tabla Normalizada</h3>
+            <h3 className="w-full  text-center mt-16 mb-5 text-4xl lg:mt-16 bg-gradient-to-r from-pink-300 via-slate-300 to-purple-500 bg-clip-text tracking-tight text-transparent">
+              Tabla Normalizada
+            </h3>
+            <p>{MOORA.normalizar1}</p>
+            <p>{MOORA.normalizar2}</p>
+            <p>{MOORA.normalizar3}</p>
+            <p>{MOORA.normalizar4}</p>
+
             <TablaMuestra data={datosNormalizados} />
           </div>
           <div className="w-full flex flex-col items-center gap-5">
-            <h3 className="w-full text-xl">Tabla Ponderada</h3>
+            <h3 className="w-full text-center mt-16 mb-5 text-4xl lg:mt-16 bg-gradient-to-r from-pink-300 via-slate-300 to-purple-500 bg-clip-text tracking-tight text-transparent">
+              Tabla Ponderada
+            </h3>
+            <p>{MOORA.ponderizar1}</p>
+            <p>{MOORA.ponderizar2}</p>
+            <p>{MOORA.ponderizar3}</p>
             <TablaMuestra data={datosPonderizados} />
           </div>
 
           <div className="w-full flex flex-col items-center gap-5">
-            <h3 className="w-full  text-xl">Tabla Suma</h3>
+            <h3 className="w-full  text-center mt-16 mb-5 text-4xl lg:mt-16 bg-gradient-to-r from-pink-300 via-slate-300 to-purple-500 bg-clip-text tracking-tight text-transparent">
+              Tabla Suma
+            </h3>
+            <p>{MOORA.suma1}</p>
+            <p>{MOORA.suma2}</p>
             <TablaMuestra data={datosFinales} />
           </div>
 
           <div className="w-full flex flex-col items-center gap-5">
-            <h3 className="w-full  text-xl">
+            <h3 className="w-full  text-center mt-16 mb-5 text-4xl lg:mt-16 bg-gradient-to-r from-pink-300 via-slate-300 to-purple-500 bg-clip-text tracking-tight text-transparent">
               Posicion de las mejores alternativas
             </h3>
+            <p>{MOORA.orden1}</p>
             <TablaOrden data={ordenFinal} />
           </div>
         </section>
