@@ -2,6 +2,10 @@ import { useEffect, useState } from "react"; // Import the 'useState' hook
 import EntradaDatos from "../../components/entradaDatos.jsx";
 import TablaInicial from "../../components/tabla.jsx";
 import { Button } from "@nextui-org/react";
+import { metodoTopsis } from "../../services/metodo.js";
+import TablaMuestra from "../../components/tablamuestra.jsx";
+import TablaCoficientes from "../../components/tablaCofTop.jsx";
+import TablaOrden from "../../components/tablaOrden.jsx";
 
 const PaginaTopsis = () => {
   // Define el estado para alternativas y criterios
@@ -12,22 +16,38 @@ const PaginaTopsis = () => {
   const [generarTabla, setGenerarTabla] = useState(false);
   const [tablaKey, setTablaKey] = useState(0);
   const [mostrarResultados, setMostrarResultados] = useState(false);
+  const [datosOriginales, setDatosOriginale] = useState();
+  const [datosNormalizados, setDatosNormalizados] = useState();
+  const [datosPonderizados, setDatosPonderizados] = useState();
+  const [datosIdeales, setDatosIdeales] = useState();
+  const [datosIdeal, setDatosIdeal] = useState();
+  const [datosAntiIdeal, setDatosAntiIdeal] = useState();
+  const [datosCoficientes, setDatosCoficientes] = useState();
+  const [datosOrden, setDatosOrden] = useState();
 
   const [alternativas, setAlternativas] = useState([]);
   const [criterios, setCriterios] = useState([]);
-  const [tiposDeCriterio, setTiposDeCriterio] = useState([]);
-  const [matrizValores, setMatrizValores] = useState([]);
+  const [tipos_criterios, setTiposDeCriterio] = useState([]);
+  const [valores, setValores] = useState([]);
   const [pesos, setPesos] = useState([]);
+  const [normalizacion, setMetodoNormalizacion] = useState("EULER");
 
   // Definir un efecto para manejar la actualización de los vectores y la matriz
   useEffect(() => {
     // Crear arreglos según las entradas
-    setAlternativas(Array.from({ length: cantidadAlternativas }, (_, index) => `A${index + 1}`));
-    setCriterios(Array.from({ length: cantidadCriterios }, (_, index) => `C${index + 1}`));
+    setAlternativas(
+      Array.from(
+        { length: cantidadAlternativas },
+        (_, index) => `A${index + 1}`
+      )
+    );
+    setCriterios(
+      Array.from({ length: cantidadCriterios }, (_, index) => `C${index + 1}`)
+    );
 
     setPesos(Array(cantidadCriterios).fill(0));
     setTiposDeCriterio(Array(cantidadCriterios).fill("MAX")); // Tipo por defecto
-    setMatrizValores(
+    setValores(
       Array(cantidadAlternativas)
         .fill([])
         .map(() => Array(cantidadCriterios).fill(0))
@@ -49,30 +69,48 @@ const PaginaTopsis = () => {
     const data = {
       alternativas,
       criterios,
-      tiposDeCriterio,
-      matrizValores,
+      tipos_criterios,
+      valores,
       pesos,
-      metodoNormalizacion,
+      normalizacion,
     };
     console.log(data);
 
-    // try {
-    //   const response = await fetch('/api/endpoint', {
-    //     method: 'POST',
-    //     headers: {
-    //       'Content-Type': 'application/json',
-    //     },
-    //     body: JSON.stringify(data),
-    //   });
+    try {
+      const response = await metodoTopsis(data);
 
-    //   if (response.ok) {
-    //     console.log('Datos enviados exitosamente');
-    //   } else {
-    //     console.error('Error al enviar los datos');
-    //   }
-    // } catch (error) {
-    //   console.error('Error en la solicitud:', error);
-    // }
+      if (response.ok) {
+        console.log("Datos enviados exitosamente");
+        console.log("Respuesta:", response);
+        const json = await response.json();
+        console.log("Respuesta:", json);
+
+        const {
+          normalizado,
+          ponderado,
+          original,
+          ideales,
+          ideal,
+          anti_ideal,
+          solucion,
+          ordenFinal,
+        } = json;
+        setDatosOriginale(original);
+        setDatosNormalizados(normalizado);
+        setDatosPonderizados(ponderado);
+        setDatosIdeales(ideales);
+        setDatosAntiIdeal(anti_ideal);
+        setDatosIdeal(ideal);
+        setDatosCoficientes(solucion);
+        setDatosOrden(ordenFinal);
+
+        setMostrarResultados(true);
+      } else {
+        console.error("Error al enviar los datos");
+      }
+    } catch (error) {
+      console.error("Error en la solicitud:", error);
+    }
   };
 
   return (
@@ -125,12 +163,13 @@ const PaginaTopsis = () => {
               setAlternativas={setAlternativas}
               criterios={criterios}
               setCriterios={setCriterios}
-              tiposDeCriterio={tiposDeCriterio}
+              tiposDeCriterio={tipos_criterios}
               setTiposDeCriterio={setTiposDeCriterio}
-              matrizValores={matrizValores}
-              setMatrizValores={setMatrizValores}
+              matrizValores={valores}
+              setMatrizValores={setValores}
               pesos={pesos}
               setPesos={setPesos}
+              setMetodoNormalizacion={setMetodoNormalizacion}
             />
           </div>
           <Button
@@ -150,18 +189,44 @@ const PaginaTopsis = () => {
           className="flex flex-col items-center gap-5"
         >
           <h2 className="text-2xl">Resultados</h2>
-          <div className="flex flex-col items-center gap-5">
-            <h3 className="text-xl"></h3>
-            {/* <TablaResultados datosNormalizados={datosNormalizados} /> */}
-          </div>
-          <div className="flex flex-col items-center gap-5">
-            <h3 className="text-xl"></h3>
-            {/* <TablaResultados datosPonderizados={datosPonderizados} /> */}
+          <div className="w-full flex flex-col items-center gap-5">
+            <h3 className="w-full  text-xl">Tabla Original</h3>
+            <TablaMuestra data={datosOriginales} />
           </div>
 
-          <div className="flex flex-col items-center gap-5">
-            <h3 className="text-xl"></h3>
-            {/* <TablaResultados resultadosFinales={resultadosFinales} /> */}
+          <div className="w-full flex flex-col items-center gap-5">
+            <h3 className="w-full  text-xl">Tabla Normalizada</h3>
+            <TablaMuestra data={datosNormalizados} />
+          </div>
+
+          <div className="w-full flex flex-col items-center gap-5">
+            <h3 className="w-full text-xl">Tabla Ponderada</h3>
+            <TablaMuestra data={datosPonderizados} />
+          </div>
+
+          <div className="w-full flex flex-col items-center gap-5">
+            <h3 className="w-full text-xl">Tabla Ideal y Anti-Ideal</h3>
+            <TablaMuestra data={datosIdeales} />
+          </div>
+
+          <div className="w-full flex flex-col items-center gap-5">
+            <h3 className="w-full text-xl">Tabla distancia Ideal</h3>
+            <TablaMuestra data={datosIdeal} />
+          </div>
+
+          <div className="w-full flex flex-col items-center gap-5">
+            <h3 className="w-full text-xl">Tabla distancia Anti-Ideal</h3>
+            <TablaMuestra data={datosAntiIdeal} />
+          </div>
+
+          <div className="w-full flex flex-col items-center gap-5">
+            <h3 className="w-full text-xl">Tabla de Resultados</h3>
+            <TablaCoficientes data={datosCoficientes} />
+          </div>
+
+          <div className="w-full flex flex-col items-center gap-5">
+            <h3 className="w-full text-xl">Tabla de Resultados</h3>
+            <TablaOrden data={datosOrden} />
           </div>
         </section>
       )}

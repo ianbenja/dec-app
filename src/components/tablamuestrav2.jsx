@@ -11,15 +11,13 @@ import {
 import { TIPO_CRITERIO } from "../constants/index.js";
 
 const TablaMuestra = ({ data }) => {
-  const { criterios, tipos_criterios, alternativas, valores, pesos, solucion } = data;
+  const { criterios, tipos_criterios, alternativas, valores, pesos, solucion } =
+    data;
   const mostrarPesos = pesos && pesos.length > 0 ? true : false;
   const mostrarSuma = solucion && solucion.length > 0 ? true : false;
 
   return (
-    <Table
-      aria-label="Example static collection table"
-      className="text-center"
-    >
+    <Table aria-label="Example static collection table" className="text-center">
       <TableHeader>
         <TableColumn
           align="center"
@@ -54,7 +52,9 @@ const TablaMuestra = ({ data }) => {
           </TableColumn>
         ))}
         {mostrarSuma ? (
-          <TableColumn className="text-xl text-center font-bold text-indigo-500">Suma</TableColumn>
+          <TableColumn className="text-xl text-center font-bold text-indigo-500">
+            Suma
+          </TableColumn>
         ) : (
           <TableColumn
             hidden={true}
@@ -73,7 +73,9 @@ const TablaMuestra = ({ data }) => {
             </TableCell>
             {/* Renderizar las celdas restantes */}
             {row.map((cell, cellIndex) => (
-              <TableCell key={"V" + rowIndex + "-" + cellIndex}>{cell}</TableCell>
+              <TableCell key={"V" + rowIndex + "-" + cellIndex}>
+                {cell}
+              </TableCell>
             ))}
 
             {mostrarSuma ? (
@@ -88,12 +90,18 @@ const TablaMuestra = ({ data }) => {
         {mostrarPesos && (
           <TableRow>
             {mostrarPesos && (
-              <TableCell className="text-xl font-bold text-indigo-500">Pesos</TableCell>
+              <TableCell className="text-xl font-bold text-indigo-500">
+                Pesos
+              </TableCell>
             )}
             {pesos.map((cell, cellIndex) => (
               <TableCell key={"P" + cellIndex}>{cell}</TableCell>
             ))}
-            {mostrarSuma ? <TableCell></TableCell> : <TableCell hidden={true}>{0}</TableCell>}
+            {mostrarSuma ? (
+              <TableCell></TableCell>
+            ) : (
+              <TableCell hidden={true}>{0}</TableCell>
+            )}
           </TableRow>
         )}
       </TableBody>

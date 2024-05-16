@@ -3,7 +3,9 @@ import EntradaDatos from "../../components/entradaDatos.jsx";
 import TablaInicial from "../../components/tabla.jsx";
 import { Button } from "@nextui-org/react";
 import { METODOS_NORMALIZACION } from "../../constants/index.js";
-import TablaMuestra from "../../components/tablamuestrav2.jsx";
+import TablaMuestra from "../../components/tablamuestra.jsx";
+import TablaOrden from "../../components/tablaOrden.jsx";
+import { metodoMoora } from "../../services/metodo";
 
 const PaginaMoora = () => {
   // Define el estado para alternativas y criterios
@@ -11,13 +13,17 @@ const PaginaMoora = () => {
   const [criteriosInput, setCriteriosInput] = useState(0);
   const [cantidadAlternativas, setCantidadAlternativas] = useState(0);
   const [cantidadCriterios, setCantidadCriterios] = useState(0);
-  const [metodoNormalizacion, setMetodoNormalizacion] = useState(METODOS_NORMALIZACION.EULER);
+  const [metodoNormalizacion, setMetodoNormalizacion] = useState(
+    METODOS_NORMALIZACION.EULER
+  );
   const [generarTabla, setGenerarTabla] = useState(false);
   const [tablaKey, setTablaKey] = useState(0);
   const [mostrarResultados, setMostrarResultados] = useState(false);
+  const [datosOriginales, setDatosOriginale] = useState();
   const [datosNormalizados, setDatosNormalizados] = useState();
   const [datosPonderizados, setDatosPonderizados] = useState();
   const [datosFinales, setFinales] = useState();
+  const [ordenFinal, setOrdenFinal] = useState();
 
   const [alternativas, setAlternativas] = useState([]);
   const [criterios, setCriterios] = useState([]);
@@ -28,8 +34,15 @@ const PaginaMoora = () => {
   // Definir un efecto para manejar la actualización de los vectores y la matriz
   useEffect(() => {
     // Crear arreglos según las entradas
-    setAlternativas(Array.from({ length: cantidadAlternativas }, (_, index) => `A${index + 1}`));
-    setCriterios(Array.from({ length: cantidadCriterios }, (_, index) => `C${index + 1}`));
+    setAlternativas(
+      Array.from(
+        { length: cantidadAlternativas },
+        (_, index) => `A${index + 1}`
+      )
+    );
+    setCriterios(
+      Array.from({ length: cantidadCriterios }, (_, index) => `C${index + 1}`)
+    );
 
     setPesos(Array(cantidadCriterios).fill(0));
     setTiposDeCriterio(Array(cantidadCriterios).fill("MAX")); // Tipo por defecto
@@ -64,13 +77,7 @@ const PaginaMoora = () => {
     console.log(data);
 
     try {
-      const response = await fetch("https://jtzzynaju6.execute-api.us-east-1.amazonaws.com/moora", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
+      const response = await metodoMoora(data);
 
       if (response.ok) {
         console.log("Datos enviados exitosamente");
@@ -78,10 +85,12 @@ const PaginaMoora = () => {
         const json = await response.json();
         console.log("Respuesta:", json);
 
-        const { normalizado, ponderado, solucion } = json;
+        const { normalizado, ponderado, solucion, original, ordenFinal } = json;
         setDatosNormalizados(normalizado);
         setDatosPonderizados(ponderado);
         setFinales(solucion);
+        setDatosOriginale(original);
+        setOrdenFinal(ordenFinal);
 
         setMostrarResultados(true);
       } else {
@@ -169,6 +178,10 @@ const PaginaMoora = () => {
         >
           <h2 className="text-2xl">Resultados</h2>
           <div className="w-full flex flex-col items-center gap-5">
+            <h3 className="w-full  text-xl">Tabla Original</h3>
+            <TablaMuestra data={datosOriginales} />
+          </div>
+          <div className="w-full flex flex-col items-center gap-5">
             <h3 className="w-full  text-xl">Tabla Normalizada</h3>
             <TablaMuestra data={datosNormalizados} />
           </div>
@@ -180,6 +193,13 @@ const PaginaMoora = () => {
           <div className="w-full flex flex-col items-center gap-5">
             <h3 className="w-full  text-xl">Tabla Suma</h3>
             <TablaMuestra data={datosFinales} />
+          </div>
+
+          <div className="w-full flex flex-col items-center gap-5">
+            <h3 className="w-full  text-xl">
+              Posicion de las mejores alternativas
+            </h3>
+            <TablaOrden data={ordenFinal} />
           </div>
         </section>
       )}
