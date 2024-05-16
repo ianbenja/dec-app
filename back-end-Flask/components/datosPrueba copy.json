@@ -1,0 +1,15 @@
+{
+    "criterios": ["C1", "C2", "C3"],
+    "alternativas": ["A1", "A2"],
+  
+    "tipos_criterios": ["MAX", "MIN", "MAX"],
+    "valores": [
+      [5, 3, 4 ],
+      [3, 4, 2 ]
+    ],
+    "pesos": [0.3, 0.3, 0.4],
+    "p": 2,
+    "normalizacion": "EULER",
+
+    "criterio_general": "MAX"
+  }
