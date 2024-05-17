@@ -22,6 +22,9 @@ const TablaMuestra = ({ data }) => {
     resultadosParciales && resultadosParciales.length > 0 ? true : false;
 
   console.log("suma", mostrarSuma, "peso", mostrarPesos);
+  
+  const numeroDecimales = 5;
+  const decimales = Math.pow(10, numeroDecimales)
 
   return (
     <Table aria-label="Example static collection table">
@@ -78,6 +81,7 @@ const TablaMuestra = ({ data }) => {
             </TableCell>
             {/* Renderizar las celdas restantes */}
             {valores.map((cell, cellIndex) => (
+
               <TableCell
                 className=" text-center valor-celda"
                 key={cellIndex}
@@ -92,21 +96,26 @@ const TablaMuestra = ({ data }) => {
                 <span
                   title={solucion[rowIndex]}
                 >{solucion[rowIndex]}</span>
+
               </TableCell>
             ) : (
               <TableCell hidden={true}>{0}</TableCell>
             )}
 
             {mostrarResultadosParciales ? (
+
               <TableCell className=" text-center text-bold valor-celda">{suma[rowIndex]} </TableCell>
+
             ) : (
               <TableCell hidden={true}>{0}</TableCell>
             )}
             {mostrarResultadosParciales ? (
+
               <TableCell className=" text-lg text-center text-bold text-pink-600 valor-celda">
                 <span
                   title={resultadosParciales[rowIndex]}
                 >{resultadosParciales[rowIndex]}</span>
+
               </TableCell>
             ) : (
               <TableCell hidden={true}>{0}</TableCell>
@@ -118,6 +127,7 @@ const TablaMuestra = ({ data }) => {
           <TableRow>
             <TableCell className="text-xl text-center font-bold text-indigo-500">Pesos</TableCell>
             {pesos.map((cell, cellIndex) => (
+
               <TableCell
                 className=" text-center valor-celda "
                 key={cellIndex}
@@ -125,6 +135,7 @@ const TablaMuestra = ({ data }) => {
                 <span
                   title={cell}
                 >{cell}</span>
+
               </TableCell>
             ))}
             {mostrarSuma ? (
@@ -151,6 +162,7 @@ const TablaMuestra = ({ data }) => {
           <TableRow>
             <TableCell className="text-xl text-center font-bold text-indigo-500">A+</TableCell>
             {ideal.map((cell, cellIndex) => (
+
               <TableCell
                 className=" text-center valor-celda"
                 key={cellIndex}
@@ -158,6 +170,7 @@ const TablaMuestra = ({ data }) => {
                 <span
                   title={cell}
                 >{cell}</span>
+
               </TableCell>
             ))}
             {mostrarSuma ? (
@@ -183,6 +196,7 @@ const TablaMuestra = ({ data }) => {
           <TableRow>
             <TableCell className="text-xl text-center font-bold text-indigo-500">A-</TableCell>
             {anti_ideal.map((cell, cellIndex) => (
+
               <TableCell
                 className=" text-center valor-celda"
                 key={cellIndex}
@@ -190,6 +204,7 @@ const TablaMuestra = ({ data }) => {
                 <span
                   title={cell}
                 >{cell}</span>
+
               </TableCell>
             ))}
             {mostrarSuma ? (

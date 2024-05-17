@@ -142,7 +142,7 @@ const PaginaMoora = () => {
             handleCalcular(e);
           }}
         >
-          <div className="mt-4 ">
+          <div className="mt-4">
             <TablaInicial
               key={tablaKey}
               cantidadAlternativas={cantidadAlternativas}
