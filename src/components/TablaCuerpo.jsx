@@ -26,6 +26,7 @@ export const TablaCuerpo = ({
               <input
                 type="number"
                 inputMode="decimal"
+                step="any"
                 required
                 name={`A${i}C${j}`}
                 className="p-2 w-full text-center remove-arrow bg-zinc-900"
