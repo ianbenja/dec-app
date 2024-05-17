@@ -119,7 +119,7 @@ const PaginaTopsis = () => {
       {/* Sección inicial */}
       <section
         id="seccion-inicial"
-        className="flex flex-col items-center gap-5"
+        className="flex flex-col   items-center gap-5"
       >
         <div>
           <h1 className="text-center mt-16 mb-5 text-4xl lg:mt-16 bg-gradient-to-r from-pink-300 via-slate-300 to-purple-500 bg-clip-text tracking-tight text-transparent">
@@ -150,7 +150,7 @@ const PaginaTopsis = () => {
       {/* Sección de la tabla de datos */}
       {generarTabla && (
         <form
-          className="flex flex-col items-center gap-5"
+          className="flex flex-col w-full max-w-7xl items-center gap-5"
           onSubmit={(e) => {
             handleCalcular(e);
           }}
@@ -187,7 +187,7 @@ const PaginaTopsis = () => {
       {mostrarResultados && (
         <section
           id="seccion-resultados"
-          className="flex flex-col items-center gap-5"
+          className="flex flex-col w-full max-w-7xl items-center gap-5"
         >
           <h2 className="text-2xl">Resultados</h2>
           <div className="w-full flex flex-col items-center gap-5">

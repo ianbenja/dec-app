@@ -52,10 +52,10 @@ const TablaInicial = ({
   const handleMostrarPesosChange = (e) => {
     setMostrarPesos(e.target.checked);
   };
-
+  
   return (
-    <div className="max-w-7xl flex flex-col mx-auto">
-      <table className="w-full p-2 pt-12 mt-5 border-separate border-spacing-2 bg-zinc-800 rounded-2xl">
+    <div className="w-full flex flex-col mx-auto">
+      <table className=" p-2 pt-12 mt-4 border-separate border-spacing-0 bg-zinc-800 rounded-2xl">
         <TablaCabecera
           cantidadCriterios={cantidadCriterios}
           tipoCriterios={botonesTipoCriterios}

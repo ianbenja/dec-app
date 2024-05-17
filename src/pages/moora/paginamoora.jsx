@@ -142,7 +142,7 @@ const PaginaMoora = () => {
             handleCalcular(e);
           }}
         >
-          <div className="mt-4 ">
+          <div className="mt-4">
             <TablaInicial
               key={tablaKey}
               cantidadAlternativas={cantidadAlternativas}
@@ -174,7 +174,7 @@ const PaginaMoora = () => {
       {mostrarResultados && (
         <section
           id="seccion-resultados"
-          className="flex flex-col w-full items-center gap-5"
+          className="flex flex-col w-full max-w-7xl items-center gap-5"
         >
           <h2 className="text-2xl">Resultados</h2>
           <div className="w-full flex flex-col items-center gap-5">

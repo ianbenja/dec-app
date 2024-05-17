@@ -29,6 +29,9 @@ const TablaMuestra = ({ data }) => {
     resultadosParciales && resultadosParciales.length > 0 ? true : false;
 
   console.log("suma", mostrarSuma, "peso", mostrarPesos);
+  
+  const numeroDecimales = 5;
+  const decimales = Math.pow(10, numeroDecimales)
 
   return (
     <Table aria-label="Example static collection table">
@@ -93,12 +96,12 @@ const TablaMuestra = ({ data }) => {
             {/* Renderizar las celdas restantes */}
             {valores.map((cell, cellIndex) => (
               <TableCell className=" text-center " key={cellIndex}>
-                {cell}
+                {Math.round(cell * decimales) / decimales}
               </TableCell>
             ))}
             {mostrarSuma ? (
               <TableCell className=" text-lg text-center text-bold text-pink-600 ">
-                {solucion[rowIndex]}{" "}
+                {Math.round(solucion[rowIndex] * decimales) / decimales}{" "}
               </TableCell>
             ) : (
               <TableCell hidden={true}>{0}</TableCell>
@@ -106,14 +109,14 @@ const TablaMuestra = ({ data }) => {
 
             {mostrarResultadosParciales ? (
               <TableCell className=" text-center text-bold ">
-                {suma[rowIndex]}{" "}
+                {Math.round(suma[rowIndex] * decimales) / decimales }{" "}
               </TableCell>
             ) : (
               <TableCell hidden={true}>{0}</TableCell>
             )}
             {mostrarResultadosParciales ? (
               <TableCell className=" text-lg text-center text-bold text-pink-600 ">
-                {resultadosParciales[rowIndex]}{" "}
+                {Math.round(resultadosParciales[rowIndex] * decimales) / decimales}{" "}
               </TableCell>
             ) : (
               <TableCell hidden={true}>{0}</TableCell>
@@ -128,7 +131,7 @@ const TablaMuestra = ({ data }) => {
             </TableCell>
             {pesos.map((cell, cellIndex) => (
               <TableCell className=" text-center " key={cellIndex}>
-                {cell}
+                {Math.round(cell * decimales) / decimales}
               </TableCell>
             ))}
             {mostrarSuma ? (
@@ -158,7 +161,7 @@ const TablaMuestra = ({ data }) => {
             </TableCell>
             {ideal.map((cell, cellIndex) => (
               <TableCell className=" text-center " key={cellIndex}>
-                {cell}
+                {Math.round(cell * decimales) / decimales}
               </TableCell>
             ))}
             {mostrarSuma ? (
@@ -187,7 +190,7 @@ const TablaMuestra = ({ data }) => {
             </TableCell>
             {anti_ideal.map((cell, cellIndex) => (
               <TableCell className=" text-center " key={cellIndex}>
-                {cell}
+                {Math.round(cell * decimales) / decimales}
               </TableCell>
             ))}
             {mostrarSuma ? (

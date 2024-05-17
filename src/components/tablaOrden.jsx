@@ -8,6 +8,9 @@ import {
   TableCell,
 } from "@nextui-org/react";
 
+const numeroDecimales = 5;
+const decimales = Math.pow(10, numeroDecimales)
+
 const TablaOrden = ({ data }) => {
   const { alternativas, solucion } = data;
   return (
@@ -33,7 +36,7 @@ const TablaOrden = ({ data }) => {
               {alternativas[rowIndex]}
             </TableCell>
             <TableCell className="text-xl text-center font-bold ">
-              {valores}
+              {Math.round(valores * decimales) / decimales}
             </TableCell>
           </TableRow>
         ))}

@@ -180,7 +180,7 @@ const PaginaPonderacion = () => {
       {mostrarResultados && (
         <section
           id="seccion-resultados"
-          className="flex flex-col items-center gap-5"
+          className="flex flex-col w-full max-w-7xl items-center gap-5"
         >
           <h2 className="text-2xl">Resultados</h2>
           <div className="w-full flex flex-col items-center gap-5">
