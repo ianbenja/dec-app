@@ -26,8 +26,10 @@ const TablaCoficientes = ({ data }) => {
             <TableCell className="text-xl text-center font-bold ">
               {alternativas[rowIndex]}
             </TableCell>
-            <TableCell className="text-xl text-center font-bold ">
-              {valores}
+            <TableCell className="text-xl text-center font-bold valor-celda">
+              <span
+                title={valores}
+              >{valores}</span>
             </TableCell>
           </TableRow>
         ))}

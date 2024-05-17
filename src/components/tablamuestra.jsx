@@ -82,25 +82,31 @@ const TablaMuestra = ({ data }) => {
                 className=" text-center valor-celda"
                 key={cellIndex}
               >
-                {cell}
+                <span
+                  title={cell}
+                >{cell}</span>
               </TableCell>
             ))}
             {mostrarSuma ? (
-              <TableCell className=" text-lg text-center text-bold text-pink-600 ">
-                {solucion[rowIndex]}{" "}
+              <TableCell className=" text-lg text-center text-bold text-pink-600 valor-celda">
+                <span
+                  title={solucion[rowIndex]}
+                >{solucion[rowIndex]}</span>
               </TableCell>
             ) : (
               <TableCell hidden={true}>{0}</TableCell>
             )}
 
             {mostrarResultadosParciales ? (
-              <TableCell className=" text-center text-bold ">{suma[rowIndex]} </TableCell>
+              <TableCell className=" text-center text-bold valor-celda">{suma[rowIndex]} </TableCell>
             ) : (
               <TableCell hidden={true}>{0}</TableCell>
             )}
             {mostrarResultadosParciales ? (
-              <TableCell className=" text-lg text-center text-bold text-pink-600 ">
-                {resultadosParciales[rowIndex]}{" "}
+              <TableCell className=" text-lg text-center text-bold text-pink-600 valor-celda">
+                <span
+                  title={resultadosParciales[rowIndex]}
+                >{resultadosParciales[rowIndex]}</span>
               </TableCell>
             ) : (
               <TableCell hidden={true}>{0}</TableCell>
@@ -113,10 +119,12 @@ const TablaMuestra = ({ data }) => {
             <TableCell className="text-xl text-center font-bold text-indigo-500">Pesos</TableCell>
             {pesos.map((cell, cellIndex) => (
               <TableCell
-                className=" text-center "
+                className=" text-center valor-celda "
                 key={cellIndex}
               >
-                {cell}
+                <span
+                  title={cell}
+                >{cell}</span>
               </TableCell>
             ))}
             {mostrarSuma ? (
@@ -144,10 +152,12 @@ const TablaMuestra = ({ data }) => {
             <TableCell className="text-xl text-center font-bold text-indigo-500">A+</TableCell>
             {ideal.map((cell, cellIndex) => (
               <TableCell
-                className=" text-center "
+                className=" text-center valor-celda"
                 key={cellIndex}
               >
-                {cell}
+                <span
+                  title={cell}
+                >{cell}</span>
               </TableCell>
             ))}
             {mostrarSuma ? (
@@ -174,10 +184,12 @@ const TablaMuestra = ({ data }) => {
             <TableCell className="text-xl text-center font-bold text-indigo-500">A-</TableCell>
             {anti_ideal.map((cell, cellIndex) => (
               <TableCell
-                className=" text-center "
+                className=" text-center valor-celda"
                 key={cellIndex}
               >
-                {cell}
+                <span
+                  title={cell}
+                >{cell}</span>
               </TableCell>
             ))}
             {mostrarSuma ? (
