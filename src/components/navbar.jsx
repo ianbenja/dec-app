@@ -10,6 +10,7 @@ import {
   Link,
 } from "@nextui-org/react";
 import { AcmeLogo } from "./iconos/AcmeLogo.jsx";
+import Logo from "./iconos/logo.jsx";
 
 const NavBarHome = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -32,12 +33,15 @@ const NavBarHome = () => {
           className="sm:hidden"
         />
         <NavbarBrand>
-          <AcmeLogo />
+          <Logo />
           <p className="font-bold text-inherit">DEC</p>
         </NavbarBrand>
       </NavbarContent>
 
-      <NavbarContent className="hidden sm:flex" justify="center">
+      <NavbarContent
+        className="hidden sm:flex"
+        justify="center"
+      >
         {/* generamos los items del menu */}
         {Object.entries(menuItems).map(([label, path]) => (
           <NavbarItem

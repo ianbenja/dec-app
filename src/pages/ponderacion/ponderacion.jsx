@@ -148,7 +148,7 @@ const PaginaPonderacion = () => {
             handleCalcular(e);
           }}
         >
-          <div className="mt-4 ">
+          <div className="mt-4  overflow-x-scroll">
             <TablaInicial
               key={tablaKey}
               cantidadAlternativas={cantidadAlternativas}

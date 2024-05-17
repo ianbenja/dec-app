@@ -1,4 +1,4 @@
-import React from "react";
+import PropTypes from "prop-types";
 import {
   Table,
   TableHeader,
@@ -35,14 +35,26 @@ const TablaOrden = ({ data }) => {
             <TableCell className="text-xl text-center font-bold ">
               {alternativas[rowIndex]}
             </TableCell>
-            <TableCell className="text-xl text-center font-bold ">
-              {Math.round(valores * decimales) / decimales}
+
+            <TableCell className="text-xl text-center font-bold valor-celda">
+              <span
+                title={valores}
+              >{valores}</span>
+
             </TableCell>
           </TableRow>
         ))}
       </TableBody>
     </Table>
   );
-};
 
+
+};
+TablaOrden.propTypes = {
+  data: PropTypes.shape({
+    alternativas: PropTypes.array.isRequired,
+    solucion: PropTypes.array.isRequired,
+  }
+  )
+};
 export default TablaOrden;

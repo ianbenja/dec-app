@@ -8,7 +8,7 @@ export const TablaPesos = ({
   handleMostrarPesosChange,
 }) => {
   return (
-    <div className="flex flex-col items-center">
+    <div className="w-full flex flex-col items-center">
       <div className="flex justify-center items-center mt-5">
         <input
           type="checkbox"
@@ -29,7 +29,10 @@ export const TablaPesos = ({
                   <span className=" text-center">Pesos(W)</span>
                 </th>
                 {[...Array(cantidadCriterios).keys()].map((i) => (
-                  <th key={i}>
+                  <th key={i}
+                  className="min-w-24"
+                  
+                  >
                     <input
                       type="number"
                       inputMode="decimal"

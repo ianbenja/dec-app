@@ -15,7 +15,7 @@ export const TablaCabecera = ({
         {[...Array(cantidadCriterios).keys()].map((i) => (
           <th
             key={i}
-            className="relative criterio"
+            className="relative min-w-24"
           >
             <input
               type="text"

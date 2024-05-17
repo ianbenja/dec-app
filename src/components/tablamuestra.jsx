@@ -1,12 +1,5 @@
-import React from "react";
-import {
-  Table,
-  TableHeader,
-  TableColumn,
-  TableBody,
-  TableRow,
-  TableCell,
-} from "@nextui-org/react";
+import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@nextui-org/react";
+import PropTypes from "prop-types";
 
 const TablaMuestra = ({ data }) => {
   const {
@@ -36,9 +29,7 @@ const TablaMuestra = ({ data }) => {
   return (
     <Table aria-label="Example static collection table">
       <TableHeader>
-        <TableColumn className="text-xl text-center font-bold text-indigo-500">
-          A \ C
-        </TableColumn>
+        <TableColumn className="text-xl text-center font-bold text-indigo-500">A \ C</TableColumn>
         {criterios.map((columnName, index) => (
           <TableColumn
             className="text-xl text-center font-bold text-indigo-500"
@@ -48,9 +39,7 @@ const TablaMuestra = ({ data }) => {
           </TableColumn>
         ))}
         {mostrarSuma ? (
-          <TableColumn className="text-xl text-center font-bold text-indigo-500">
-            Suma
-          </TableColumn>
+          <TableColumn className="text-xl text-center font-bold text-indigo-500">Suma</TableColumn>
         ) : (
           <TableColumn
             hidden={true}
@@ -60,10 +49,7 @@ const TablaMuestra = ({ data }) => {
           </TableColumn>
         )}
         {mostrarResultadosParciales ? (
-          <TableColumn className="text-xl text-center font-bold text-indigo-500">
-            {" "}
-            Suma
-          </TableColumn>
+          <TableColumn className="text-xl text-center font-bold text-indigo-500"> Suma</TableColumn>
         ) : (
           <TableColumn
             hidden={true}
@@ -95,28 +81,41 @@ const TablaMuestra = ({ data }) => {
             </TableCell>
             {/* Renderizar las celdas restantes */}
             {valores.map((cell, cellIndex) => (
-              <TableCell className=" text-center " key={cellIndex}>
-                {Math.round(cell * decimales) / decimales}
+
+              <TableCell
+                className=" text-center valor-celda"
+                key={cellIndex}
+              >
+                <span
+                  title={cell}
+                >{cell}</span>
               </TableCell>
             ))}
             {mostrarSuma ? (
-              <TableCell className=" text-lg text-center text-bold text-pink-600 ">
-                {Math.round(solucion[rowIndex] * decimales) / decimales}{" "}
+              <TableCell className=" text-lg text-center text-bold text-pink-600 valor-celda">
+                <span
+                  title={solucion[rowIndex]}
+                >{solucion[rowIndex]}</span>
+
               </TableCell>
             ) : (
               <TableCell hidden={true}>{0}</TableCell>
             )}
 
             {mostrarResultadosParciales ? (
-              <TableCell className=" text-center text-bold ">
-                {Math.round(suma[rowIndex] * decimales) / decimales }{" "}
-              </TableCell>
+
+              <TableCell className=" text-center text-bold valor-celda">{suma[rowIndex]} </TableCell>
+
             ) : (
               <TableCell hidden={true}>{0}</TableCell>
             )}
             {mostrarResultadosParciales ? (
-              <TableCell className=" text-lg text-center text-bold text-pink-600 ">
-                {Math.round(resultadosParciales[rowIndex] * decimales) / decimales}{" "}
+
+              <TableCell className=" text-lg text-center text-bold text-pink-600 valor-celda">
+                <span
+                  title={resultadosParciales[rowIndex]}
+                >{resultadosParciales[rowIndex]}</span>
+
               </TableCell>
             ) : (
               <TableCell hidden={true}>{0}</TableCell>
@@ -126,12 +125,17 @@ const TablaMuestra = ({ data }) => {
 
         {mostrarPesos && (
           <TableRow>
-            <TableCell className="text-xl text-center font-bold text-indigo-500">
-              Pesos
-            </TableCell>
+            <TableCell className="text-xl text-center font-bold text-indigo-500">Pesos</TableCell>
             {pesos.map((cell, cellIndex) => (
-              <TableCell className=" text-center " key={cellIndex}>
-                {Math.round(cell * decimales) / decimales}
+
+              <TableCell
+                className=" text-center valor-celda "
+                key={cellIndex}
+              >
+                <span
+                  title={cell}
+                >{cell}</span>
+
               </TableCell>
             ))}
             {mostrarSuma ? (
@@ -156,12 +160,17 @@ const TablaMuestra = ({ data }) => {
 
         {mostrarIdeal && (
           <TableRow>
-            <TableCell className="text-xl text-center font-bold text-indigo-500">
-              A+
-            </TableCell>
+            <TableCell className="text-xl text-center font-bold text-indigo-500">A+</TableCell>
             {ideal.map((cell, cellIndex) => (
-              <TableCell className=" text-center " key={cellIndex}>
-                {Math.round(cell * decimales) / decimales}
+
+              <TableCell
+                className=" text-center valor-celda"
+                key={cellIndex}
+              >
+                <span
+                  title={cell}
+                >{cell}</span>
+
               </TableCell>
             ))}
             {mostrarSuma ? (
@@ -185,12 +194,17 @@ const TablaMuestra = ({ data }) => {
 
         {mostrarAntiIdeal && (
           <TableRow>
-            <TableCell className="text-xl text-center font-bold text-indigo-500">
-              A-
-            </TableCell>
+            <TableCell className="text-xl text-center font-bold text-indigo-500">A-</TableCell>
             {anti_ideal.map((cell, cellIndex) => (
-              <TableCell className=" text-center " key={cellIndex}>
-                {Math.round(cell * decimales) / decimales}
+
+              <TableCell
+                className=" text-center valor-celda"
+                key={cellIndex}
+              >
+                <span
+                  title={cell}
+                >{cell}</span>
+
               </TableCell>
             ))}
             {mostrarSuma ? (
@@ -214,6 +228,21 @@ const TablaMuestra = ({ data }) => {
       </TableBody>
     </Table>
   );
+};
+
+TablaMuestra.propTypes = {
+  data: PropTypes.shape({
+    criterios: PropTypes.arrayOf(PropTypes.string),
+    valores: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.number)),
+    pesos: PropTypes.arrayOf(PropTypes.number),
+    alternativas: PropTypes.arrayOf(PropTypes.string),
+    solucion: PropTypes.arrayOf(PropTypes.number),
+    ideal: PropTypes.arrayOf(PropTypes.number),
+    anti_ideal: PropTypes.arrayOf(PropTypes.number),
+    suma: PropTypes.arrayOf(PropTypes.number),
+    resultadosParciales: PropTypes.arrayOf(PropTypes.number),
+    tipo: PropTypes.string,
+  }),
 };
 
 export default TablaMuestra;
