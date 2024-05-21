@@ -6,6 +6,7 @@ import { METODOS_NORMALIZACION, MOORA } from "../../constants/index.js";
 import TablaMuestra from "../../components/tablamuestra.jsx";
 import TablaOrden from "../../components/tablaOrden.jsx";
 import { metodoMoora } from "../../services/metodo";
+import ExportToPDF from "../../components/exportPdf.jsx";
 
 const PaginaMoora = () => {
   // Define el estado para alternativas y criterios
@@ -220,6 +221,14 @@ const PaginaMoora = () => {
             <p>{MOORA.orden1}</p>
             <TablaOrden data={ordenFinal} />
           </div>
+          {mostrarResultados && (
+            <ExportToPDF
+              paginaTitulo="Resultados de Moora"
+              datosOriginales={datosOriginales}
+              datosOrden={ordenFinal}
+              titlePDF={"Moora"}
+            />
+          )}
         </section>
       )}
     </>

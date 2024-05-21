@@ -6,6 +6,8 @@ import { PONDERACION_LINEAL as PONDERACIONLINEAL } from "../../constants/index.j
 import TablaMuestra from "../../components/tablamuestra.jsx";
 import TablaOrden from "../../components/tablaOrden.jsx";
 import { metodoPonLin } from "../../services/metodo";
+import ExportToPDF from "../../components/exportPdf.jsx";
+import { PDFDownloadLink } from "@react-pdf/renderer";
 
 const PaginaPonderacion = () => {
   const [alternativasInput, setAlternativasInput] = useState(0);
@@ -237,6 +239,14 @@ const PaginaPonderacion = () => {
             <p>{PONDERACIONLINEAL.orden1}</p>
             <TablaOrden data={datosOrden} />
           </div>
+          {mostrarResultados && (
+            <ExportToPDF
+              paginaTitulo="Resultados de Ponderación Lineal"
+              datosOriginales={datosOriginales}
+              datosOrden={datosOrden}
+              titlePDF={"PonderacionLineal"}
+            />
+          )}
         </section>
       )}
     </>

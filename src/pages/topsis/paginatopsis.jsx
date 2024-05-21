@@ -7,6 +7,7 @@ import TablaMuestra from "../../components/tablamuestra.jsx";
 import TablaCoficientes from "../../components/tablaCofTop.jsx";
 import TablaOrden from "../../components/tablaOrden.jsx";
 import { TOPSIS } from "../../constants/index.js";
+import ExportToPDF from "../../components/exportPdf.jsx";
 
 const PaginaTopsis = () => {
   // Define el estado para alternativas y criterios
@@ -266,6 +267,14 @@ const PaginaTopsis = () => {
             <p>{TOPSIS.orden1}</p>
             <TablaOrden data={datosOrden} />
           </div>
+          {mostrarResultados && (
+            <ExportToPDF
+              paginaTitulo="Resultados de Topsis"
+              datosOriginales={datosOriginales}
+              datosOrden={datosOrden}
+              titlePDF={"Topsis"}
+            />
+          )}
         </section>
       )}
     </>
