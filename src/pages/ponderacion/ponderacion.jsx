@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"; // Import the 'useState' hook
+import { useEffect, useState } from "react";
 import EntradaDatos from "../../components/entradaDatos.jsx";
 import TablaInicial from "../../components/tabla.jsx";
 import { Button } from "@nextui-org/react";
@@ -7,9 +7,8 @@ import TablaMuestra from "../../components/tablamuestra.jsx";
 import TablaOrden from "../../components/tablaOrden.jsx";
 import { metodoPonLin } from "../../services/metodo";
 import ExportToPDF from "../../components/exportPdf.jsx";
-import { PDFDownloadLink } from "@react-pdf/renderer";
 
-const PaginaPonderacion = () => {
+const PaginaPonderacion = (theme) => {
   const [alternativasInput, setAlternativasInput] = useState(0);
   const [criteriosInput, setCriteriosInput] = useState(0);
   const [cantidadAlternativas, setCantidadAlternativas] = useState(0);

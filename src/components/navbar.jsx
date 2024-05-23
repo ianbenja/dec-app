@@ -25,16 +25,18 @@ const NavBarHome = ({ theme, setTheme }) => {
     DOCUMENTACION: "#documentacion",
     CONTACTO: "#contacto",
   };
+
   const [activeItem, setActiveItem] = useState(
-    menuItems[
-      window.location.hash.split("#")[1] !== undefined
-        ? window.location.hash.split("#")[1].toUpperCase()
-        : "HOME"
-    ]
+    menuItems[window.location.hash.split("#")[1]?.toUpperCase() ?? "HOME"]
   );
 
+  const handleMenuItemClick = (path) => {
+    setActiveItem(path);
+    setIsMenuOpen(false); // Cierra el menú al seleccionar un ítem
+  };
+
   return (
-    <Navbar onMenuOpenChange={setIsMenuOpen}>
+    <Navbar isMenuOpen={isMenuOpen} onMenuOpenChange={setIsMenuOpen}>
       <NavbarContent>
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
@@ -46,16 +48,10 @@ const NavBarHome = ({ theme, setTheme }) => {
         </NavbarBrand>
       </NavbarContent>
 
-      <NavbarContent
-        className="hidden sm:flex"
-        justify="center"
-      >
-        {/* generamos los items del menu */}
+      <NavbarContent className="hidden sm:flex" justify="center">
+        {/* Generamos los ítems del menú */}
         {Object.entries(menuItems).map(([label, path]) => (
-          <NavbarItem
-            key={label}
-            // isActive={activeItem === path}
-          >
+          <NavbarItem key={label}>
             <Link
               href={path}
               className={
@@ -63,29 +59,23 @@ const NavBarHome = ({ theme, setTheme }) => {
                   ? "text-center text-xl bg-gradient-to-r from-pink-500 to-yellow-500 bg-clip-text text-transparent"
                   : "text-inherit text-xl"
               }
-              onClick={() => setActiveItem(path)}
+              onClick={() => handleMenuItemClick(path)}
             >
               {label}
             </Link>
           </NavbarItem>
         ))}
-        <NavbarMenuItem>
+        <NavbarItem>
           {theme === "dark" ? (
-            <Link
-              color="foreground"
-              onClick={() => setTheme("light")}
-            >
+            <Link color="foreground" onClick={() => setTheme("light")}>
               <SunIcon />
             </Link>
           ) : (
-            <Link
-              color="foreground"
-              onClick={() => setTheme("dark")}
-            >
+            <Link color="foreground" onClick={() => setTheme("dark")}>
               <MoonIcon />
             </Link>
           )}
-        </NavbarMenuItem>
+        </NavbarItem>
       </NavbarContent>
 
       <NavbarMenu className="bg-transparent">
@@ -98,7 +88,7 @@ const NavBarHome = ({ theme, setTheme }) => {
                   ? "text-center text-xl bg-gradient-to-r from-pink-500 to-yellow-500 bg-clip-text text-transparent"
                   : "text-slate-300 text-xl"
               }
-              onClick={() => setActiveItem(path)}
+              onClick={() => handleMenuItemClick(path)}
             >
               {label}
             </Link>
@@ -107,17 +97,11 @@ const NavBarHome = ({ theme, setTheme }) => {
 
         <NavbarMenuItem>
           {theme === "dark" ? (
-            <Link
-              color="foreground"
-              onClick={() => setTheme("light")}
-            >
+            <Link color="foreground" onClick={() => setTheme("light")}>
               <SunIcon />
             </Link>
           ) : (
-            <Link
-              color="foreground"
-              onClick={() => setTheme("dark")}
-            >
+            <Link color="foreground" onClick={() => setTheme("dark")}>
               <MoonIcon />
             </Link>
           )}
@@ -129,7 +113,7 @@ const NavBarHome = ({ theme, setTheme }) => {
 
 NavBarHome.propTypes = {
   theme: PropTypes.string,
-  setTheme: PropTypes.func,
+  setTheme: PropTypes.func.isRequired,
 };
 
 export default NavBarHome;

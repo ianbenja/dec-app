@@ -18,10 +18,7 @@ const App = () => {
         <main
           className={`${theme} text-foreground bg-background px-5 pb-10 flex flex-col items-center transition-colors`}
         >
-          <NavBarHome
-            theme={theme}
-            setTheme={setTheme}
-          />
+          <NavBarHome theme={theme} setTheme={setTheme} />
           <Rutas />
         </main>
       </NextUIProvider>
