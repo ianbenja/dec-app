@@ -2,7 +2,7 @@ import { useEffect, useState } from "react"; // Import the 'useState' hook
 import EntradaDatos from "../../components/entradaDatos.jsx";
 import TablaInicial from "../../components/tabla.jsx";
 import { Button } from "@nextui-org/react";
-import { METODOS_NORMALIZACION, MOORA } from "../../constants/index.js";
+import { METODOS, METODOS_NORMALIZACION, MOORA } from "../../constants/index.js";
 import TablaMuestra from "../../components/tablamuestra.jsx";
 import TablaOrden from "../../components/tablaOrden.jsx";
 import { metodoMoora } from "../../services/metodo";
@@ -45,7 +45,7 @@ const PaginaMoora = () => {
       Array.from({ length: cantidadCriterios }, (_, index) => `C${index + 1}`)
     );
 
-    setPesos(Array(cantidadCriterios).fill(0));
+    setPesos(Array(cantidadCriterios).fill(1));
     setTiposDeCriterio(Array(cantidadCriterios).fill("MAX")); // Tipo por defecto
     setValores(
       Array(cantidadAlternativas)
@@ -146,6 +146,7 @@ const PaginaMoora = () => {
           <div className="mt-4">
             <TablaInicial
               key={tablaKey}
+              metodo={METODOS.MOORA}
               cantidadAlternativas={cantidadAlternativas}
               cantidadCriterios={cantidadCriterios}
               alternativas={alternativas}

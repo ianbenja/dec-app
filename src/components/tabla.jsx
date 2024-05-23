@@ -4,9 +4,10 @@ import { TablaPesos } from "./TablaPesos.jsx";
 import { TablaCuerpo } from "./TablaCuerpo.jsx";
 import { TablaCabecera } from "./TablaCabecera.jsx";
 import { Select, SelectItem } from "@nextui-org/react";
-import { METODOS_NORMALIZACION, TIPO_CRITERIO } from "../constants/index.js";
+import { METODOS, METODOS_NORMALIZACION, TIPO_CRITERIO } from "../constants/index.js";
 
 const TablaInicial = ({
+  metodo,
   cantidadAlternativas,
   cantidadCriterios,
   alternativas,
@@ -24,7 +25,6 @@ const TablaInicial = ({
   const [botonesTipoCriterios, setTipoCriterio] = useState(
     Array(cantidadCriterios).fill(TIPO_CRITERIO.Max)
   );
-  const [mostrarPesos, setMostrarPesos] = useState(true);
 
   const handleCambioBotonTipoCriterio = (i) => {
     const nuevoBotonesTipoCriterios = [...botonesTipoCriterios];
@@ -49,15 +49,9 @@ const TablaInicial = ({
     setMatrizValores(nuevaMatrizValores);
   };
 
-  const handleMostrarPesosChange = (e) => {
-    setMostrarPesos(e.target.checked);
-  };
-  
   return (
-
     <div className="max-w-7xl flex flex-col mx-auto">
       <table className=" max-w-full max-md::max-w-7xl w-full overflow-x-scroll p-2 pt-12 mt-5 border-separate border-spacing-2 bg-zinc-800 rounded-2xl">
-
         <TablaCabecera
           cantidadCriterios={cantidadCriterios}
           tipoCriterios={botonesTipoCriterios}
@@ -78,38 +72,40 @@ const TablaInicial = ({
       </table>
       <TablaPesos
         cantidadCriterios={cantidadCriterios}
-        mostrarPesos={mostrarPesos}
-        handleMostrarPesosChange={handleMostrarPesosChange}
         cambiarPesos={(i, value) => handleCambioValor(pesos, i, value, setPesos)}
       />
 
-      <div className="flex justify-center items-center mt-5">
-        <Select
-          color="secondary"
-          variant="underlined"
-          label="Método de Normalización"
-          labelPlacement="outside"
-          placeholder="Método"
-          // defaultSelectedKeys={[opciones["2"]]}
-          className="max-w-xs "
-          isRequired
-          onChange={(e) => setMetodoNormalizacion(e.target.value)}
-        >
-          {Object.keys(METODOS_NORMALIZACION).map((opcion) => (
-            <SelectItem
-              key={opcion}
-              value={opcion}
-            >
-              {opcion}
-            </SelectItem>
-          ))}
-        </Select>
-      </div>
+      {/* SI ES mora ocultar la selecion del metoo de normalizacion */}
+      {metodo !== METODOS.MOORA && (
+        <div className="flex justify-center items-center mt-5">
+          <Select
+            color="secondary"
+            variant="underlined"
+            label="Método de Normalización"
+            labelPlacement="outside"
+            placeholder="Método"
+            // defaultSelectedKeys={[opciones["2"]]}
+            className="max-w-xs "
+            isRequired
+            onChange={(e) => setMetodoNormalizacion(e.target.value)}
+          >
+            {Object.keys(METODOS_NORMALIZACION).map((opcion) => (
+              <SelectItem
+                key={opcion}
+                value={opcion}
+              >
+                {opcion}
+              </SelectItem>
+            ))}
+          </Select>
+        </div>
+      )}
     </div>
   );
 };
 
 TablaInicial.propTypes = {
+  metodo: PropTypes.string.isRequired,
   cantidadAlternativas: PropTypes.number.isRequired,
   cantidadCriterios: PropTypes.number.isRequired,
   alternativas: PropTypes.array.isRequired,

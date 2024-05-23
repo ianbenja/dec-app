@@ -15,14 +15,20 @@ const NavBarHome = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const menuItems = {
-    Home: "#",
-    Ponderación: "#ponderacion",
-    Moora: "#moora",
-    Topsis: "#topsis",
-    Documentación: "#documentacion",
-    Contacto: "#contacto",
+    HOME: "#",
+    PONDERACION: "#ponderacion",
+    MOORA: "#moora",
+    TOPSIS: "#topsis",
+    DOCUMENTACION: "#documentacion",
+    CONTACTO: "#contacto",
   };
-  const [activeItem, setActiveItem] = useState(menuItems.Home);
+  const [activeItem, setActiveItem] = useState(
+    menuItems[
+      window.location.hash.split("#")[1] !== undefined
+        ? window.location.hash.split("#")[1].toUpperCase()
+        : "HOME"
+    ]
+  );
 
   return (
     <Navbar onMenuOpenChange={setIsMenuOpen}>
@@ -37,7 +43,10 @@ const NavBarHome = () => {
         </NavbarBrand>
       </NavbarContent>
 
-      <NavbarContent className="hidden sm:flex" justify="center">
+      <NavbarContent
+        className="hidden sm:flex"
+        justify="center"
+      >
         {/* generamos los items del menu */}
         {Object.entries(menuItems).map(([label, path]) => (
           <NavbarItem
