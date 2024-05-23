@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom/client";
 import Rutas from "./routes/routes.jsx";
 import "./index.css";
@@ -6,7 +6,11 @@ import { NextUIProvider } from "@nextui-org/react";
 import NavBarHome from "./components/navbar.jsx";
 
 const App = () => {
-  const [theme, setTheme] = useState("dark");
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
+
+  useEffect(() => {
+    localStorage.setItem("theme", theme);
+  }, [theme]);
 
   return (
     <React.StrictMode>
