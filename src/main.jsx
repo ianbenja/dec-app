@@ -1,17 +1,28 @@
-import React from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom/client";
 import Rutas from "./routes/routes.jsx";
 import "./index.css";
 import { NextUIProvider } from "@nextui-org/react";
 import NavBarHome from "./components/navbar.jsx";
 
-ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <NextUIProvider>
-      <main className="dark text-foreground bg-background px-5 pb-10 flex flex-col items-center">
-        <NavBarHome />
-        <Rutas />
-      </main>
-    </NextUIProvider>
-  </React.StrictMode>
-);
+const App = () => {
+  const [theme, setTheme] = useState("dark");
+
+  return (
+    <React.StrictMode>
+      <NextUIProvider>
+        <main
+          className={`${theme} text-foreground bg-background px-5 pb-10 flex flex-col items-center transition-colors`}
+        >
+          <NavBarHome
+            theme={theme}
+            setTheme={setTheme}
+          />
+          <Rutas />
+        </main>
+      </NextUIProvider>
+    </React.StrictMode>
+  );
+};
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);

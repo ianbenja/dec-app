@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { useState } from "react";
 import {
   Navbar,
@@ -10,8 +11,10 @@ import {
   Link,
 } from "@nextui-org/react";
 import Logo from "./iconos/logo.jsx";
+import SunIcon from "./iconos/SunIcon.jsx";
+import MoonIcon from "./iconos/MoonIcon.jsx";
 
-const NavBarHome = () => {
+const NavBarHome = ({ theme, setTheme }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const menuItems = {
@@ -66,6 +69,23 @@ const NavBarHome = () => {
             </Link>
           </NavbarItem>
         ))}
+        <NavbarMenuItem>
+          {theme === "dark" ? (
+            <Link
+              color="foreground"
+              onClick={() => setTheme("light")}
+            >
+              <SunIcon />
+            </Link>
+          ) : (
+            <Link
+              color="foreground"
+              onClick={() => setTheme("dark")}
+            >
+              <MoonIcon />
+            </Link>
+          )}
+        </NavbarMenuItem>
       </NavbarContent>
 
       <NavbarMenu className="bg-transparent">
@@ -84,9 +104,32 @@ const NavBarHome = () => {
             </Link>
           </NavbarMenuItem>
         ))}
+
+        <NavbarMenuItem>
+          {theme === "dark" ? (
+            <Link
+              color="foreground"
+              onClick={() => setTheme("light")}
+            >
+              <SunIcon />
+            </Link>
+          ) : (
+            <Link
+              color="foreground"
+              onClick={() => setTheme("dark")}
+            >
+              <MoonIcon />
+            </Link>
+          )}
+        </NavbarMenuItem>
       </NavbarMenu>
     </Navbar>
   );
+};
+
+NavBarHome.propTypes = {
+  theme: PropTypes.string,
+  setTheme: PropTypes.func,
 };
 
 export default NavBarHome;
