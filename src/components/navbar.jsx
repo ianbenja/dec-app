@@ -9,7 +9,6 @@ import {
   NavbarMenuItem,
   Link,
 } from "@nextui-org/react";
-import { AcmeLogo } from "./iconos/AcmeLogo.jsx";
 import Logo from "./iconos/logo.jsx";
 
 const NavBarHome = () => {
@@ -38,10 +37,7 @@ const NavBarHome = () => {
         </NavbarBrand>
       </NavbarContent>
 
-      <NavbarContent
-        className="hidden sm:flex"
-        justify="center"
-      >
+      <NavbarContent className="hidden sm:flex" justify="center">
         {/* generamos los items del menu */}
         {Object.entries(menuItems).map(([label, path]) => (
           <NavbarItem
