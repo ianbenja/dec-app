@@ -29,7 +29,7 @@ export const TablaCuerpo = ({
                 step="any"
                 required
                 name={`A${i}C${j}`}
-                className="p-2 w-full text-center remove-arrow bg-zinc-900"
+                className="p-2 w-full text-center remove-arrow bg-zinc-300 dark:bg-zinc-900 "
                 onChange={(e) => cambiarMatrizValores(i, j, e.target.value)}
               />
             </td>

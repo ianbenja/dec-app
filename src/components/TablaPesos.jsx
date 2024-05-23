@@ -25,8 +25,8 @@ export const TablaPesos = ({ cantidadCriterios, cambiarPesos }) => {
       </div>
 
       {mostrarPesos && (
-        <div className="w-full flex flex-col items-center">
-          <table className="w-full p-2 mt-5 border-separate border-spacing-2 bg-zinc-800 rounded-2xl">
+        <div className="w-full flex flex-col items-center ">
+          <table className="w-full p-2 mt-5 border-separate border-spacing-2 rounded-2xl bg-zinc-300 dark:bg-zinc-800">
             <thead>
               <tr>
                 <th className="p-2">
