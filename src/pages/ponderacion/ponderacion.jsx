@@ -129,38 +129,43 @@ const PaginaPonderacion = (theme) => {
 
       {/* Sección de la tabla de datos */}
       {generarTabla && (
-        <form
-          className="flex flex-col items-center gap-5"
-          onSubmit={(e) => {
-            handleCalcular(e);
-          }}
+        <section
+          id="seccion-carga-datos"
+          className="flex flex-col items-center gap-5 w-full max-w-7xl"
         >
-          <div className="mt-4  overflow-x-scroll">
-            <TablaInicial
-              key={tablaKey}
-              cantidadAlternativas={cantidadAlternativas}
-              cantidadCriterios={cantidadCriterios}
-              alternativas={alternativas}
-              setAlternativas={setAlternativas}
-              criterios={criterios}
-              setCriterios={setCriterios}
-              tiposDeCriterio={tipos_criterios}
-              setTiposDeCriterio={setTiposDeCriterio}
-              matrizValores={valores}
-              setMatrizValores={setValores}
-              pesos={pesos}
-              setPesos={setPesos}
-              setMetodoNormalizacion={setMetodoNormalizacion}
-            />
-          </div>
-          <Button
-            type="submit"
-            radius="md"
-            className="w-1 bg-gradient-to-tr from-pink-500 to-yellow-500 text-white shadow-lg"
+          <form
+            className="flex flex-col items-center gap-5 w-full"
+            onSubmit={(e) => {
+              handleCalcular(e);
+            }}
           >
-            Calcular
-          </Button>
-        </form>
+            <div className="mt-4 w-full">
+              <TablaInicial
+                key={tablaKey}
+                cantidadAlternativas={cantidadAlternativas}
+                cantidadCriterios={cantidadCriterios}
+                alternativas={alternativas}
+                setAlternativas={setAlternativas}
+                criterios={criterios}
+                setCriterios={setCriterios}
+                tiposDeCriterio={tipos_criterios}
+                setTiposDeCriterio={setTiposDeCriterio}
+                matrizValores={valores}
+                setMatrizValores={setValores}
+                pesos={pesos}
+                setPesos={setPesos}
+                setMetodoNormalizacion={setMetodoNormalizacion}
+              />
+            </div>
+            <Button
+              type="submit"
+              radius="md"
+              className="w-1 bg-gradient-to-tr from-pink-500 to-yellow-500 text-white shadow-lg"
+            >
+              Calcular
+            </Button>
+          </form>
+        </section>
       )}
 
       {/* Sección de resultados que tendra 4 tablas, la primera sera la tabla con los datos normalizados, la segunda tabla con los datos ponderizados y la tercera con los resultados finales ordenados  */}

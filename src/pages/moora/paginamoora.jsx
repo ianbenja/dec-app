@@ -175,7 +175,7 @@ const PaginaMoora = () => {
           id="seccion-resultados"
           className="flex flex-col w-full max-w-7xl items-center gap-5"
         >
-          <h2 className="text-center mt-16 text-6xl  leading-inherit   lg:mt-16 bg-gradient-to-r from-pink-400 via-slate-300 to-purple-600  dark:from-pink-300 dark:via-slate-300 dark:to-purple-500  bg-clip-text tracking-tight text-transparent">
+          <h2 className="text-center mt-16 text-6xl leading-inherit lg:mt-16 bg-gradient-to-r from-pink-400 via-slate-300 to-purple-600  dark:from-pink-300 dark:via-slate-300 dark:to-purple-500  bg-clip-text tracking-tight text-transparent">
             Resultados
           </h2>
           <div className="w-full flex flex-col items-center gap-5">

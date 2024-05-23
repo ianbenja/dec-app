@@ -50,8 +50,8 @@ const TablaInicial = ({
   };
 
   return (
-    <div className="max-w-7xl flex flex-col mx-auto overflow-auto ">
-      <table className=" max-w-full max-md::max-w-7xl w-full overflow-x-scroll p-2 pt-12 mt-5 border-separate border-spacing-2  rounded-2xl bg-zinc-200 dark:bg-zinc-800">
+    <div className="max-w-7xl flex flex-col mx-auto mb-3 pb-10 overflow-x-scroll ">
+      <table className=" max-w-full max-md::max-w-7xl w-full p-2 pt-12 border-separate border-spacing-2  rounded-2xl bg-zinc-200 dark:bg-zinc-800">
         <TablaCabecera
           cantidadCriterios={cantidadCriterios}
           tipoCriterios={botonesTipoCriterios}

@@ -26,16 +26,15 @@ export const TablaPesos = ({ cantidadCriterios, cambiarPesos }) => {
 
       {mostrarPesos && (
         <div className="w-full flex flex-col">
-          <table className="w-full p-2 mt-5 border-separate border-spacing-2 rounded-2xl bg-zinc-300 dark:bg-zinc-800">
+          <table className="w-full p-2 mt-5 border-separate border-spacing-2 rounded-2xl bg-zinc-200 dark:bg-zinc-800">
             <thead>
               <tr>
                 <th className="min-w-24">
-                  {/* <span className=" text-center">Pesos(W)</span> */}
                   <input
                     type="text"
                     value={"Pesos(W)"}
                     disabled
-                    className="p-2 w-full text-center"
+                    className="p-2 w-full text-center bg-transparent"
                   />
                 </th>
                 {[...Array(cantidadCriterios).keys()].map((i) => (
