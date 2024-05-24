@@ -95,7 +95,7 @@ export const TIPO_CRITERIO = {
 export const METODOS_NORMALIZACION = {
   MAX: "MAX",
   SUMA: "SUMA",
-  EUCLIDIANA: "EULER",
+  EUCLIDEANA: "EULER",
 };
 const cantDecimales = 5;
 export const decimales = Math.pow(10, cantDecimales);
