@@ -1,126 +1,23 @@
 
 import React from "react";
 import {Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, getKeyValue, Image} from "@nextui-org/react";
+import { DOCUMENTACION } from "../../constants";
 
-import img01 from "../../assets/images/pageDoc/img-ejemplo-01.png";
-import img02 from "../../assets/images/pageDoc/img-ejemplo-02.png";
-import img03 from "../../assets/images/pageDoc/img-ejemplo-03.png";
-import img04 from "../../assets/images/pageDoc/img-ejemplo-04.png";
+
 import img05 from "../../assets/images/pageDoc/img-ejemplo-05.png";
 import img06 from "../../assets/images/pageDoc/img-ejemplo-06.png";
 import img07 from "../../assets/images/pageDoc/img-ejemplo-07.png";
 import img08 from "../../assets/images/pageDoc/img-ejemplo-08.png";
-import img09 from "../../assets/images/pageDoc/img-ejemplo-09.png";
 
+import gif01 from "../../assets/images/pageDoc/imgDoc01.gif";
+import gif02 from "../../assets/images/pageDoc/imgDoc02.gif";
+import gif03 from "../../assets/images/pageDoc/imgDoc03.gif";
+import gif04 from "../../assets/images/pageDoc/imgDoc04.gif";
+import gif05 from "../../assets/images/pageDoc/imgDoc05.gif";
+import gif06 from "../../assets/images/pageDoc/imgDoc06.gif";
+import gif07 from "../../assets/images/pageDoc/imgDoc07.gif";
+import gif08 from "../../assets/images/pageDoc/imgDoc08.gif";
 
-const columnas = [
-  {
-    key: "name",
-    label: "Alter. / Opc.",
-  },
-  {
-    key: "ram",
-    label: "RAM",
-  },
-  {
-    key: "procesador",
-    label: "Procesador",
-  },
-  {
-    key: "camara",
-    label: "Cámara",
-  },
-  {
-    key: "bateria",
-    label: "Batería",
-  },
-  {
-    key: "precio",
-    label: "Precio",
-  },
-  {
-    key: "marca",
-    label: "Marca",
-  },
-  {
-    key: "almacenamiento",
-    label: "Almacenamiento",
-  },
-  {
-    key: "pantalla",
-    label: "Pantalla",
-  },
-  {
-    key: "so",
-    label: "S.O.",
-  },
-  {
-    key: "conectividad",
-    label: "Conectividad",
-  },
-]
-
-const alternativas = [
-  {
-    key: "1",
-    name: "Celular A",
-    ram: "8",
-    procesador: "2.5",
-    camara: "48",
-    bateria: "4000",
-    precio: "600",
-    marca: "8",
-    almacenamiento: "128",
-    pantalla: "6.5",
-    so: "9",
-    conectividad: "5",              
-  },
-  {
-    key: "2",
-    name: "Celular B",
-    ram: "6",
-    procesador: "2.8",
-    camara: "64",
-    bateria: "4500",
-    precio: "700",
-    marca: "9",
-    almacenamiento: "256",
-    pantalla: "6.7",
-    so: "8",
-    conectividad: "6",              
-  },
-  {
-    key: "3",
-    name: "Celular C",
-    ram: "12",
-    procesador: "3.0",
-    camara: "108",
-    bateria: "5000",
-    precio: "800",
-    marca: "7",
-    almacenamiento: "512",
-    pantalla: "6.8",
-    so: "10",
-    conectividad: "7",              
-  },
-]
-
-const pesos = [
-  {
-    key: "1",
-    name: "Pesos",
-    ram: "0.15",
-    procesador: "0.15",
-    camara: "0.10",
-    bateria: "0.10",
-    precio: "0.20",
-    marca: "0.05",
-    almacenamiento: "0.10",
-    pantalla: "0.05",
-    so: "0.05",
-    conectividad: "0.05",              
-  },
-]
 
 
 const Docs = () => {
@@ -224,7 +121,7 @@ const Docs = () => {
           <li>Celular B</li>
           <li>Celular C</li>
         </ul>
-        <h1><i className="text-xl text-indigo-500">Paso 1: Introducir los Criterios y Alternativas</i></h1>
+        <h1><i className="text-xl text-indigo-500"><strong>Paso 1:</strong> Introducir los Criterios y Alternativas</i></h1>
         <p><strong>Criterios:</strong></p>
         <ul style={{ listStyleType: 'decimal', paddingLeft: '1.5em' }}>
           <li>Memoria RAM (en GB)</li>
@@ -244,7 +141,7 @@ const Docs = () => {
           <li>Celular B</li>
           <li>Celular C</li>
         </ul>
-        <h1><i className="text-xl text-indigo-500">Paso 2: Asignar Pesos a los Criterios</i></h1>
+        <h1><i className="text-xl text-indigo-500"><strong>Paso 2:</strong> Asignar Pesos a los Criterios</i></h1>
         <p>Asignamos pesos a cada criterio según su importancia para el usuario. Supongamos que los pesos son:</p>
         <ul style={{ listStyleType: 'circle', paddingLeft: '1.5em' }}>
           <li>Memoria RAM: 0.15</li>
@@ -258,75 +155,99 @@ const Docs = () => {
           <li>Sistema Operativo: 0.05</li>
           <li>Conectividad: 0.05</li>
         </ul>
-        <h1><i className="text-xl text-indigo-500">Paso 3: Elegir el Método entre Ponderación Lineal, TOPSIS y MOORA</i></h1>
+        <h1><i className="text-xl text-indigo-500"><strong>Paso 3:</strong> Elegir el Método entre Ponderación Lineal, TOPSIS y MOORA</i></h1>
         <p>Para el ejemplo que estamos desarrollando, elegiremos el método <strong><i>Ponderación Lineal</i></strong></p>
-        <h1><i className="text-xl text-indigo-500">Paso 4: Ingresar la Cantidad de Criterios y Alternativas</i></h1>
+        <Image
+          isBlurred
+          width={400}
+          src={gif01}
+          alt="NextUI Album Cover"
+          className="m-5"
+        />
+        <h1><i className="text-xl text-indigo-500"><strong>Paso 4:</strong> Ingresar la Cantidad de Criterios y Alternativas</i></h1>
         <p>En este caso son 3 alternativas y 10 criterios, luego presionar el botón confirmar.</p>
-        <h1><i className="text-xl text-indigo-500">Paso 5: Ingresar las Puntuaciones de las Alternativas</i></h1>
+        <Image
+          isBlurred
+          width={400}
+          src={gif02}
+          alt="NextUI Album Cover"
+          className="m-5"
+        />
+        <h1><i className="text-xl text-indigo-500"><strong>Paso 5:</strong> Ingresar las Puntuaciones de las Alternativas</i></h1>
+
+        <Image
+          isBlurred
+          width={400}
+          src={gif03}
+          alt="NextUI Album Cover"
+          className="m-5"
+        />
+       
+        <h1><i className="text-xl text-indigo-500"><strong>Paso 6:</strong> Seleccionar en cada Criterio si es Maximización y Minimización</i></h1>
+        <p>para este ejemplo, se busacara <strong>MAXIMIZAR</strong> la mayoria de las caractresiticas del celular (memoria RAM, Almacenamiento, procesador, etc.), con excepcion del precio, que buscaremos <strong>MINIMIZAR</strong> el costo a la hora de elegir alguno de las alternativas.
+        </p>
+        <Image 
+          isBlurred
+          width={400}
+          src={gif04}
+          alt="NextUI Album Cover"
+          className="m-5"
+        />
+        <h1><i className="text-xl text-indigo-500"><strong>Paso 7:</strong> Ingresar los Pesos para Cada Criterio (esta opcion puede ser <strong>OPCIONAL</strong>)</i></h1>
+        
+        
+        <Image 
+          isBlurred
+          width={400}
+          src={gif05}
+          alt="NextUI Album Cover"
+          className="m-5"
+        />
+
+        <p><strong>NOTA:</strong> si no se ingresa el peso, se toma por defecto que los pesos equiprobables (mismo valor o importancia).</p>
+        
+        <Image 
+          isBlurred
+          width={400}
+          src={gif06}
+          alt="NextUI Album Cover"
+          className="m-5"
+        />
+        
+        <h1><i className="text-xl text-indigo-500"><strong>Paso 8:</strong> seleccionar el metodo de Normalizacion</i></h1>
+        <p>En la página incluimos 3 metodos de normalización: por MAX, por SUMA y por EUCLIDEANA. Para el ejemplo usaremos el metodo de <strong>SUMA</strong></p>
+        
+        <h1><i className="text-xl text-indigo-500"><strong>Paso 9:</strong> una vez ingresado el metodo de normalizacion seleccionar “calcular”</i></h1>
+        <Image
+          isBlurred
+          width={400}
+          src={gif07}
+          alt="NextUI Album Cover"
+          className="m-5"
+        />
+        
+        <h1><i className="text-xl text-indigo-500"><strong>Paso 10:</strong> Interpretar los Resultados</i></h1>
+        <p>Después de realizar los cálculos con cada método, la plataforma mostrará cuál es la mejor alternativa (celular) basado en los criterios y pesos asignados.</p>
+        <p>En general, para todos los metodos, se mostrara las siguientes tablas:</p>
+        <p><strong>Tabla Original:</strong></p>
 
         <div style={{ overflowX: 'auto' }}>
           <Table removeWrapper aria-label="Example table with dynamic content" className="w-full flex flex-col grap-5" css={{
             minWidth: '800px', // Establece el ancho mínimo para activar el scroll horizontal 
           }}>
-              <TableHeader columns={columnas}>
+              <TableHeader columns={DOCUMENTACION.columnas}>
               {(column) => <TableColumn className="text-xl items-center font-bold text-pink-600" key={column.key}>{column.label}</TableColumn>}
             </TableHeader>
-            <TableBody items={alternativas}>
+            <TableBody items={DOCUMENTACION.tablaOriginal}>
               {(item) => (
-                <TableRow key={item.key} className="items-center">
-                  {(columnKey) => <TableCell className="text-xl items-center">{getKeyValue(item, columnKey)}</TableCell>}
+                <TableRow className=" text-xl items-center" key={item.key}>
+                  {(columnKey) => <TableCell className=" text-xl items-center">{getKeyValue(item, columnKey)}</TableCell>}
                 </TableRow>
               )}
             </TableBody>
           </Table>
         </div>
-       
-        <h1><i className="text-xl text-indigo-500">Paso 6: Seleccionar en cada Criterio si es Maximización y Minimización</i></h1>
-        <p>para este ejemplo, se busacara <strong>MAXIMIZAR</strong> la mayoria de las caractresiticas del celular (memoria RAM, Almacenamiento, procesador, etc.), con excepcion del precio, que buscaremos <strong>MINIMIZAR</strong> el costo a la hora de elegir alguno de las alternativas.
-        </p>
-        <h1><i className="text-xl text-indigo-500">Paso 7: Ingresar los Pesos para Cada Criterio:</i></h1>
-        
-        <div style={{ overflowX: 'auto'}}>
-        <Image 
-          css={{ minWidth: '800px' }}
-          isBlurred
-          width={1024}
-          src={img01}
-          alt="NextUI Album Cover"
-          className="m-5"
-        />
-        </div>
-        <h1><i className="text-xl text-indigo-500">Paso 8: seleccionar el metodo de Normalizacion</i></h1>
-        <Image
-          isBlurred
-          width={300}
-          src={img02}
-          alt="NextUI Album Cover"
-          className="m-1"
-        />
-        
-        <h1><i className="text-xl text-indigo-500">Paso 9: una vez ingresado el metodo de normalizacion seleccionar “calcular”</i></h1>
-        <Image
-          isBlurred
-          width={300}
-          src={img03}
-          alt="NextUI Album Cover"
-          className="m-5"
-        />
-        
-        <h1><i className="text-xl text-indigo-500">Paso 10: Interpretar los Resultados</i></h1>
-        <div style={{ overflowX: 'auto' }}>
-        <Image
-          css={{ minWidth: '800px'}}
-          isBlurred
-          width={1024}
-          src={img04}
-          alt="NextUI Album Cover"
-          className="w-full m-5"
-        />
-        </div>
-        <p>Después de realizar los cálculos con cada método, la plataforma mostrará cuál es la mejor alternativa (celular) basado en los criterios y pesos asignados.</p>
-        <p>En general para todos los metodos, se mostrara las siguientes tablas:</p>
+
         <p><strong>Tabla Normalizada:</strong></p>
         <div style={{ overflowX: 'auto' }}>
         <Image
@@ -381,12 +302,12 @@ const Docs = () => {
           <li>Resultados para TOPSIS: Celular con el índice de cercanía más alto.</li>
         </ul>
         
-        <h1><i className="text-xl text-indigo-500">Paso 11: Descargar el Informe en PDF</i></h1>
+        <h1><i className="text-xl text-indigo-500"><strong>Paso 11:</strong> Descargar el Informe en PDF</i></h1>
         <p>Luego de que aparecen todos los resultados, puedes seleccionar la opción para descargar el informe en PDF si así lo deseas. Esta opción se encuentra al final de la página.</p>
         <Image
           isBlurred
           width={300}
-          src={img09}
+          src={gif08}
           alt="NextUI Album Cover"
           className="m-5"
         />

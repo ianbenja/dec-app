@@ -100,6 +100,131 @@ export const METODOS_NORMALIZACION = {
 const cantDecimales = 5;
 export const decimales = Math.pow(10, cantDecimales);
 
+export const DOCUMENTACION = {
+  columnas: [
+    {
+      key: "name",
+      label: "Alter. / Opc.",
+    },
+    {
+      key: "ram",
+      label: "RAM",
+    },
+    {
+      key: "procesador",
+      label: "Procesador",
+    },
+    {
+      key: "camara",
+      label: "Cámara",
+    },
+    {
+      key: "bateria",
+      label: "Batería",
+    },
+    {
+      key: "precio",
+      label: "Precio",
+    },
+    {
+      key: "marca",
+      label: "Marca",
+    },
+    {
+      key: "almacenamiento",
+      label: "Almacenamiento",
+    },
+    {
+      key: "pantalla",
+      label: "Pantalla",
+    },
+    {
+      key: "so",
+      label: "S.O.",
+    },
+    {
+      key: "conectividad",
+      label: "Conectividad",
+    },
+  ],
+  
+  tablaOriginal: [
+    {
+      key: "1",
+      name: "Celular A",
+      ram: "8",
+      procesador: "2.5",
+      camara: "48",
+      bateria: "4000",
+      precio: "600",
+      marca: "8",
+      almacenamiento: "128",
+      pantalla: "6.5",
+      so: "9",
+      conectividad: "5",              
+    },
+    {
+      key: "2",
+      name: "Celular B",
+      ram: "6",
+      procesador: "2.8",
+      camara: "64",
+      bateria: "4500",
+      precio: "700",
+      marca: "9",
+      almacenamiento: "256",
+      pantalla: "6.7",
+      so: "8",
+      conectividad: "6",              
+    },
+    {
+      key: "3",
+      name: "Celular C",
+      ram: "12",
+      procesador: "3.0",
+      camara: "108",
+      bateria: "5000",
+      precio: "800",
+      marca: "7",
+      almacenamiento: "512",
+      pantalla: "6.8",
+      so: "10",
+      conectividad: "7",              
+    },
+    {
+      key: "4",
+      name: "Pesos",
+      ram: "0.15",
+      procesador: "0.15",
+      camara: "0.10",
+      bateria: "0.10",
+      precio: "0.20",
+      marca: "0.05",
+      almacenamiento: "0.10",
+      pantalla: "0.05",
+      so: "0.05",
+      conectividad: "0.05",              
+    },
+  ],
+  
+  pesos: [
+    {
+      key: "4",
+      name: "Pesos",
+      ram: "0.15",
+      procesador: "0.15",
+      camara: "0.10",
+      bateria: "0.10",
+      precio: "0.20",
+      marca: "0.05",
+      almacenamiento: "0.10",
+      pantalla: "0.05",
+      so: "0.05",
+      conectividad: "0.05",              
+    },
+  ]
+};
+
 export const DATATABLAPRUEBA1 = {
   header: [
     " ",
