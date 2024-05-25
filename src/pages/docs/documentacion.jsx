@@ -3,12 +3,6 @@ import React from "react";
 import {Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, getKeyValue, Image} from "@nextui-org/react";
 import { DOCUMENTACION } from "../../constants";
 
-
-import img05 from "../../assets/images/pageDoc/img-ejemplo-05.png";
-import img06 from "../../assets/images/pageDoc/img-ejemplo-06.png";
-import img07 from "../../assets/images/pageDoc/img-ejemplo-07.png";
-import img08 from "../../assets/images/pageDoc/img-ejemplo-08.png";
-
 import gif01 from "../../assets/images/pageDoc/imgDoc01.gif";
 import gif02 from "../../assets/images/pageDoc/imgDoc02.gif";
 import gif03 from "../../assets/images/pageDoc/imgDoc03.gif";
@@ -232,16 +226,16 @@ const Docs = () => {
         <p><strong>Tabla Original:</strong></p>
 
         <div style={{ overflowX: 'auto' }}>
-          <Table removeWrapper aria-label="Example table with dynamic content" className="w-full flex flex-col grap-5" css={{
+          <Table removeWrapper aria-label="Example table with dynamic content" css={{
             minWidth: '800px', // Establece el ancho mínimo para activar el scroll horizontal 
           }}>
               <TableHeader columns={DOCUMENTACION.columnas}>
               {(column) => <TableColumn className="text-xl items-center font-bold text-pink-600" key={column.key}>{column.label}</TableColumn>}
             </TableHeader>
             <TableBody items={DOCUMENTACION.tablaOriginal}>
-              {(item) => (
-                <TableRow className=" text-xl items-center" key={item.key}>
-                  {(columnKey) => <TableCell className=" text-xl items-center">{getKeyValue(item, columnKey)}</TableCell>}
+              {(item) => (                               
+                <TableRow key={item.key}>
+                  {(columnKey) => <TableCell className="items-center valor-celda"><span title={getKeyValue(item, columnKey)}>{getKeyValue(item, columnKey)}</span></TableCell>}
                 </TableRow>
               )}
             </TableBody>
@@ -249,53 +243,160 @@ const Docs = () => {
         </div>
 
         <p><strong>Tabla Normalizada:</strong></p>
+        
         <div style={{ overflowX: 'auto' }}>
-        <Image
-          isBlurred
-          css={{ minWidth: '800px' }}
-          width={1024}
-          src={img05}
-          alt="NextUI Album Cover"
-          className="m-5"
-        />
+          <Table removeWrapper aria-label="Example table with dynamic content" className="w-full item-center flex flex-col grap-5" css={{
+            minWidth: '800px', // Establece el ancho mínimo para activar el scroll horizontal 
+          }}>
+            <TableHeader>
+            <TableColumn className="text-xl text-center font-bold text-pink-600">Alter. / Opc.</TableColumn>
+              {DOCUMENTACION.criterios.map((columnName, index) => (
+                <TableColumn
+                  className="text-xl text-center font-bold text-pink-600"
+                  key={index}
+                >
+                  {columnName}
+                </TableColumn>
+              ))}
+            </TableHeader>
+            <TableBody>
+              
+              {DOCUMENTACION.tablaNormalizada.map((valores, rowIndex) => (
+                <TableRow key={rowIndex}>
+                  {/* Mostrar el nombre de la fila */}
+                  <TableCell className="text-xl text-center font-bold text-pink-600">
+                      {DOCUMENTACION.alternativas[rowIndex]}
+                  </TableCell>
+                  {/* Renderizar las celdas restantes */}
+                  {valores.map((cell, cellIndex) => (
+
+                <TableCell
+                  className=" text-center valor-celda"
+                  key={cellIndex}
+                >
+                  <span
+                    title={cell}
+                  >{cell}</span>
+                </TableCell>
+                ))}
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
         </div>
 
+
         <p><strong>Tabla Ponderada:</strong></p>
+
         <div style={{ overflowX: 'auto' }}>
-        <Image
-          isBlurred
-          css={{ minWidth: '800px' }}
-          width={1024}
-          src={img06}
-          alt="NextUI Album Cover"
-          className="m-5"
-        />
+          <Table removeWrapper aria-label="Example table with dynamic content" className="w-full item-center flex flex-col grap-5" css={{
+            minWidth: '800px', // Establece el ancho mínimo para activar el scroll horizontal 
+          }}>
+            <TableHeader>
+            <TableColumn className="text-xl text-center font-bold text-pink-600">Alter. / Opc.</TableColumn>
+              {DOCUMENTACION.criterios.map((columnName, index) => (
+                <TableColumn
+                  className="text-xl text-center font-bold text-pink-600"
+                  key={index}
+                >
+                  {columnName}
+                </TableColumn>
+              ))}
+            </TableHeader>
+            <TableBody>
+              
+              {DOCUMENTACION.tablaNormalizadayPonderada.map((valores, rowIndex) => (
+                <TableRow key={rowIndex}>
+                  {/* Mostrar el nombre de la fila */}
+                  <TableCell className="text-xl text-center font-bold text-pink-600">
+                      {DOCUMENTACION.alternativas[rowIndex]}
+                  </TableCell>
+                  {/* Renderizar las celdas restantes */}
+                  {valores.map((cell, cellIndex) => (
+
+                <TableCell
+                  className=" text-center valor-celda"
+                  key={cellIndex}
+                >
+                  <span
+                    title={cell}
+                  >{cell}</span>
+                </TableCell>
+                ))}
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
         </div>
 
         <p><strong>Tabla Solucion:</strong></p>
         <div style={{ overflowX: 'auto' }}>
-        <Image
-          isBlurred
-          
-          css={{ minWidth: '800px' }}
-          width={1024}
-          src={img07}
-          alt="NextUI Album Cover"
-          className="m-5"
-        />
+          <Table removeWrapper aria-label="Example table with dynamic content" className="w-full item-center flex flex-col grap-5" css={{
+            minWidth: '800px', // Establece el ancho mínimo para activar el scroll horizontal 
+          }}>
+            <TableHeader>
+            <TableColumn className="text-xl text-center font-bold text-pink-600">Alter. / Opc.</TableColumn>
+              {DOCUMENTACION.criterios.map((columnName, index) => (
+                <TableColumn
+                  className="text-xl text-center font-bold text-pink-600"
+                  key={index}
+                >
+                  {columnName}
+                </TableColumn>
+              ))}
+              <TableColumn className="text-xl text-center font-bold text-indigo-500">Suma</TableColumn>
+            </TableHeader>
+            <TableBody>
+              
+              {DOCUMENTACION.tablaNormalizadayPonderada.map((valores, rowIndex) => (
+                <TableRow key={rowIndex}>
+                  {/* Mostrar el nombre de la fila */}
+                  <TableCell className="text-xl text-center font-bold text-pink-600">
+                      {DOCUMENTACION.alternativas[rowIndex]}
+                  </TableCell>
+                  {/* Renderizar las celdas restantes */}
+                  {valores.map((cell, cellIndex) => (
+
+                    <TableCell
+                      className=" text-center valor-celda"
+                      key={cellIndex}
+                    >
+                      <span
+                        title={cell}
+                      >{cell}</span>
+                    </TableCell>
+                    ))}
+                    <TableCell className=" text-lg text-center text-bold text-indigo-500 valor-celda">
+                      <span
+                        title={DOCUMENTACION.columnaSuma[rowIndex]}
+                      >{DOCUMENTACION.columnaSuma[rowIndex]}</span>
+
+                    </TableCell>
+                </TableRow>
+              ))}              
+            </TableBody>
+          </Table>
         </div>
 
         <p><strong>Tabla Resultados:</strong></p>
+        
         <div style={{ overflowX: 'auto' }}>
-        <Image
-          isBlurred
-          css={{ minWidth: '800px' }}
-          width={1024}
-          src={img08}
-          alt="NextUI Album Cover"
-          className="m-5"
-        />
+          <Table removeWrapper aria-label="Example table with dynamic content" className="w-full flex flex-col grap-5" css={{
+            minWidth: '800px', // Establece el ancho mínimo para activar el scroll horizontal 
+          }}>
+              <TableHeader columns={DOCUMENTACION.columnaTablaResultado}>
+              {(column) => <TableColumn className="text-xl items-center font-bold text-pink-600" key={column.key}>{column.label}</TableColumn>}
+            </TableHeader>
+            <TableBody items={DOCUMENTACION.tablaResultado}>
+              {(item) => (
+                <TableRow className=" text-xl items-center" key={item.key}>
+                  {(columnKey) => <TableCell className="items-center valor-celda"><span></span>{getKeyValue(item, columnKey)}</TableCell>}
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
         </div>
+
         <ul style={{ listStyleType: 'circle', paddingLeft: '1.5em' }}>
           <li>Resultados para Ponderación Lineal: Celular con la mayor puntuación total.</li>
           <li>Resultados para MOORA: Celular con la mayor suma de razones ponderadas.</li>
@@ -314,7 +415,7 @@ const Docs = () => {
         <p><strong>Conclusion:</strong></p>
         <p>Utilizando los métodos de Ponderación Lineal, MOORA y TOPSIS, puedes evaluar múltiples alternativas de celulares considerando diversos criterios importantes para tu decisión. Esta plataforma facilita la comparación y elección del mejor celular según tus necesidades y preferencias. ¡Prueba cada método para ver cuál se adapta mejor a tu proceso de decisión!</p>
         
-        <h1 className=" mt-8 text-2xl text-pink-600">Preguntas Frecuentes (FAQ)</h1>
+        <h1 className=" mt-8 text-2xl text-pink-600">Preguntas Frecuentes (<strong>FAQ</strong>)</h1>
         <ol style={{ listStyleType: 'decimal', paddingLeft: '1.5em' }}>
           <li>¿Qué es la plataforma de "Decisiones en Escenarios Complejos"?
               <p>Nuestra plataforma es una herramienta educativa desarrollada como parte de un proyecto académico para la asignatura "Decisiones en Escenarios Complejos". Permite a los usuarios resolver ejercicios utilizando métodos multicriterio como Ponderación Lineal, MOORA y TOPSIS.</p>
