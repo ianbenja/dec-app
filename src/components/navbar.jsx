@@ -35,12 +35,32 @@ const NavBarHome = ({ theme, setTheme }) => {
     setIsMenuOpen(false); // Cierra el menú al seleccionar un ítem
   };
 
+  if (localStorage.getItem("theme")) {
+    let html = document.querySelector("html")
+    html.classList.remove("dark", "light");
+    html.classList.add(localStorage.getItem("theme"))
+  }
+
+  const changeTheme = (color) => {
+    setTheme(color)
+    let html = document.querySelector("html")
+    if (html.classList.contains("dark")) {
+      html.classList.remove("dark");
+      html.classList.add("light")
+    }
+    else {
+      html.classList.remove("light");
+      html.classList.add("dark")
+    }
+    localStorage.setItem("theme", color)
+  }
+
   return (
     <Navbar isMenuOpen={isMenuOpen} onMenuOpenChange={setIsMenuOpen}>
       <NavbarContent>
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-          className="sm:hidden"
+          className="md:hidden"
         />
         <NavbarBrand>
           <Logo />
@@ -48,7 +68,7 @@ const NavBarHome = ({ theme, setTheme }) => {
         </NavbarBrand>
       </NavbarContent>
 
-      <NavbarContent className="hidden sm:flex" justify="center">
+      <NavbarContent className="hidden md:flex" justify="center">
         {/* Generamos los ítems del menú */}
         {Object.entries(menuItems).map(([label, path]) => (
           <NavbarItem key={label}>
@@ -67,11 +87,11 @@ const NavBarHome = ({ theme, setTheme }) => {
         ))}
         <NavbarItem>
           {theme === "dark" ? (
-            <Link color="foreground" onClick={() => setTheme("light")}>
+            <Link color="foreground" onClick={() => changeTheme("light")}>
               <SunIcon />
             </Link>
           ) : (
-            <Link color="foreground" onClick={() => setTheme("dark")}>
+            <Link color="foreground" onClick={() => changeTheme("dark")}>
               <MoonIcon />
             </Link>
           )}
@@ -86,7 +106,7 @@ const NavBarHome = ({ theme, setTheme }) => {
               className={
                 activeItem === path
                   ? "text-center text-xl bg-gradient-to-r from-pink-500 to-yellow-500 bg-clip-text text-transparent"
-                  : "text-slate-300 text-xl"
+                  : "text-xl text-slate-600 dark:text-slate-300"
               }
               onClick={() => handleMenuItemClick(path)}
             >
@@ -97,11 +117,11 @@ const NavBarHome = ({ theme, setTheme }) => {
 
         <NavbarMenuItem>
           {theme === "dark" ? (
-            <Link color="foreground" onClick={() => setTheme("light")}>
+            <Link color="foreground" onClick={() => changeTheme("light")}>
               <SunIcon />
             </Link>
           ) : (
-            <Link color="foreground" onClick={() => setTheme("dark")}>
+            <Link color="foreground" onClick={() => changeTheme("dark")}>
               <MoonIcon />
             </Link>
           )}
