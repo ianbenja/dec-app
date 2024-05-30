@@ -1,6 +1,6 @@
 
 import React from "react";
-import {Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, getKeyValue, Image} from "@nextui-org/react";
+import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, getKeyValue, Image } from "@nextui-org/react";
 import { DOCUMENTACION } from "../../constants";
 
 import gif01 from "../../assets/images/pageDoc/imgDoc01.gif";
@@ -20,8 +20,8 @@ const Docs = () => {
       <div className="text-center mt-16 text-4xl lg:mt-16 bg-gradient-to-r from-pink-400 via-slate-300 to-purple-600  dark:from-pink-300 dark:via-slate-300 dark:to-purple-500  bg-clip-text tracking-tight text-transparent">
         DOCUMENTACION
       </div>
-      
-      <div className="w-full flex flex-col gap-5">
+
+      <div className="w-full flex flex-col gap-5 max-w-7xl">
         <div> </div><h1 className=" mt-8 text-2xl text-pink-600">Introducción</h1>
         <p>
           Esta plataforma está dedicada a la resolución de ejercicios utilizando los métodos MOORA, TOPSIS y Ponderación Lineal. Esta herramienta ha sido desarrollada como parte de nuestro proyecto para la asignatura "Decisiones en Escenarios Complejos", donde exploramos técnicas avanzadas de toma de decisiones multicriterio.
@@ -40,7 +40,7 @@ const Docs = () => {
           <br />
 
           <li>
-           <strong className="text-indigo-500">Ponderación Lineal:</strong> En esta sección, puedes resolver ejercicios utilizando el método de Ponderación Lineal.
+            <strong className="text-indigo-500">Ponderación Lineal:</strong> En esta sección, puedes resolver ejercicios utilizando el método de Ponderación Lineal.
             <ol style={{ paddingLeft: '1.0em' }}>
               <li> 1. Selecciona Ponderación Lineal en el menú.</li>
               <li> 2. Introduce los criterios y las alternativas y presiona confirmar.</li>
@@ -58,7 +58,7 @@ const Docs = () => {
             </ol>
           </li>
           <li>
-          <br />
+            <br />
             <strong className="text-indigo-500">MOORA:</strong> Utiliza el método MOORA para evaluar y comparar múltiples alternativas.
             <ol style={{ paddingLeft: '1.0em' }}>
               <li>1. Selecciona MOORA en el menú.</li>
@@ -176,11 +176,11 @@ const Docs = () => {
           alt="NextUI Album Cover"
           className="m-5"
         />
-       
+
         <h1><i className="text-xl text-indigo-500"><strong>Paso 6:</strong> Seleccionar en cada Criterio si es Maximización y Minimización</i></h1>
         <p>para este ejemplo, se busacara <strong>MAXIMIZAR</strong> la mayoria de las caractresiticas del celular (memoria RAM, Almacenamiento, procesador, etc.), con excepcion del precio, que buscaremos <strong>MINIMIZAR</strong> el costo a la hora de elegir alguno de las alternativas.
         </p>
-        <Image 
+        <Image
           isBlurred
           width={400}
           src={gif04}
@@ -188,9 +188,9 @@ const Docs = () => {
           className="m-5"
         />
         <h1><i className="text-xl text-indigo-500"><strong>Paso 7:</strong> Ingresar los Pesos para Cada Criterio (esta opcion puede ser <strong>OPCIONAL</strong>)</i></h1>
-        
-        
-        <Image 
+
+
+        <Image
           isBlurred
           width={400}
           src={gif05}
@@ -199,18 +199,18 @@ const Docs = () => {
         />
 
         <p><strong>NOTA:</strong> si no se ingresa el peso, se toma por defecto que los pesos equiprobables (mismo valor o importancia).</p>
-        
-        <Image 
+
+        <Image
           isBlurred
           width={400}
           src={gif06}
           alt="NextUI Album Cover"
           className="m-5"
         />
-        
+
         <h1><i className="text-xl text-indigo-500"><strong>Paso 8:</strong> seleccionar el metodo de Normalizacion</i></h1>
         <p>En la página incluimos 3 metodos de normalización: por MAX, por SUMA y por EUCLIDEANA. Para el ejemplo usaremos el metodo de <strong>SUMA</strong></p>
-        
+
         <h1><i className="text-xl text-indigo-500"><strong>Paso 9:</strong> una vez ingresado el metodo de normalizacion seleccionar “calcular”</i></h1>
         <Image
           isBlurred
@@ -219,7 +219,7 @@ const Docs = () => {
           alt="NextUI Album Cover"
           className="m-5"
         />
-        
+
         <h1><i className="text-xl text-indigo-500"><strong>Paso 10:</strong> Interpretar los Resultados</i></h1>
         <p>Después de realizar los cálculos con cada método, la plataforma mostrará cuál es la mejor alternativa (celular) basado en los criterios y pesos asignados.</p>
         <p>En general, para todos los metodos, se mostrara las siguientes tablas:</p>
@@ -229,11 +229,11 @@ const Docs = () => {
           <Table removeWrapper aria-label="Example table with dynamic content" css={{
             minWidth: '800px', // Establece el ancho mínimo para activar el scroll horizontal 
           }}>
-              <TableHeader columns={DOCUMENTACION.columnas}>
+            <TableHeader columns={DOCUMENTACION.columnas}>
               {(column) => <TableColumn className="text-xl items-center font-bold text-pink-600" key={column.key}>{column.label}</TableColumn>}
             </TableHeader>
             <TableBody items={DOCUMENTACION.tablaOriginal}>
-              {(item) => (                               
+              {(item) => (
                 <TableRow key={item.key}>
                   {(columnKey) => <TableCell className="items-center valor-celda"><span title={getKeyValue(item, columnKey)}>{getKeyValue(item, columnKey)}</span></TableCell>}
                 </TableRow>
@@ -243,13 +243,13 @@ const Docs = () => {
         </div>
 
         <p><strong>Tabla Normalizada:</strong></p>
-        
+
         <div style={{ overflowX: 'auto' }}>
           <Table removeWrapper aria-label="Example table with dynamic content" className="w-full item-center flex flex-col grap-5" css={{
             minWidth: '800px', // Establece el ancho mínimo para activar el scroll horizontal 
           }}>
             <TableHeader>
-            <TableColumn className="text-xl text-center font-bold text-pink-600">Alter. / Opc.</TableColumn>
+              <TableColumn className="text-xl text-center font-bold text-pink-600">Alter. / Opc.</TableColumn>
               {DOCUMENTACION.criterios.map((columnName, index) => (
                 <TableColumn
                   className="text-xl text-center font-bold text-pink-600"
@@ -260,25 +260,25 @@ const Docs = () => {
               ))}
             </TableHeader>
             <TableBody>
-              
+
               {DOCUMENTACION.tablaNormalizada.map((valores, rowIndex) => (
                 <TableRow key={rowIndex}>
                   {/* Mostrar el nombre de la fila */}
                   <TableCell className="text-xl text-center font-bold text-pink-600">
-                      {DOCUMENTACION.alternativas[rowIndex]}
+                    {DOCUMENTACION.alternativas[rowIndex]}
                   </TableCell>
                   {/* Renderizar las celdas restantes */}
                   {valores.map((cell, cellIndex) => (
 
-                <TableCell
-                  className=" text-center valor-celda"
-                  key={cellIndex}
-                >
-                  <span
-                    title={cell}
-                  >{cell}</span>
-                </TableCell>
-                ))}
+                    <TableCell
+                      className=" text-center valor-celda"
+                      key={cellIndex}
+                    >
+                      <span
+                        title={cell}
+                      >{cell}</span>
+                    </TableCell>
+                  ))}
                 </TableRow>
               ))}
             </TableBody>
@@ -293,7 +293,7 @@ const Docs = () => {
             minWidth: '800px', // Establece el ancho mínimo para activar el scroll horizontal 
           }}>
             <TableHeader>
-            <TableColumn className="text-xl text-center font-bold text-pink-600">Alter. / Opc.</TableColumn>
+              <TableColumn className="text-xl text-center font-bold text-pink-600">Alter. / Opc.</TableColumn>
               {DOCUMENTACION.criterios.map((columnName, index) => (
                 <TableColumn
                   className="text-xl text-center font-bold text-pink-600"
@@ -304,55 +304,12 @@ const Docs = () => {
               ))}
             </TableHeader>
             <TableBody>
-              
+
               {DOCUMENTACION.tablaNormalizadayPonderada.map((valores, rowIndex) => (
                 <TableRow key={rowIndex}>
                   {/* Mostrar el nombre de la fila */}
                   <TableCell className="text-xl text-center font-bold text-pink-600">
-                      {DOCUMENTACION.alternativas[rowIndex]}
-                  </TableCell>
-                  {/* Renderizar las celdas restantes */}
-                  {valores.map((cell, cellIndex) => (
-
-                <TableCell
-                  className=" text-center valor-celda"
-                  key={cellIndex}
-                >
-                  <span
-                    title={cell}
-                  >{cell}</span>
-                </TableCell>
-                ))}
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </div>
-
-        <p><strong>Tabla Solucion:</strong></p>
-        <div style={{ overflowX: 'auto' }}>
-          <Table removeWrapper aria-label="Example table with dynamic content" className="w-full item-center flex flex-col grap-5" css={{
-            minWidth: '800px', // Establece el ancho mínimo para activar el scroll horizontal 
-          }}>
-            <TableHeader>
-            <TableColumn className="text-xl text-center font-bold text-pink-600">Alter. / Opc.</TableColumn>
-              {DOCUMENTACION.criterios.map((columnName, index) => (
-                <TableColumn
-                  className="text-xl text-center font-bold text-pink-600"
-                  key={index}
-                >
-                  {columnName}
-                </TableColumn>
-              ))}
-              <TableColumn className="text-xl text-center font-bold text-indigo-500">Suma</TableColumn>
-            </TableHeader>
-            <TableBody>
-              
-              {DOCUMENTACION.tablaNormalizadayPonderada.map((valores, rowIndex) => (
-                <TableRow key={rowIndex}>
-                  {/* Mostrar el nombre de la fila */}
-                  <TableCell className="text-xl text-center font-bold text-pink-600">
-                      {DOCUMENTACION.alternativas[rowIndex]}
+                    {DOCUMENTACION.alternativas[rowIndex]}
                   </TableCell>
                   {/* Renderizar las celdas restantes */}
                   {valores.map((cell, cellIndex) => (
@@ -365,26 +322,69 @@ const Docs = () => {
                         title={cell}
                       >{cell}</span>
                     </TableCell>
-                    ))}
-                    <TableCell className=" text-lg text-center text-bold text-indigo-500 valor-celda">
-                      <span
-                        title={DOCUMENTACION.columnaSuma[rowIndex]}
-                      >{DOCUMENTACION.columnaSuma[rowIndex]}</span>
-
-                    </TableCell>
+                  ))}
                 </TableRow>
-              ))}              
+              ))}
+            </TableBody>
+          </Table>
+        </div>
+
+        <p><strong>Tabla Solucion:</strong></p>
+        <div style={{ overflowX: 'auto' }}>
+          <Table removeWrapper aria-label="Example table with dynamic content" className="w-full item-center flex flex-col grap-5" css={{
+            minWidth: '800px', // Establece el ancho mínimo para activar el scroll horizontal 
+          }}>
+            <TableHeader>
+              <TableColumn className="text-xl text-center font-bold text-pink-600">Alter. / Opc.</TableColumn>
+              {DOCUMENTACION.criterios.map((columnName, index) => (
+                <TableColumn
+                  className="text-xl text-center font-bold text-pink-600"
+                  key={index}
+                >
+                  {columnName}
+                </TableColumn>
+              ))}
+              <TableColumn className="text-xl text-center font-bold text-indigo-500">Suma</TableColumn>
+            </TableHeader>
+            <TableBody>
+
+              {DOCUMENTACION.tablaNormalizadayPonderada.map((valores, rowIndex) => (
+                <TableRow key={rowIndex}>
+                  {/* Mostrar el nombre de la fila */}
+                  <TableCell className="text-xl text-center font-bold text-pink-600">
+                    {DOCUMENTACION.alternativas[rowIndex]}
+                  </TableCell>
+                  {/* Renderizar las celdas restantes */}
+                  {valores.map((cell, cellIndex) => (
+
+                    <TableCell
+                      className=" text-center valor-celda"
+                      key={cellIndex}
+                    >
+                      <span
+                        title={cell}
+                      >{cell}</span>
+                    </TableCell>
+                  ))}
+                  <TableCell className=" text-lg text-center text-bold text-indigo-500 valor-celda">
+                    <span
+                      title={DOCUMENTACION.columnaSuma[rowIndex]}
+                    >{DOCUMENTACION.columnaSuma[rowIndex]}</span>
+
+                  </TableCell>
+                </TableRow>
+              ))}
             </TableBody>
           </Table>
         </div>
 
         <p><strong>Tabla Resultados:</strong></p>
-        
+
         <div style={{ overflowX: 'auto' }}>
           <Table removeWrapper aria-label="Example table with dynamic content" className="w-full flex flex-col grap-5" css={{
             minWidth: '800px', // Establece el ancho mínimo para activar el scroll horizontal 
           }}>
-              <TableHeader columns={DOCUMENTACION.columnaTablaResultado}>
+            <TableHeader columns={DOCUMENTACION.columnaTablaResultado}>
               {(column) => <TableColumn className="text-xl items-center font-bold text-pink-600" key={column.key}>{column.label}</TableColumn>}
             </TableHeader>
             <TableBody items={DOCUMENTACION.tablaResultado}>
@@ -402,7 +402,7 @@ const Docs = () => {
           <li>Resultados para MOORA: Celular con la mayor suma de razones ponderadas.</li>
           <li>Resultados para TOPSIS: Celular con el índice de cercanía más alto.</li>
         </ul>
-        
+
         <h1><i className="text-xl text-indigo-500"><strong>Paso 11:</strong> Descargar el Informe en PDF</i></h1>
         <p>Luego de que aparecen todos los resultados, puedes seleccionar la opción para descargar el informe en PDF si así lo deseas. Esta opción se encuentra al final de la página.</p>
         <Image
@@ -414,54 +414,54 @@ const Docs = () => {
         />
         <p><strong>Conclusion:</strong></p>
         <p>Utilizando los métodos de Ponderación Lineal, MOORA y TOPSIS, puedes evaluar múltiples alternativas de celulares considerando diversos criterios importantes para tu decisión. Esta plataforma facilita la comparación y elección del mejor celular según tus necesidades y preferencias. ¡Prueba cada método para ver cuál se adapta mejor a tu proceso de decisión!</p>
-        
+
         <h1 className=" mt-8 text-2xl text-pink-600">Preguntas Frecuentes (<strong>FAQ</strong>)</h1>
         <ol style={{ listStyleType: 'decimal', paddingLeft: '1.5em' }}>
           <li>¿Qué es la plataforma de "Decisiones en Escenarios Complejos"?
-              <p>Nuestra plataforma es una herramienta educativa desarrollada como parte de un proyecto académico para la asignatura "Decisiones en Escenarios Complejos". Permite a los usuarios resolver ejercicios utilizando métodos multicriterio como Ponderación Lineal, MOORA y TOPSIS.</p>
-              <br />
+            <p>Nuestra plataforma es una herramienta educativa desarrollada como parte de un proyecto académico para la asignatura "Decisiones en Escenarios Complejos". Permite a los usuarios resolver ejercicios utilizando métodos multicriterio como Ponderación Lineal, MOORA y TOPSIS.</p>
+            <br />
           </li>
           <li>¿Cómo puedo acceder a los métodos de resolución de ejercicios?
-              <p> Puedes acceder a los métodos seleccionando la opción correspondiente (Ponderación Lineal, MOORA o TOPSIS) en la barra superior de menú.</p>
-              <br />
+            <p> Puedes acceder a los métodos seleccionando la opción correspondiente (Ponderación Lineal, MOORA o TOPSIS) en la barra superior de menú.</p>
+            <br />
           </li>
           <li>¿Qué son los métodos de normalización y por qué son importantes?
-              <p> La normalización es un proceso que transforma las puntuaciones originales de los criterios para permitir comparaciones justas entre diferentes alternativas. Los métodos de normalización disponibles son: </p>
-              <ul style={{ listStyleType: 'circle', paddingLeft: '2.0em' }}>
-                <li>Euclidiana: Mantiene la proporcionalidad de las puntuaciones relativas.</li>
-                <li>Max: Ajusta todas las puntuaciones a una escala de 0 a 1 comparándolas con la máxima puntuación.</li>
-                <li>Suma: Asegura que las puntuaciones normalizadas sumen 1, otorgando una contribución proporcional.</li>
-              </ul>
-              <br />
+            <p> La normalización es un proceso que transforma las puntuaciones originales de los criterios para permitir comparaciones justas entre diferentes alternativas. Los métodos de normalización disponibles son: </p>
+            <ul style={{ listStyleType: 'circle', paddingLeft: '2.0em' }}>
+              <li>Euclidiana: Mantiene la proporcionalidad de las puntuaciones relativas.</li>
+              <li>Max: Ajusta todas las puntuaciones a una escala de 0 a 1 comparándolas con la máxima puntuación.</li>
+              <li>Suma: Asegura que las puntuaciones normalizadas sumen 1, otorgando una contribución proporcional.</li>
+            </ul>
+            <br />
           </li>
           <li>¿Qué información necesito para empezar a resolver un ejercicio?
-              <p>Para resolver un ejercicio, necesitas:</p>
-              <ul style={{ listStyleType: 'circle', paddingLeft: '2.0em' }}>
-                <li>Los criterios a evaluar.</li>
-                <li>Las puntuaciones de cada alternativa para cada criterio.</li>
-                <li>Los pesos asignados a cada criterio según su importancia.</li>
-              </ul>
-              <br />
+            <p>Para resolver un ejercicio, necesitas:</p>
+            <ul style={{ listStyleType: 'circle', paddingLeft: '2.0em' }}>
+              <li>Los criterios a evaluar.</li>
+              <li>Las puntuaciones de cada alternativa para cada criterio.</li>
+              <li>Los pesos asignados a cada criterio según su importancia.</li>
+            </ul>
+            <br />
           </li>
           <li>¿Cómo puedo descargar los resultados en PDF?
-              <p> Después de calcular los resultados, puedes descargar el informe en PDF. La opción de descarga se encuentra al final de la página de resultados.</p>
-              <br />
+            <p> Después de calcular los resultados, puedes descargar el informe en PDF. La opción de descarga se encuentra al final de la página de resultados.</p>
+            <br />
           </li>
           <li>¿Dónde puedo encontrar documentación y tutoriales?
-              <p> En la sección de **Documentación** del menú superior, encontrarás manuales de usuario, tutoriales y ejemplos detallados sobre cómo utilizar la plataforma y aplicar los métodos multicriterio.</p>
-              <br />
+            <p> En la sección de **Documentación** del menú superior, encontrarás manuales de usuario, tutoriales y ejemplos detallados sobre cómo utilizar la plataforma y aplicar los métodos multicriterio.</p>
+            <br />
           </li>
           <li>¿Cómo puedo contactar al equipo de soporte?
-              <p> Si necesitas ayuda adicional, tienes preguntas o deseas proporcionar retroalimentación, puedes utilizar la opción **Contacto** en el menú superior. Completa el formulario de contacto con tus datos y mensaje, y haz clic en "Enviar".</p>
-              <br />
+            <p> Si necesitas ayuda adicional, tienes preguntas o deseas proporcionar retroalimentación, puedes utilizar la opción **Contacto** en el menú superior. Completa el formulario de contacto con tus datos y mensaje, y haz clic en "Enviar".</p>
+            <br />
           </li>
           <li> ¿Puedo utilizar la plataforma en dispositivos móviles?
-              <p> Sí, nuestra plataforma es compatible con dispositivos móviles y se puede acceder desde cualquier navegador web.</p>
-              <br />
+            <p> Sí, nuestra plataforma es compatible con dispositivos móviles y se puede acceder desde cualquier navegador web.</p>
+            <br />
           </li>
           <li>¿Es necesario crear una cuenta para utilizar la plataforma?
-              <p> No, no es necesario crear una cuenta para utilizar las funcionalidades básicas de la plataforma. Sin embargo, puede que se requiera registro para acceder a características avanzadas o guardar tu progreso.</p>
-              <br />
+            <p> No, no es necesario crear una cuenta para utilizar las funcionalidades básicas de la plataforma. Sin embargo, puede que se requiera registro para acceder a características avanzadas o guardar tu progreso.</p>
+            <br />
           </li>
         </ol>
 
