@@ -7,6 +7,15 @@ export const METODOS = {
   TOPSIS: "Topsis",
 };
 
+export const MENU_ITEMS = {
+  HOME: "#",
+  PONDERACION: "#ponderacion",
+  MOORA: "#moora",
+  TOPSIS: "#topsis",
+  DOCUMENTACION: "#documentacion",
+  CONTACTO: "#contacto",
+};
+
 export const PRESENTACION = {
   title: "Herramienta de Apoyo a la Toma de Decisiones",
   description:
@@ -100,8 +109,7 @@ export const METODOS_NORMALIZACION = {
 const cantDecimales = 5;
 export const decimales = Math.pow(10, cantDecimales);
 
-// para mostrar los datos del ejemplo en la documentacion 
-
+// para mostrar los datos del ejemplo en la documentacion
 
 export const DOCUMENTACION = {
   columnas: [
@@ -150,7 +158,7 @@ export const DOCUMENTACION = {
       label: "Conectividad",
     },
   ],
-  
+
   tablaOriginal: [
     {
       key: "1",
@@ -164,7 +172,7 @@ export const DOCUMENTACION = {
       almacenamiento: "128",
       pantalla: "6.5",
       so: "9",
-      conectividad: "5",              
+      conectividad: "5",
     },
     {
       key: "2",
@@ -178,7 +186,7 @@ export const DOCUMENTACION = {
       almacenamiento: "256",
       pantalla: "6.7",
       so: "8",
-      conectividad: "6",              
+      conectividad: "6",
     },
     {
       key: "3",
@@ -192,7 +200,7 @@ export const DOCUMENTACION = {
       almacenamiento: "512",
       pantalla: "6.8",
       so: "10",
-      conectividad: "7",              
+      conectividad: "7",
     },
     {
       key: "4",
@@ -206,10 +214,10 @@ export const DOCUMENTACION = {
       almacenamiento: "0.10",
       pantalla: "0.05",
       so: "0.05",
-      conectividad: "0.05",              
+      conectividad: "0.05",
     },
   ],
-  
+
   pesos: [
     {
       key: "4",
@@ -223,73 +231,97 @@ export const DOCUMENTACION = {
       almacenamiento: "0.10",
       pantalla: "0.05",
       so: "0.05",
-      conectividad: "0.05",              
+      conectividad: "0.05",
     },
   ],
 
   alternativas: ["Celular A", "Celular B", "Celular C", "Pesos"],
-  
-  criterios: ["RAM","Procesador", "Cámara", "Batería", "Precio", "Marca", "Almacenamiento", "Pantalla", "S.O.", "Conectividad"],
 
-  columnaSuma: [
-    [0.277683174144018], 
-    [0.309861613397758], 
-    [0.412455212458224],
-    [0]
+  criterios: [
+    "RAM",
+    "Procesador",
+    "Cámara",
+    "Batería",
+    "Precio",
+    "Marca",
+    "Almacenamiento",
+    "Pantalla",
+    "S.O.",
+    "Conectividad",
   ],
+
+  columnaSuma: [[0.277683174144018], [0.309861613397758], [0.412455212458224], [0]],
 
   tablaNormalizadayPonderada: [
-    [0.0461538461538462, 0.0451807228915663, 0.0218181818181818, 0.0296296296296296, 0.0571428571428571, 0.0166666666666667, 0.0142857142857143, 0.01625, 0.0166666666666667, 0.0138888888888889],
-    [0.0346153846153846, 0.0506024096385542, 0.0290909090909091, 0.0333333333333333, 0.0666666666666667, 0.01875, 0.0285714285714286, 0.01675, 0.0148148148148148, 0.0166666666666667],
-    [0.0692307692307692, 0.0542168674698795, 0.0490909090909091, 0.037037037037037, 0.0761904761904762, 0.0145833333333333, 0.0571428571428571, 0.017, 0.0185185185185185, 0.0194444444444444],
-    [0.15, 0.15, 0.1, 0.1, 0.2, 0.05, 0.1, 0.05, 0.05, 0.05]
+    [
+      0.0461538461538462, 0.0451807228915663, 0.0218181818181818, 0.0296296296296296,
+      0.0571428571428571, 0.0166666666666667, 0.0142857142857143, 0.01625, 0.0166666666666667,
+      0.0138888888888889,
+    ],
+    [
+      0.0346153846153846, 0.0506024096385542, 0.0290909090909091, 0.0333333333333333,
+      0.0666666666666667, 0.01875, 0.0285714285714286, 0.01675, 0.0148148148148148,
+      0.0166666666666667,
+    ],
+    [
+      0.0692307692307692, 0.0542168674698795, 0.0490909090909091, 0.037037037037037,
+      0.0761904761904762, 0.0145833333333333, 0.0571428571428571, 0.017, 0.0185185185185185,
+      0.0194444444444444,
+    ],
+    [0.15, 0.15, 0.1, 0.1, 0.2, 0.05, 0.1, 0.05, 0.05, 0.05],
   ],
 
-  tablaNormalizada:  [
-    [0.307692307692308, 0.301204819277108, 0.218181818181818, 0.296296296296296, 0.285714285714286, 0.333333333333333, 0.142857142857143, 0.325, 0.333333333333333, 0.277777777777778],
-    [0.230769230769231, 0.337349397590361, 0.290909090909091, 0.333333333333333, 0.333333333333333, 0.375, 0.285714285714286, 0.335, 0.296296296296296, 0.333333333333333],
-    [0.461538461538462, 0.36144578313253, 0.490909090909091, 0.37037037037037, 0.380952380952381, 0.291666666666667, 0.571428571428571, 0.34, 0.37037037037037, 0.388888888888889],
-    [0.15, 0.15, 0.1, 0.1, 0.2, 0.05, 0.1, 0.05, 0.05, 0.05]
+  tablaNormalizada: [
+    [
+      0.307692307692308, 0.301204819277108, 0.218181818181818, 0.296296296296296, 0.285714285714286,
+      0.333333333333333, 0.142857142857143, 0.325, 0.333333333333333, 0.277777777777778,
+    ],
+    [
+      0.230769230769231, 0.337349397590361, 0.290909090909091, 0.333333333333333, 0.333333333333333,
+      0.375, 0.285714285714286, 0.335, 0.296296296296296, 0.333333333333333,
+    ],
+    [
+      0.461538461538462, 0.36144578313253, 0.490909090909091, 0.37037037037037, 0.380952380952381,
+      0.291666666666667, 0.571428571428571, 0.34, 0.37037037037037, 0.388888888888889,
+    ],
+    [0.15, 0.15, 0.1, 0.1, 0.2, 0.05, 0.1, 0.05, 0.05, 0.05],
   ],
-
 
   columnaTablaResultado: [
-  {
-    key: "orden",
-    label: "Orden",
-  },
-  {
-    key: "alternativa",
-    label: "Alternativa",
-  },
-  {
-    key: "solucion",
-    label: "Valor",
-  },
+    {
+      key: "orden",
+      label: "Orden",
+    },
+    {
+      key: "alternativa",
+      label: "Alternativa",
+    },
+    {
+      key: "solucion",
+      label: "Valor",
+    },
   ],
 
-  tablaResultado: 
-  [
-    { 
+  tablaResultado: [
+    {
       key: 1,
       orden: 1,
       alternativa: "Celular C",
-      solucion:"0.4124552124582244"
+      solucion: "0.4124552124582244",
     },
-    { 
+    {
       key: 2,
       orden: 2,
       alternativa: "Celular B",
-      solucion:"0.30986161339775803"
+      solucion: "0.30986161339775803",
     },
-    { 
+    {
       key: 3,
       orden: 3,
       alternativa: "Celular A",
-      solucion: "0.27768317414401755"
-    }
-  ]
-
+      solucion: "0.27768317414401755",
+    },
+  ],
 };
 
 export const DATATABLAPRUEBA1 = {

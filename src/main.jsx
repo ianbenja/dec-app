@@ -4,8 +4,9 @@ import Rutas from "./routes/routes.jsx";
 import "./index.css";
 import { NextUIProvider } from "@nextui-org/react";
 import NavBarHome from "./components/navbar.jsx";
+import { ActiveItemProvider } from "./contexts/ActiveItemContext.jsx";
 
-const App = () => {
+export const App = () => {
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "dark");
 
   useEffect(() => {
@@ -14,14 +15,19 @@ const App = () => {
 
   return (
     <React.StrictMode>
-      <NextUIProvider>
-        <main
-          className={`${theme} text-foreground bg-background px-5 pb-10 flex flex-col items-center transition-colors`}
-        >
-          <NavBarHome theme={theme} setTheme={setTheme} />
-          <Rutas />
-        </main>
-      </NextUIProvider>
+      <ActiveItemProvider>
+        <NextUIProvider>
+          <main
+            className={`${theme} text-foreground bg-background px-5 pb-10 flex flex-col items-center transition-colors`}
+          >
+            <NavBarHome
+              theme={theme}
+              setTheme={setTheme}
+            />
+            <Rutas />
+          </main>
+        </NextUIProvider>
+      </ActiveItemProvider>
     </React.StrictMode>
   );
 };

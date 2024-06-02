@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
   Navbar,
   NavbarBrand,
@@ -13,22 +13,12 @@ import {
 import Logo from "./iconos/logo.jsx";
 import SunIcon from "./iconos/SunIcon.jsx";
 import MoonIcon from "./iconos/MoonIcon.jsx";
+import { ActiveItemContext } from "../contexts/ActiveItemContext.jsx";
+import { MENU_ITEMS } from "../constants/index.js";
 
 const NavBarHome = ({ theme, setTheme }) => {
+  const { activeItem, setActiveItem } = useContext(ActiveItemContext);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const menuItems = {
-    HOME: "#",
-    PONDERACION: "#ponderacion",
-    MOORA: "#moora",
-    TOPSIS: "#topsis",
-    DOCUMENTACION: "#documentacion",
-    CONTACTO: "#contacto",
-  };
-
-  const [activeItem, setActiveItem] = useState(
-    menuItems[window.location.hash.split("#")[1]?.toUpperCase() ?? "HOME"]
-  );
 
   const handleMenuItemClick = (path) => {
     setActiveItem(path);
@@ -36,27 +26,33 @@ const NavBarHome = ({ theme, setTheme }) => {
   };
 
   if (localStorage.getItem("theme")) {
-    let html = document.querySelector("html")
+    let html = document.querySelector("html");
     html.classList.remove("dark", "light");
-    html.classList.add(localStorage.getItem("theme"))
+    html.classList.add(localStorage.getItem("theme"));
   }
+
+  useEffect(() => {
+    setActiveItem(window.location.hash || "#");
+  }, [setActiveItem]);
 
   const changeTheme = (color) => {
-    setTheme(color)
-    let html = document.querySelector("html")
+    setTheme(color);
+    let html = document.querySelector("html");
     if (html.classList.contains("dark")) {
       html.classList.remove("dark");
-      html.classList.add("light")
-    }
-    else {
+      html.classList.add("light");
+    } else {
       html.classList.remove("light");
-      html.classList.add("dark")
+      html.classList.add("dark");
     }
-    localStorage.setItem("theme", color)
-  }
+    localStorage.setItem("theme", color);
+  };
 
   return (
-    <Navbar isMenuOpen={isMenuOpen} onMenuOpenChange={setIsMenuOpen}>
+    <Navbar
+      isMenuOpen={isMenuOpen}
+      onMenuOpenChange={setIsMenuOpen}
+    >
       <NavbarContent>
         <NavbarMenuToggle
           aria-label={isMenuOpen ? "Close menu" : "Open menu"}
@@ -68,9 +64,12 @@ const NavBarHome = ({ theme, setTheme }) => {
         </NavbarBrand>
       </NavbarContent>
 
-      <NavbarContent className="hidden md:flex" justify="center">
+      <NavbarContent
+        className="hidden md:flex"
+        justify="center"
+      >
         {/* Generamos los ítems del menú */}
-        {Object.entries(menuItems).map(([label, path]) => (
+        {Object.entries(MENU_ITEMS).map(([label, path]) => (
           <NavbarItem key={label}>
             <Link
               href={path}
@@ -87,11 +86,17 @@ const NavBarHome = ({ theme, setTheme }) => {
         ))}
         <NavbarItem>
           {theme === "dark" ? (
-            <Link color="foreground" onClick={() => changeTheme("light")}>
+            <Link
+              color="foreground"
+              onClick={() => changeTheme("light")}
+            >
               <SunIcon />
             </Link>
           ) : (
-            <Link color="foreground" onClick={() => changeTheme("dark")}>
+            <Link
+              color="foreground"
+              onClick={() => changeTheme("dark")}
+            >
               <MoonIcon />
             </Link>
           )}
@@ -99,7 +104,7 @@ const NavBarHome = ({ theme, setTheme }) => {
       </NavbarContent>
 
       <NavbarMenu className="bg-transparent">
-        {Object.entries(menuItems).map(([label, path]) => (
+        {Object.entries(MENU_ITEMS).map(([label, path]) => (
           <NavbarMenuItem key={label}>
             <Link
               href={path}
@@ -117,11 +122,17 @@ const NavBarHome = ({ theme, setTheme }) => {
 
         <NavbarMenuItem>
           {theme === "dark" ? (
-            <Link color="foreground" onClick={() => changeTheme("light")}>
+            <Link
+              color="foreground"
+              onClick={() => changeTheme("light")}
+            >
               <SunIcon />
             </Link>
           ) : (
-            <Link color="foreground" onClick={() => changeTheme("dark")}>
+            <Link
+              color="foreground"
+              onClick={() => changeTheme("dark")}
+            >
               <MoonIcon />
             </Link>
           )}

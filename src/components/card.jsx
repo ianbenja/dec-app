@@ -1,21 +1,15 @@
-import React, { useState } from "react";
-import {
-  Card,
-  CardHeader,
-  CardFooter,
-  Image,
-  Button,
-  Link,
-} from "@nextui-org/react";
+import { useContext } from "react";
+import { Card, CardHeader, CardFooter, Image, Button, Link } from "@nextui-org/react";
 import card1 from "../assets/images/card1.jpg";
 import card2 from "../assets/images/card2.jpg";
 import card3 from "../assets/images/card3.jpg";
 import card4 from "../assets/images/card4.jpg";
 import card5 from "../assets/images/card5.jpg";
 import card6 from "../assets/images/card6.jpg";
+import { ActiveItemContext } from "../contexts/ActiveItemContext.jsx";
 
 const CardComponent = () => {
-  const [activeItem, setActiveItem] = useState("#");
+  const { activeItem, setActiveItem } = useContext(ActiveItemContext);
 
   const handleMouseEnter = (path) => {
     setActiveItem(path);
@@ -30,9 +24,7 @@ const CardComponent = () => {
       <Card className="col-span-12 sm:col-span-4 h-[300px]">
         <CardHeader className="absolute z-10 top-1 flex-col !items-start">
           <p className="text-tiny text-white/60 uppercase font-bold">Metodo</p>
-          <h4 className="text-white font-medium text-large">
-            Ponderacion Lineal
-          </h4>
+          <h4 className="text-white font-medium text-large">Ponderacion Lineal</h4>
         </CardHeader>
         <CardFooter className="absolute bg-black/40 bottom-0 z-10 border-t-1 border-default-600 dark:border-default-100">
           <div className="flex flex-grow gap-2 items-center">
@@ -40,10 +32,7 @@ const CardComponent = () => {
               <p className="text-tiny text-white/60">Te ayudamos a decidir.</p>
             </div>
           </div>
-          <Link
-            href="#ponderacion"
-            onClick={() => setActiveItem("#ponderacion")}
-          >
+          <Link href="#ponderacion">
             <Button
               radius="full"
               size="sm"
@@ -77,7 +66,7 @@ const CardComponent = () => {
               <p className="text-tiny text-white/60">Te ayudamos a decidir.</p>
             </div>
           </div>
-          <Link href="#moora" onClick={() => setActiveItem("#moora")}>
+          <Link href="#moora">
             <Button
               radius="full"
               size="sm"
@@ -111,7 +100,7 @@ const CardComponent = () => {
               <p className="text-tiny text-white/60">Te ayudamos a decidir.</p>
             </div>
           </div>
-          <Link href="#topsis" onClick={() => setActiveItem("#topsis")}>
+          <Link href="#topsis">
             <Button
               radius="full"
               size="sm"
