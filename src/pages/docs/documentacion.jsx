@@ -1,5 +1,4 @@
 
-import React from "react";
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, getKeyValue, Image } from "@nextui-org/react";
 import { DOCUMENTACION } from "../../constants";
 

@@ -1,16 +1,10 @@
-import React from "react";
 import jsPDF from "jspdf";
 import "jspdf-autotable";
 import { Button } from "@nextui-org/react";
-
 import { FaFileDownload } from "react-icons/fa";
+import PropTypes from "prop-types";
 
-const ExportToPDF = ({
-  datosOriginales,
-  datosOrden,
-  paginaTitulo,
-  titlePDF,
-}) => {
+const ExportToPDF = ({ datosOriginales, datosOrden, paginaTitulo, titlePDF }) => {
   const doc = new jsPDF();
   const columns = ["A \\ C", ...datosOriginales.criterios];
   const criterios = [" ", ...datosOriginales.tipos_criterios];
@@ -60,6 +54,14 @@ const ExportToPDF = ({
       </Button>
     </>
   );
+};
+
+// Add the 'datosOrden' prop to the props validation
+ExportToPDF.propTypes = {
+  datosOriginales: PropTypes.object.isRequired,
+  datosOrden: PropTypes.object.isRequired,
+  paginaTitulo: PropTypes.string.isRequired,
+  titlePDF: PropTypes.string.isRequired,
 };
 
 export default ExportToPDF;

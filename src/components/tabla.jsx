@@ -26,11 +26,6 @@ const TablaInicial = ({
     Array(cantidadCriterios).fill(TIPO_CRITERIO.Max)
   );
 
-  const prueba = (e) =>{
-    setMetodoNormalizacion(e.target)
-    console.log(e.target);
-  }
-
   const handleCambioBotonTipoCriterio = (i) => {
     const nuevoBotonesTipoCriterios = [...botonesTipoCriterios];
     nuevoBotonesTipoCriterios[i] =

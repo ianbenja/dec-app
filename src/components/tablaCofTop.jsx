@@ -1,12 +1,5 @@
-import React from "react";
-import {
-  Table,
-  TableHeader,
-  TableColumn,
-  TableBody,
-  TableRow,
-  TableCell,
-} from "@nextui-org/react";
+import PropTypes from 'prop-types';
+import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@nextui-org/react";
 
 const TablaCoficientes = ({ data }) => {
   const { alternativas, resultados } = data;
@@ -16,9 +9,7 @@ const TablaCoficientes = ({ data }) => {
         <TableColumn className="text-xl text-center font-bold text-indigo-500">
           Alternativas
         </TableColumn>
-        <TableColumn className="text-xl text-center font-bold text-indigo-500">
-          C*
-        </TableColumn>
+        <TableColumn className="text-xl text-center font-bold text-indigo-500">C*</TableColumn>
       </TableHeader>
       <TableBody>
         {resultados.map((valores, rowIndex) => (
@@ -27,15 +18,17 @@ const TablaCoficientes = ({ data }) => {
               {alternativas[rowIndex]}
             </TableCell>
             <TableCell className="text-xl text-center font-bold valor-celda">
-              <span
-                title={valores}
-              >{valores}</span>
+              <span title={valores}>{valores}</span>
             </TableCell>
           </TableRow>
         ))}
       </TableBody>
     </Table>
   );
+};
+
+TablaCoficientes.propTypes = {
+  data: PropTypes.object.isRequired,
 };
 
 export default TablaCoficientes;

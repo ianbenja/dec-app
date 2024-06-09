@@ -12,6 +12,7 @@
   "dependencies": {
     "@nextui-org/react": "^2.3.6",
     "@react-pdf/renderer": "^3.4.4",
+    "@types/prop-types": "^15.7.12",
     "axios": "^1.6.8",
     "framer-motion": "^11.1.7",
     "jspdf": "^2.5.1",

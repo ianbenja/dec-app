@@ -8,7 +8,7 @@ import TablaOrden from "../../components/tablaOrden.jsx";
 import { metodoPonLin } from "../../services/metodo";
 import ExportToPDF from "../../components/exportPdf.jsx";
 
-const PaginaPonderacion = (theme) => {
+const PaginaPonderacion = () => {
   const [alternativasInput, setAlternativasInput] = useState(0);
   const [criteriosInput, setCriteriosInput] = useState(0);
   const [cantidadAlternativas, setCantidadAlternativas] = useState(0);
