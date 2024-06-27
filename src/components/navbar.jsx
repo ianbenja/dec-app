@@ -52,6 +52,7 @@ const NavBarHome = ({ theme, setTheme }) => {
     <Navbar
       isMenuOpen={isMenuOpen}
       onMenuOpenChange={setIsMenuOpen}
+      className="bg-transparent"
     >
       <NavbarContent>
         <NavbarMenuToggle
