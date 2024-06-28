@@ -1,4 +1,5 @@
 import CardIntegrante from "../../components/cardIntegrante.jsx";
+import { INTENTANTES } from "../../constants/index.js";
 
 const Contact = () => {
   return (
@@ -7,22 +8,10 @@ const Contact = () => {
         CONTACTO
       </div>
       <section className="flex flex-col xl:flex-row justify-center mt-10 gap-5">
-        <CardIntegrante
-          imagen="./integrantes/eze.png"
-          nombre="Ezequiel Luzaro"
-          rol="Backend Developer"
-        ></CardIntegrante>
-        <CardIntegrante
-          imagen="./integrantes/giuliano.png"
-          nombre="Giuliano Charra Marquez"
-          rol="Frontend Developer"
-          github="https://github.com/GiulianoCharra"
-        ></CardIntegrante>
-        <CardIntegrante
-          imagen="./integrantes/ian.png"
-          nombre="Ian "
-          rol="Full-Stack"
-        ></CardIntegrante>
+        <CardIntegrante integrante={INTENTANTES.EZE}></CardIntegrante>
+        <CardIntegrante integrante={INTENTANTES.GIULIANO}></CardIntegrante>
+        <CardIntegrante integrante={INTENTANTES.IAN}></CardIntegrante>
+        <CardIntegrante integrante={INTENTANTES.JUAN}></CardIntegrante>
       </section>
     </>
   );

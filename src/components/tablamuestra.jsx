@@ -1,4 +1,11 @@
-import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from "@nextui-org/react";
+import {
+  Table,
+  TableHeader,
+  TableColumn,
+  TableBody,
+  TableRow,
+  TableCell,
+} from "@nextui-org/react";
 import PropTypes from "prop-types";
 
 const TablaMuestra = ({ data }) => {
@@ -13,7 +20,9 @@ const TablaMuestra = ({ data }) => {
     suma,
     resultadosParciales,
     tipo,
+    puntoref,
   } = data;
+
   const mostrarPesos = pesos && pesos.length > 0 ? true : false;
   const mostrarIdeal = ideal && ideal.length > 0 ? true : false;
   const mostrarAntiIdeal = anti_ideal && anti_ideal.length > 0 ? true : false;
@@ -24,7 +33,9 @@ const TablaMuestra = ({ data }) => {
   return (
     <Table aria-label="Example static collection table">
       <TableHeader>
-        <TableColumn className="text-xl text-center font-bold text-indigo-500">A \ C</TableColumn>
+        <TableColumn className="text-xl text-center font-bold text-indigo-500">
+          A \ C
+        </TableColumn>
         {criterios.map((columnName, index) => (
           <TableColumn
             className="text-xl text-center font-bold text-indigo-500"
@@ -34,7 +45,9 @@ const TablaMuestra = ({ data }) => {
           </TableColumn>
         ))}
         {mostrarSuma ? (
-          <TableColumn className="text-xl text-center font-bold text-indigo-500">Suma</TableColumn>
+          <TableColumn className="text-xl text-center font-bold text-indigo-500">
+            {puntoref ? "Max" : "Suma"}
+          </TableColumn>
         ) : (
           <TableColumn
             hidden={true}
@@ -44,7 +57,10 @@ const TablaMuestra = ({ data }) => {
           </TableColumn>
         )}
         {mostrarResultadosParciales ? (
-          <TableColumn className="text-xl text-center font-bold text-indigo-500"> Suma</TableColumn>
+          <TableColumn className="text-xl text-center font-bold text-indigo-500">
+            {" "}
+            Suma
+          </TableColumn>
         ) : (
           <TableColumn
             hidden={true}
@@ -100,7 +116,9 @@ const TablaMuestra = ({ data }) => {
             )}
             {mostrarResultadosParciales ? (
               <TableCell className=" text-lg text-center text-bold text-pink-600 valor-celda">
-                <span title={resultadosParciales[rowIndex]}>{resultadosParciales[rowIndex]}</span>
+                <span title={resultadosParciales[rowIndex]}>
+                  {resultadosParciales[rowIndex]}
+                </span>
               </TableCell>
             ) : (
               <TableCell hidden={true}>{0}</TableCell>
@@ -110,7 +128,9 @@ const TablaMuestra = ({ data }) => {
 
         {mostrarPesos && (
           <TableRow>
-            <TableCell className="text-xl text-center font-bold text-indigo-500">Pesos</TableCell>
+            <TableCell className="text-xl text-center font-bold text-indigo-500">
+              Pesos
+            </TableCell>
             {pesos.map((cell, cellIndex) => (
               <TableCell
                 className=" text-center valor-celda "
@@ -141,7 +161,9 @@ const TablaMuestra = ({ data }) => {
 
         {mostrarIdeal && (
           <TableRow>
-            <TableCell className="text-xl text-center font-bold text-indigo-500">A+</TableCell>
+            <TableCell className="text-xl text-center font-bold text-indigo-500">
+              A+
+            </TableCell>
             {ideal.map((cell, cellIndex) => (
               <TableCell
                 className=" text-center valor-celda"
@@ -171,7 +193,9 @@ const TablaMuestra = ({ data }) => {
 
         {mostrarAntiIdeal && (
           <TableRow>
-            <TableCell className="text-xl text-center font-bold text-indigo-500">A-</TableCell>
+            <TableCell className="text-xl text-center font-bold text-indigo-500">
+              A-
+            </TableCell>
             {anti_ideal.map((cell, cellIndex) => (
               <TableCell
                 className=" text-center valor-celda"
@@ -215,6 +239,7 @@ TablaMuestra.propTypes = {
     suma: PropTypes.arrayOf(PropTypes.number),
     resultadosParciales: PropTypes.arrayOf(PropTypes.number),
     tipo: PropTypes.string,
+    puntoref: PropTypes.arrayOf(PropTypes.number),
   }),
 };
 

@@ -2,10 +2,17 @@ import { useEffect, useState } from "react"; // Import the 'useState' hook
 import EntradaDatos from "../../components/entradaDatos.jsx";
 import TablaInicial from "../../components/tabla.jsx";
 import { Button } from "@nextui-org/react";
-import { METODOS, METODOS_NORMALIZACION, MOORA } from "../../constants/index.js";
+import {
+  METODOS,
+  METODOS_NORMALIZACION,
+  MOORA,
+} from "../../constants/index.js";
 import TablaMuestra from "../../components/tablamuestra.jsx";
 import TablaOrden from "../../components/tablaOrden.jsx";
-import { metodoMoora } from "../../services/metodo";
+import {
+  metodoMoora,
+  metodoMooraConPuntoReferencia,
+} from "../../services/metodo";
 import ExportToPDF from "../../components/exportPdf.jsx";
 
 const PaginaMoora = () => {
@@ -14,7 +21,9 @@ const PaginaMoora = () => {
   const [criteriosInput, setCriteriosInput] = useState(0);
   const [cantidadAlternativas, setCantidadAlternativas] = useState(0);
   const [cantidadCriterios, setCantidadCriterios] = useState(0);
-  const [metodoNormalizacion, setMetodoNormalizacion] = useState(METODOS_NORMALIZACION.EULER);
+  const [metodoNormalizacion, setMetodoNormalizacion] = useState(
+    METODOS_NORMALIZACION.EULER
+  );
   const [generarTabla, setGenerarTabla] = useState(false);
   const [tablaKey, setTablaKey] = useState(0);
   const [mostrarResultados, setMostrarResultados] = useState(false);
@@ -23,6 +32,7 @@ const PaginaMoora = () => {
   const [datosPonderizados, setDatosPonderizados] = useState();
   const [datosFinales, setFinales] = useState();
   const [ordenFinal, setOrdenFinal] = useState();
+  const [usarPuntoReferencia, setUsarPuntoReferencia] = useState(false);
 
   const [alternativas, setAlternativas] = useState([]);
   const [criterios, setCriterios] = useState([]);
@@ -33,8 +43,15 @@ const PaginaMoora = () => {
   // Definir un efecto para manejar la actualización de los vectores y la matriz
   useEffect(() => {
     // Crear arreglos según las entradas
-    setAlternativas(Array.from({ length: cantidadAlternativas }, (_, index) => `A${index + 1}`));
-    setCriterios(Array.from({ length: cantidadCriterios }, (_, index) => `C${index + 1}`));
+    setAlternativas(
+      Array.from(
+        { length: cantidadAlternativas },
+        (_, index) => `A${index + 1}`
+      )
+    );
+    setCriterios(
+      Array.from({ length: cantidadCriterios }, (_, index) => `C${index + 1}`)
+    );
 
     setPesos(Array(cantidadCriterios).fill(1));
     setTiposDeCriterio(Array(cantidadCriterios).fill("MAX")); // Tipo por defecto
@@ -65,25 +82,39 @@ const PaginaMoora = () => {
       valores,
       pesos,
       metodoNormalizacion,
+      puntoref: usarPuntoReferencia,
     };
     console.log(data);
 
     try {
-      const response = await metodoMoora(data);
+      let response;
+      if (usarPuntoReferencia) {
+        console.log("Usando punto de referencia");
+        response = await metodoMooraConPuntoReferencia(data);
+      } else {
+        response = await metodoMoora(data);
+      }
 
       if (response.ok) {
         console.log("Datos enviados exitosamente");
         console.log("Respuesta:", response);
         const json = await response.json();
-        console.log("Respuesta:", json);
+        console.log("Respuesta json:", json);
 
         const { normalizado, ponderado, solucion, original, ordenFinal } = json;
         setDatosNormalizados(normalizado);
         setDatosPonderizados(ponderado);
         setFinales(solucion);
         setDatosOriginale(original);
-        setOrdenFinal(ordenFinal);
-
+        if (usarPuntoReferencia) {
+          // invertir el order de las alternativas y la solucion dentro del orden final
+          ordenFinal.alternativas = ordenFinal.alternativas.reverse();
+          ordenFinal.solucion = ordenFinal.solucion.reverse();
+          setOrdenFinal(ordenFinal);
+        } else {
+          setOrdenFinal(ordenFinal);
+        }
+        console.log("invertido", ordenFinal);
         setMostrarResultados(true);
       } else {
         console.error("Error al enviar los datos");
@@ -156,7 +187,21 @@ const PaginaMoora = () => {
                 pesos={pesos}
                 setPesos={setPesos}
                 setMetodoNormalizacion={setMetodoNormalizacion}
+                setUsarPuntoReferencia={setUsarPuntoReferencia}
               />
+            </div>
+
+            <div className="flex justify-center items-center ">
+              <input
+                type="checkbox"
+                id="conPuntoReferencia"
+                className="mr-2 w-5 h-5"
+                checked={usarPuntoReferencia}
+                onChange={() => setUsarPuntoReferencia(!usarPuntoReferencia)}
+              />
+              <label htmlFor="conPuntoReferencia">
+                Usar punto de referencia
+              </label>
             </div>
             <Button
               type="submit"
@@ -192,7 +237,6 @@ const PaginaMoora = () => {
             <p>{MOORA.normalizar2}</p>
             <p>{MOORA.normalizar3}</p>
             <p>{MOORA.normalizar4}</p>
-
             <TablaMuestra data={datosNormalizados} />
           </div>
           <div className="w-full flex flex-col items-center gap-5">
@@ -203,6 +247,27 @@ const PaginaMoora = () => {
             <p>{MOORA.ponderizar2}</p>
             <p>{MOORA.ponderizar3}</p>
             <TablaMuestra data={datosPonderizados} />
+            {datosPonderizados.puntoref && (
+              <div className="w-full flex flex-col">
+                <table className="w-full p-2 mt-5 border-separate border-spacing-2 rounded-2xl bg-zinc-200 dark:bg-zinc-800">
+                  <thead>
+                    <tr>
+                      <th className="min-w-24 text-xl text-center font-bold text-indigo-500">
+                        <span>PuntosRef</span>
+                      </th>
+                      {datosPonderizados.puntoref.map((i) => (
+                        <th
+                          key={i}
+                          className="min-w-24 valor-celda"
+                        >
+                          <span>{i}</span>
+                        </th>
+                      ))}
+                    </tr>
+                  </thead>
+                </table>
+              </div>
+            )}
           </div>
 
           <div className="w-full flex flex-col items-center gap-5">

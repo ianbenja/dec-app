@@ -15,6 +15,21 @@ export const metodoMoora = async (data) => {
   }
 };
 
+export const metodoMooraConPuntoReferencia = async (data) => {
+  try {
+    const response = await fetch(`${url_api}/moorapuntoref`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+    return response;
+  } catch (error) {
+    return false;
+  }
+};
+
 export const metodoPonLin = async (data) => {
   try {
     const response = await fetch(`${url_api}/ponderacionlineal`, {
