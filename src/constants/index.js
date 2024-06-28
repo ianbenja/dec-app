@@ -454,7 +454,7 @@ export const INTENTANTES = {
   },
   IAN: {
     nombre: "Ian Benjamin",
-    imagen: "./integrantes/ian.png",
+    imagen: "./integrantes/ian2.png",
     rol: "Full-Stack",
     descripcion: "Estudiante de Ingeniería en Sistemas de Información",
     redes: {
