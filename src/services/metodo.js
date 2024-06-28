@@ -39,9 +39,9 @@ export const metodoPonLin = async (data) => {
       },
       body: JSON.stringify(data),
     });
-    console.log("error", JSON.stringify(data));
     return response;
   } catch (error) {
+    console.log("error", JSON.stringify(data));
     return false;
   }
 };

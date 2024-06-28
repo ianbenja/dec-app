@@ -21,7 +21,7 @@ const PaginaMoora = () => {
   const [criteriosInput, setCriteriosInput] = useState(0);
   const [cantidadAlternativas, setCantidadAlternativas] = useState(0);
   const [cantidadCriterios, setCantidadCriterios] = useState(0);
-  const [metodoNormalizacion, setMetodoNormalizacion] = useState(
+  const [normalizacion, setMetodoNormalizacion] = useState(
     METODOS_NORMALIZACION.EULER
   );
   const [generarTabla, setGenerarTabla] = useState(false);
@@ -83,7 +83,7 @@ const PaginaMoora = () => {
       tipos_criterios,
       valores,
       pesos,
-      normalizacion: metodoNormalizacion,
+      normalizacion,
       puntoref: usarPuntoReferencia,
     };
     console.log(data);

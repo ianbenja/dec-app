@@ -36,7 +36,7 @@ const PaginaTopsis = () => {
   const [tipos_criterios, setTiposDeCriterio] = useState([]);
   const [valores, setValores] = useState([]);
   const [pesos, setPesos] = useState([]);
-  const [metodoNormalizacion, setMetodoNormalizacion] = useState(
+  const [normalizacion, setMetodoNormalizacion] = useState(
     METODOS_NORMALIZACION.EULER
   );
 
@@ -83,7 +83,7 @@ const PaginaTopsis = () => {
       tipos_criterios,
       valores,
       pesos,
-      normalizacion: metodoNormalizacion,
+      normalizacion,
     };
     console.log(data);
 

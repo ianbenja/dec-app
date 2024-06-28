@@ -32,7 +32,7 @@ const PaginaPonderacion = () => {
   const [tipos_criterios, setTiposDeCriterio] = useState([]);
   const [valores, setValores] = useState([]);
   const [pesos, setPesos] = useState([]);
-  const [metodoNormalizacion, setMetodoNormalizacion] = useState(
+  const [normalizacion, setMetodoNormalizacion] = useState(
     METODOS_NORMALIZACION.EULER
   );
 
@@ -79,7 +79,7 @@ const PaginaPonderacion = () => {
       tipos_criterios,
       valores,
       pesos,
-      normalizacion: metodoNormalizacion,
+      normalizacion,
       criterio_general: "MAX",
     };
     console.log(data);
