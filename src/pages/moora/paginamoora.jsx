@@ -108,15 +108,9 @@ const PaginaMoora = () => {
         setDatosPonderizados(ponderado);
         setFinales(solucion);
         setDatosOriginale(original);
-        if (usarPuntoReferencia) {
-          // invertir el order de las alternativas y la solucion dentro del orden final
-          ordenFinal.alternativas = ordenFinal.alternativas.reverse();
-          ordenFinal.solucion = ordenFinal.solucion.reverse();
-          setOrdenFinal(ordenFinal);
-        } else {
-          setOrdenFinal(ordenFinal);
-        }
-        console.log("invertido", ordenFinal);
+
+        setOrdenFinal(ordenFinal);
+
         setMostrarResultados(true);
         setCargandoResultado(false);
         setTimeout(() => {
@@ -266,10 +260,7 @@ const PaginaMoora = () => {
                         <span>PuntosRef</span>
                       </th>
                       {datosPonderizados.puntoref.map((i) => (
-                        <th
-                          key={i}
-                          className="min-w-24 valor-celda"
-                        >
+                        <th key={i} className="min-w-24 valor-celda">
                           <span>{i}</span>
                         </th>
                       ))}
@@ -281,11 +272,25 @@ const PaginaMoora = () => {
           </div>
 
           <div className="w-full flex flex-col items-center gap-5">
-            <h3 className=" text-center mt-16 mb-5 text-4xl leading-inherit lg:mt-16 bg-gradient-to-r from-pink-400 via-slate-300 to-purple-600  dark:from-pink-300 dark:via-slate-300 dark:to-purple-500  bg-clip-text tracking-tight text-transparent">
-              Tabla Suma
-            </h3>
-            <p>{MOORA.suma1}</p>
-            <p>{MOORA.suma2}</p>
+            {usarPuntoReferencia && (
+              <div>
+                <h3 className="text-center mt-16 mb-5 text-4xl leading-inherit lg:mt-16 bg-gradient-to-r from-pink-400 via-slate-300 to-purple-600  dark:from-pink-300 dark:via-slate-300 dark:to-purple-500  bg-clip-text tracking-tight text-transparent">
+                  Tabla Distancia a Punto de Referencia
+                </h3>
+                <p>{MOORA.puntoref1}</p>
+                <p>{MOORA.puntoref2}</p>
+              </div>
+            )}
+
+            {!usarPuntoReferencia && (
+              <div>
+                <h3 className="text-center mt-16 mb-5 text-4xl leading-inherit lg:mt-16 bg-gradient-to-r from-pink-400 via-slate-300 to-purple-600  dark:from-pink-300 dark:via-slate-300 dark:to-purple-500  bg-clip-text tracking-tight text-transparent">
+                  Tabla Suma
+                </h3>
+                <p>{MOORA.suma1}</p>
+                <p>{MOORA.suma2}</p>
+              </div>
+            )}
             <TablaMuestra data={datosFinales} />
           </div>
 

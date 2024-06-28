@@ -64,6 +64,10 @@ export const MOORA = {
     "Luego se sumaran por fila los valores máximos entre si y mínimos entre si",
   suma2:
     "La diferencia entre los valores máximos y mínimos sera la solución de cada fila",
+  puntoref1:
+    "Luego se calculara la distancia de cada celda al punto de referencia correspondiente",
+  puntoref2:
+    "Esto lo haremos restando el valor de la celda al punto de referencia de la columna y tomando el valor absoluto",
   orden1:
     "En base a los resultados obtenidos se ordenaran las alternativas de la mejor opción a la peor",
 };
