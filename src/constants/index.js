@@ -449,7 +449,7 @@ export const INTENTANTES = {
     descripcion: "Estudiante de Ingeniería en Sistemas de Información",
     redes: {
       github: "https://github.com/GiulianoCharra",
-      linkedIn: "www.linkedin.com/in/giuliano-charra-marquez",
+      linkedIn: "https://www.linkedin.com/in/giuliano-charra-marquez",
     },
   },
   IAN: {
@@ -459,6 +459,8 @@ export const INTENTANTES = {
     descripcion: "Estudiante de Ingeniería en Sistemas de Información",
     redes: {
       github: "https://github.com/ianbenja",
+
+      linkedIn: "https://www.linkedin.com/in/ian-nicolas-benjamin/",
     },
   },
   JUAN: {
