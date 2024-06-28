@@ -109,7 +109,7 @@ const TablaMuestra = ({ data }) => {
 
             {mostrarResultadosParciales ? (
               <TableCell className=" text-center text-bold valor-celda">
-                {suma[rowIndex]}{" "}
+                {suma[rowIndex]}
               </TableCell>
             ) : (
               <TableCell hidden={true}>{0}</TableCell>

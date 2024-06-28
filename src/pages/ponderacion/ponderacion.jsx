@@ -2,7 +2,11 @@ import { useEffect, useState } from "react";
 import EntradaDatos from "../../components/entradaDatos.jsx";
 import TablaInicial from "../../components/tabla.jsx";
 import { Button } from "@nextui-org/react";
-import { PONDERACION_LINEAL as PONDERACIONLINEAL } from "../../constants/index.js";
+import {
+  METODOS,
+  METODOS_NORMALIZACION,
+  PONDERACION_LINEAL as PONDERACIONLINEAL,
+} from "../../constants/index.js";
 import TablaMuestra from "../../components/tablamuestra.jsx";
 import TablaOrden from "../../components/tablaOrden.jsx";
 import { metodoPonLin } from "../../services/metodo";
@@ -28,13 +32,24 @@ const PaginaPonderacion = () => {
   const [tipos_criterios, setTiposDeCriterio] = useState([]);
   const [valores, setValores] = useState([]);
   const [pesos, setPesos] = useState([]);
-  const [normalizacion, setMetodoNormalizacion] = useState("EULER");
+  const [metodoNormalizacion, setMetodoNormalizacion] = useState(
+    METODOS_NORMALIZACION.EULER
+  );
+
+  const [cargandoResultado, setCargandoResultado] = useState(false);
 
   // Definir un efecto para manejar la actualización de los vectores y la matriz
   useEffect(() => {
     // Crear arreglos según las entradas
-    setAlternativas(Array.from({ length: cantidadAlternativas }, (_, index) => `A${index + 1}`));
-    setCriterios(Array.from({ length: cantidadCriterios }, (_, index) => `C${index + 1}`));
+    setAlternativas(
+      Array.from(
+        { length: cantidadAlternativas },
+        (_, index) => `A${index + 1}`
+      )
+    );
+    setCriterios(
+      Array.from({ length: cantidadCriterios }, (_, index) => `C${index + 1}`)
+    );
 
     setPesos(Array(cantidadCriterios).fill(0));
     setTiposDeCriterio(Array(cantidadCriterios).fill("MAX")); // Tipo por defecto
@@ -56,6 +71,7 @@ const PaginaPonderacion = () => {
   //funcion que al hacer submit del formulario tranforma todos los datos de la tabla en un json y lo envia al backend
   const handleCalcular = async (e) => {
     e.preventDefault();
+    setCargandoResultado(true);
 
     const data = {
       alternativas,
@@ -63,7 +79,7 @@ const PaginaPonderacion = () => {
       tipos_criterios,
       valores,
       pesos,
-      normalizacion,
+      metodoNormalizacion,
       criterio_general: "MAX",
     };
     console.log(data);
@@ -77,7 +93,14 @@ const PaginaPonderacion = () => {
         const json = await response.json();
         console.log("Respuesta:", json);
 
-        const { normalizado, ponderado, original, criterizado, solucion, ordenFinal } = json;
+        const {
+          normalizado,
+          ponderado,
+          original,
+          criterizado,
+          solucion,
+          ordenFinal,
+        } = json;
         setDatosOriginale(original);
         setDatosNormalizados(normalizado);
         setDatosPonderizados(ponderado);
@@ -86,6 +109,13 @@ const PaginaPonderacion = () => {
         setDatosOrden(ordenFinal);
 
         setMostrarResultados(true);
+        setCargandoResultado(false);
+        setTimeout(() => {
+          window.scrollTo(
+            0,
+            document.getElementById("seccion-resultados").offsetTop
+          );
+        }, 1000);
       } else {
         console.error("Error al enviar los datos");
       }
@@ -142,6 +172,7 @@ const PaginaPonderacion = () => {
             <div className="mt-4 w-full">
               <TablaInicial
                 key={tablaKey}
+                metodo={METODOS.PONDERACION}
                 cantidadAlternativas={cantidadAlternativas}
                 cantidadCriterios={cantidadCriterios}
                 alternativas={alternativas}
@@ -160,7 +191,8 @@ const PaginaPonderacion = () => {
             <Button
               type="submit"
               radius="md"
-              className="w-1 bg-gradient-to-tr from-pink-500 to-yellow-500 text-white shadow-lg"
+              className=" bg-gradient-to-tr from-pink-500 to-yellow-500 text-white shadow-lg"
+              isLoading={cargandoResultado}
             >
               Calcular
             </Button>
@@ -178,14 +210,14 @@ const PaginaPonderacion = () => {
             Resultados
           </h2>
           <div className="w-full flex flex-col items-center gap-5">
-            <h3 className="w-full  text-center mt-5 mb-5 text-4xl lg:mt-5 bg-gradient-to-r from-pink-400 via-slate-300 to-purple-600  dark:from-pink-300 dark:via-slate-300 dark:to-purple-500  bg-clip-text tracking-tight text-transparent">
+            <h3 className="text-center m-1 pb-1 text-4xl lg:mt-5 bg-gradient-to-r from-pink-400 via-slate-300 to-purple-600  dark:from-pink-300 dark:via-slate-300 dark:to-purple-500  bg-clip-text tracking-tight text-transparent">
               Tabla Original
             </h3>
             <TablaMuestra data={datosOriginales} />
           </div>
 
           <div className="w-full flex flex-col items-center gap-5">
-            <h3 className="w-full text-center mt-16 mb-5 text-4xl lg:mt-16 bg-gradient-to-r from-pink-400 via-slate-300 to-purple-600  dark:from-pink-300 dark:via-slate-300 dark:to-purple-500  bg-clip-text tracking-tight text-transparent">
+            <h3 className="text-center m-1 pb-1 text-4xl lg:mt-16 bg-gradient-to-r from-pink-400 via-slate-300 to-purple-600  dark:from-pink-300 dark:via-slate-300 dark:to-purple-500  bg-clip-text tracking-tight text-transparent">
               Tabla Criterizada
             </h3>
             <p>{PONDERACIONLINEAL.criterizar1}</p>
@@ -194,7 +226,7 @@ const PaginaPonderacion = () => {
           </div>
 
           <div className="w-full flex flex-col items-center gap-5">
-            <h3 className="w-full  text-center mt-16 mb-5 text-4xl lg:mt-16 bg-gradient-to-r from-pink-400 via-slate-300 to-purple-600  dark:from-pink-300 dark:via-slate-300 dark:to-purple-500  bg-clip-text tracking-tight text-transparent">
+            <h3 className="text-center m-1 pb-1 text-4xl lg:mt-16 bg-gradient-to-r from-pink-400 via-slate-300 to-purple-600  dark:from-pink-300 dark:via-slate-300 dark:to-purple-500  bg-clip-text tracking-tight text-transparent">
               Tabla Normalizada
             </h3>
             <p>{PONDERACIONLINEAL.normalizar1}</p>
@@ -205,7 +237,7 @@ const PaginaPonderacion = () => {
           </div>
 
           <div className="w-full flex flex-col items-center gap-5">
-            <h3 className="w-full text-center mt-16 mb-5 text-4xl lg:mt-16 bg-gradient-to-r from-pink-400 via-slate-300 to-purple-600  dark:from-pink-300 dark:via-slate-300 dark:to-purple-500  bg-clip-text tracking-tight text-transparent">
+            <h3 className="text-center m-1 pb-1 text-4xl lg:mt-16 bg-gradient-to-r from-pink-400 via-slate-300 to-purple-600  dark:from-pink-300 dark:via-slate-300 dark:to-purple-500  bg-clip-text tracking-tight text-transparent">
               Tabla Ponderada
             </h3>
             <p>{PONDERACIONLINEAL.ponderizar1}</p>
@@ -216,7 +248,7 @@ const PaginaPonderacion = () => {
           </div>
 
           <div className="w-full flex flex-col items-center gap-5">
-            <h3 className="w-full text-center mt-16 mb-5 text-4xl lg:mt-16 bg-gradient-to-r from-pink-400 via-slate-300 to-purple-600  dark:from-pink-300 dark:via-slate-300 dark:to-purple-500  bg-clip-text tracking-tight text-transparent">
+            <h3 className="text-center m-1 pb-1 text-4xl lg:mt-16 bg-gradient-to-r from-pink-400 via-slate-300 to-purple-600  dark:from-pink-300 dark:via-slate-300 dark:to-purple-500  bg-clip-text tracking-tight text-transparent">
               Tabla Solucion
             </h3>
             <p>{PONDERACIONLINEAL.solucion1}</p>
@@ -225,7 +257,7 @@ const PaginaPonderacion = () => {
           </div>
 
           <div className="w-full flex flex-col items-center gap-5">
-            <h3 className="w-full text-center mt-16 mb-5 text-4xl lg:mt-16 bg-gradient-to-r from-pink-400 via-slate-300 to-purple-600  dark:from-pink-300 dark:via-slate-300 dark:to-purple-500  bg-clip-text tracking-tight text-transparent">
+            <h3 className="text-center m-1 pb-1 text-4xl lg:mt-16 bg-gradient-to-r from-pink-400 via-slate-300 to-purple-600  dark:from-pink-300 dark:via-slate-300 dark:to-purple-500  bg-clip-text tracking-tight text-transparent">
               Tabla de Resultados
             </h3>
             <p>{PONDERACIONLINEAL.orden1}</p>

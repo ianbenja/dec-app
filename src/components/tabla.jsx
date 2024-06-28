@@ -65,46 +65,48 @@ const TablaInicial = ({
   };
 
   return (
-    <div className="max-w-7xl flex flex-col mx-auto  overflow-x-scroll ">
-      <table className=" max-w-full max-md::max-w-7xl w-full px-5 pt-12 border-separate border-spacing-2  rounded-2xl bg-zinc-200 dark:bg-zinc-800">
-        <TablaCabecera
+    <>
+      <div className="max-w-7xl flex flex-col mx-auto pb-5 overflow-x-scroll overflow-y-hidden">
+        <table className=" max-w-full max-md::max-w-7xl w-full px-5 pt-12 border-separate border-spacing-2  rounded-2xl bg-zinc-200 dark:bg-zinc-800">
+          <TablaCabecera
+            cantidadCriterios={cantidadCriterios}
+            tipoCriterios={botonesTipoCriterios}
+            cambiarCriterios={(i, value) =>
+              handleCambioValor(criterios, i, value, setCriterios)
+            }
+            cambiarBotonTipoCriterio={handleCambioBotonTipoCriterio}
+          />
+          <TablaCuerpo
+            cantidadAlternativas={cantidadAlternativas}
+            cantidadCriterios={cantidadCriterios}
+            cambiarAlternativas={(i, value) =>
+              handleCambioValor(alternativas, i, value, setAlternativas)
+            }
+            cambiarMatrizValores={(i, j, value) => {
+              handleCambioValorMatriz(
+                matrizValores,
+                i,
+                j,
+                value,
+                setMatrizValores
+              );
+            }}
+            cambiarPesos={(i, value) =>
+              handleCambioValor(pesos, i, value, setPesos)
+            }
+          />
+        </table>
+        <TablaPesos
           cantidadCriterios={cantidadCriterios}
-          tipoCriterios={botonesTipoCriterios}
-          cambiarCriterios={(i, value) =>
-            handleCambioValor(criterios, i, value, setCriterios)
-          }
-          cambiarBotonTipoCriterio={handleCambioBotonTipoCriterio}
-        />
-        <TablaCuerpo
-          cantidadAlternativas={cantidadAlternativas}
-          cantidadCriterios={cantidadCriterios}
-          cambiarAlternativas={(i, value) =>
-            handleCambioValor(alternativas, i, value, setAlternativas)
-          }
-          cambiarMatrizValores={(i, j, value) => {
-            handleCambioValorMatriz(
-              matrizValores,
-              i,
-              j,
-              value,
-              setMatrizValores
-            );
-          }}
           cambiarPesos={(i, value) =>
             handleCambioValor(pesos, i, value, setPesos)
           }
         />
-      </table>
-      <TablaPesos
-        cantidadCriterios={cantidadCriterios}
-        cambiarPesos={(i, value) =>
-          handleCambioValor(pesos, i, value, setPesos)
-        }
-      />
+      </div>
 
       {/* SI ES mora ocultar la selecion del metodo de normalizacion */}
       {metodo !== METODOS.MOORA && (
-        <div className="flex justify-center items-center mt-10">
+        <div className="flex justify-center items-center mt-10 mb-5">
           <Select
             color="secondary"
             variant="underlined"
@@ -114,8 +116,11 @@ const TablaInicial = ({
             // defaultSelectedKeys={[opciones["2"]]}
             className="max-w-xs "
             isRequired
-            // onChange={(e) => setMetodoNormalizacion(e.target.value)}
-            onSelectionChange={(e) => setMetodoNormalizacion(e.target.value)}
+            onChange={(e) => setMetodoNormalizacion(e.target.value)}
+            // onSelectionChange={(e) => {
+            //   console.log(e);
+            //   setMetodoNormalizacion(e[0].value);
+            // }}
           >
             {Object.keys(METODOS_NORMALIZACION).map((opcion) => (
               <SelectItem
@@ -128,7 +133,7 @@ const TablaInicial = ({
           </Select>
         </div>
       )}
-    </div>
+    </>
   );
 };
 

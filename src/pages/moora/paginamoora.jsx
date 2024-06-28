@@ -40,6 +40,8 @@ const PaginaMoora = () => {
   const [valores, setValores] = useState([]);
   const [pesos, setPesos] = useState([]);
 
+  const [cargandoResultado, setCargandoResultado] = useState(false);
+
   // Definir un efecto para manejar la actualización de los vectores y la matriz
   useEffect(() => {
     // Crear arreglos según las entradas
@@ -74,7 +76,7 @@ const PaginaMoora = () => {
   //funcion que al hacer submit del formulario tranforma todos los datos de la tabla en un json y lo envia al backend
   const handleCalcular = async (e) => {
     e.preventDefault();
-
+    setCargandoResultado(true);
     const data = {
       alternativas,
       criterios,
@@ -116,6 +118,13 @@ const PaginaMoora = () => {
         }
         console.log("invertido", ordenFinal);
         setMostrarResultados(true);
+        setCargandoResultado(false);
+        setTimeout(() => {
+          window.scrollTo(
+            0,
+            document.getElementById("seccion-resultados").offsetTop
+          );
+        }, 1000);
       } else {
         console.error("Error al enviar los datos");
       }
@@ -206,7 +215,8 @@ const PaginaMoora = () => {
             <Button
               type="submit"
               radius="md"
-              className="w-1 bg-gradient-to-tr from-pink-500 to-yellow-500 text-white shadow-lg"
+              className="bg-gradient-to-tr from-pink-500 to-yellow-500 text-white shadow-lg"
+              isLoading={cargandoResultado}
             >
               Calcular
             </Button>

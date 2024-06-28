@@ -6,7 +6,7 @@ import { metodoTopsis } from "../../services/metodo.js";
 import TablaMuestra from "../../components/tablamuestra.jsx";
 import TablaCoficientes from "../../components/tablaCofTop.jsx";
 import TablaOrden from "../../components/tablaOrden.jsx";
-import { TOPSIS } from "../../constants/index.js";
+import { METODOS, TOPSIS } from "../../constants/index.js";
 import ExportToPDF from "../../components/exportPdf.jsx";
 
 const PaginaTopsis = () => {
@@ -34,11 +34,20 @@ const PaginaTopsis = () => {
   const [pesos, setPesos] = useState([]);
   const [normalizacion, setMetodoNormalizacion] = useState("EULER");
 
+  const [cargandoResultado, setCargandoResultado] = useState(false);
+
   // Definir un efecto para manejar la actualización de los vectores y la matriz
   useEffect(() => {
     // Crear arreglos según las entradas
-    setAlternativas(Array.from({ length: cantidadAlternativas }, (_, index) => `A${index + 1}`));
-    setCriterios(Array.from({ length: cantidadCriterios }, (_, index) => `C${index + 1}`));
+    setAlternativas(
+      Array.from(
+        { length: cantidadAlternativas },
+        (_, index) => `A${index + 1}`
+      )
+    );
+    setCriterios(
+      Array.from({ length: cantidadCriterios }, (_, index) => `C${index + 1}`)
+    );
 
     setPesos(Array(cantidadCriterios).fill(0));
     setTiposDeCriterio(Array(cantidadCriterios).fill("MAX")); // Tipo por defecto
@@ -60,6 +69,7 @@ const PaginaTopsis = () => {
   //funcion que al hacer submit del formulario tranforma todos los datos de la tabla en un json y lo envia al backend
   const handleCalcular = async (e) => {
     e.preventDefault();
+    setCargandoResultado(true);
 
     const data = {
       alternativas,
@@ -100,6 +110,13 @@ const PaginaTopsis = () => {
         setDatosOrden(ordenFinal);
 
         setMostrarResultados(true);
+        setCargandoResultado(false);
+        setTimeout(() => {
+          window.scrollTo(
+            0,
+            document.getElementById("seccion-resultados").offsetTop
+          );
+        }, 1000);
       } else {
         console.error("Error al enviar los datos");
       }
@@ -156,6 +173,7 @@ const PaginaTopsis = () => {
             <div className="mt-4 w-full">
               <TablaInicial
                 key={tablaKey}
+                metodo={METODOS.TOPSIS}
                 cantidadAlternativas={cantidadAlternativas}
                 cantidadCriterios={cantidadCriterios}
                 alternativas={alternativas}
@@ -174,7 +192,8 @@ const PaginaTopsis = () => {
             <Button
               type="submit"
               radius="md"
-              className="w-1 bg-gradient-to-tr from-pink-500 to-yellow-500 text-white shadow-lg"
+              className=" bg-gradient-to-tr from-pink-500 to-yellow-500 text-white shadow-lg"
+              isLoading={cargandoResultado}
             >
               Calcular
             </Button>
@@ -192,14 +211,14 @@ const PaginaTopsis = () => {
             Resultados
           </h2>
           <div className="w-full flex flex-col items-center gap-5">
-            <h3 className="w-full  text-center mt-5 mb-5 text-4xl lg:mt-5 bg-gradient-to-r from-pink-400 via-slate-300 to-purple-600  dark:from-pink-300 dark:via-slate-300 dark:to-purple-500  bg-clip-text tracking-tight text-transparent">
+            <h3 className="text-center m-1 pb-1 text-4xl lg:mt-5 bg-gradient-to-r from-pink-400 via-slate-300 to-purple-600  dark:from-pink-300 dark:via-slate-300 dark:to-purple-500  bg-clip-text tracking-tight text-transparent">
               Tabla Original
             </h3>
             <TablaMuestra data={datosOriginales} />
           </div>
 
           <div className="w-full flex flex-col items-center gap-5">
-            <h3 className="w-full  text-center mt-16 mb-5 text-4xl lg:mt-16 bg-gradient-to-r from-pink-400 via-slate-300 to-purple-600  dark:from-pink-300 dark:via-slate-300 dark:to-purple-500  bg-clip-text tracking-tight text-transparent">
+            <h3 className="text-center m-1 pb-1 text-4xl lg:mt-16 bg-gradient-to-r from-pink-400 via-slate-300 to-purple-600  dark:from-pink-300 dark:via-slate-300 dark:to-purple-500  bg-clip-text tracking-tight text-transparent">
               Tabla Normalizada
             </h3>
             <p>{TOPSIS.normalizar1}</p>
@@ -211,7 +230,7 @@ const PaginaTopsis = () => {
           </div>
 
           <div className="w-full flex flex-col items-center gap-5">
-            <h3 className="w-full text-center mt-16 mb-5 text-4xl lg:mt-16 bg-gradient-to-r from-pink-400 via-slate-300 to-purple-600  dark:from-pink-300 dark:via-slate-300 dark:to-purple-500  bg-clip-text tracking-tight text-transparent">
+            <h3 className="text-center m-1 pb-1 text-4xl lg:mt-16 bg-gradient-to-r from-pink-400 via-slate-300 to-purple-600  dark:from-pink-300 dark:via-slate-300 dark:to-purple-500  bg-clip-text tracking-tight text-transparent">
               Tabla Ponderada
             </h3>
             <p>{TOPSIS.ponderizar1}</p>
@@ -222,7 +241,7 @@ const PaginaTopsis = () => {
           </div>
 
           <div className="w-full flex flex-col items-center gap-5">
-            <h3 className="w-full text-center mt-16 mb-5 text-4xl lg:mt-16 bg-gradient-to-r from-pink-400 via-slate-300 to-purple-600  dark:from-pink-300 dark:via-slate-300 dark:to-purple-500  bg-clip-text tracking-tight text-transparent">
+            <h3 className="text-center m-1 pb-1 text-4xl lg:mt-16 bg-gradient-to-r from-pink-400 via-slate-300 to-purple-600  dark:from-pink-300 dark:via-slate-300 dark:to-purple-500  bg-clip-text tracking-tight text-transparent">
               Tabla Ideal y Anti-Ideal
             </h3>
             <p>{TOPSIS.ideales1}</p>
@@ -232,7 +251,7 @@ const PaginaTopsis = () => {
           </div>
 
           <div className="w-full flex flex-col items-center gap-5">
-            <h3 className="w-full text-center mt-16 mb-5 text-4xl lg:mt-16 bg-gradient-to-r from-pink-400 via-slate-300 to-purple-600  dark:from-pink-300 dark:via-slate-300 dark:to-purple-500  bg-clip-text tracking-tight text-transparent">
+            <h3 className="text-center m-1 pb-1 text-4xl lg:mt-16 bg-gradient-to-r from-pink-400 via-slate-300 to-purple-600  dark:from-pink-300 dark:via-slate-300 dark:to-purple-500  bg-clip-text tracking-tight text-transparent">
               Tabla distancia Ideal
             </h3>
             <p>{TOPSIS.ideal1}</p>
@@ -242,7 +261,7 @@ const PaginaTopsis = () => {
           </div>
 
           <div className="w-full flex flex-col items-center gap-5">
-            <h3 className="w-full text-center mt-16 mb-5 text-4xl lg:mt-16 bg-gradient-to-r from-pink-400 via-slate-300 to-purple-600  dark:from-pink-300 dark:via-slate-300 dark:to-purple-500  bg-clip-text tracking-tight text-transparent">
+            <h3 className="text-center m-1 pb-1 text-4xl lg:mt-16 bg-gradient-to-r from-pink-400 via-slate-300 to-purple-600  dark:from-pink-300 dark:via-slate-300 dark:to-purple-500  bg-clip-text tracking-tight text-transparent">
               Tabla distancia Anti-Ideal
             </h3>
             <p>{TOPSIS.anti_ideal1}</p>
@@ -252,7 +271,7 @@ const PaginaTopsis = () => {
           </div>
 
           <div className="w-full flex flex-col items-center gap-5">
-            <h3 className="w-full text-center mt-16 mb-5 text-4xl lg:mt-16 bg-gradient-to-r from-pink-400 via-slate-300 to-purple-600  dark:from-pink-300 dark:via-slate-300 dark:to-purple-500  bg-clip-text tracking-tight text-transparent">
+            <h3 className="text-center m-1 pb-1 text-4xl lg:mt-16 bg-gradient-to-r from-pink-400 via-slate-300 to-purple-600  dark:from-pink-300 dark:via-slate-300 dark:to-purple-500  bg-clip-text tracking-tight text-transparent">
               Tabla de Coficientes
             </h3>
             <p>{TOPSIS.coeficientes1}</p>
@@ -261,7 +280,7 @@ const PaginaTopsis = () => {
           </div>
 
           <div className="w-full flex flex-col items-center gap-5">
-            <h3 className="w-full text-center mt-16 mb-5 text-4xl lg:mt-16 bg-gradient-to-r from-pink-400 via-slate-300 to-purple-600  dark:from-pink-300 dark:via-slate-300 dark:to-purple-500  bg-clip-text tracking-tight text-transparent">
+            <h3 className="text-center m-1 pb-1 text-4xl lg:mt-16 bg-gradient-to-r from-pink-400 via-slate-300 to-purple-600  dark:from-pink-300 dark:via-slate-300 dark:to-purple-500  bg-clip-text tracking-tight text-transparent">
               Tabla de Resultados
             </h3>
             <p>{TOPSIS.orden1}</p>
