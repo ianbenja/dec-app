@@ -83,7 +83,7 @@ const PaginaMoora = () => {
       tipos_criterios,
       valores,
       pesos,
-      metodoNormalizacion,
+      normalizacion: metodoNormalizacion,
       puntoref: usarPuntoReferencia,
     };
     console.log(data);

@@ -6,7 +6,11 @@ import { metodoTopsis } from "../../services/metodo.js";
 import TablaMuestra from "../../components/tablamuestra.jsx";
 import TablaCoficientes from "../../components/tablaCofTop.jsx";
 import TablaOrden from "../../components/tablaOrden.jsx";
-import { METODOS, TOPSIS } from "../../constants/index.js";
+import {
+  METODOS,
+  METODOS_NORMALIZACION,
+  TOPSIS,
+} from "../../constants/index.js";
 import ExportToPDF from "../../components/exportPdf.jsx";
 
 const PaginaTopsis = () => {
@@ -32,7 +36,9 @@ const PaginaTopsis = () => {
   const [tipos_criterios, setTiposDeCriterio] = useState([]);
   const [valores, setValores] = useState([]);
   const [pesos, setPesos] = useState([]);
-  const [normalizacion, setMetodoNormalizacion] = useState("EULER");
+  const [metodoNormalizacion, setMetodoNormalizacion] = useState(
+    METODOS_NORMALIZACION.EULER
+  );
 
   const [cargandoResultado, setCargandoResultado] = useState(false);
 
@@ -77,7 +83,7 @@ const PaginaTopsis = () => {
       tipos_criterios,
       valores,
       pesos,
-      normalizacion,
+      normalizacion: metodoNormalizacion,
     };
     console.log(data);
 

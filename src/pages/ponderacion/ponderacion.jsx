@@ -79,7 +79,7 @@ const PaginaPonderacion = () => {
       tipos_criterios,
       valores,
       pesos,
-      metodoNormalizacion,
+      normalizacion: metodoNormalizacion,
       criterio_general: "MAX",
     };
     console.log(data);
