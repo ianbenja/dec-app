@@ -116,11 +116,12 @@ const TablaInicial = ({
             // defaultSelectedKeys={[opciones["2"]]}
             className="max-w-xs "
             isRequired
-            onChange={(e) => setMetodoNormalizacion(e.target.value)}
-            // onSelectionChange={(e) => {
-            //   console.log(e);
-            //   setMetodoNormalizacion(e[0].value);
-            // }}
+            onChange={(e) =>
+              setMetodoNormalizacion(METODOS_NORMALIZACION[e.target.value])
+            }
+            // onSelectionChange={(e) =>
+            //   setMetodoNormalizacion(METODOS_NORMALIZACION[e.target.value])
+            // }
           >
             {Object.keys(METODOS_NORMALIZACION).map((opcion) => (
               <SelectItem
